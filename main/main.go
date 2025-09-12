@@ -2,10 +2,11 @@ package main
 
 import (
 	"projetred"
-	"fmt"
 )
 
 func main(){
 	c1 := projetred.InitCharacter()
-	fmt.Print(c1)
+	c1.PV = 0
+	projetred.Wasted(&c1)
+	projetred.DisplayInfo(c1)
 }

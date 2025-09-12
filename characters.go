@@ -56,3 +56,12 @@ func InitCharacter() Character {
 	}
 	return c
 }
+
+func DisplayInfo(c Character) {
+	fmt.Println(c.name)
+	fmt.Println("classe:",c.class)
+	fmt.Println("niveau:",c.level)
+	fmt.Println("PV:",c.PV,"/",c.PVmax)
+	fmt.Println("power:",c.power)
+	fmt.Println("inventaire:",c.inventory)
+}
