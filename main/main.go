@@ -1,7 +1,11 @@
-package main 
+package main
 
-import "fmt"
+import (
+	"projetred"
+	"fmt"
+)
 
 func main(){
-	fmt.Print("Hello")
+	c1 := projetred.InitCharacter()
+	fmt.Print(c1)
 }
