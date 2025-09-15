@@ -33,12 +33,10 @@ func main(){
 	projetred.Wasted(&c1)
 	typeWriter(projetred.DisplayInfo(c1), 50*time.Millisecond)
 	typeWriter(projetred.AccessInventory(c1), 50*time.Millisecond)
+    fmt.Scan(&choice)
+
     switch choice {
     case 1:
-        typeWriter("Vous avez choisi l'option 1", 50*time.Millisecond)
-    case 2:
-        typeWriter("Vous avez choisi l'option 2", 50*time.Millisecond)
-    default:
-        typeWriter("Choix invalide", 50*time.Millisecond)
+        projetred.Shopkeeper(&c1)
     }
 }
