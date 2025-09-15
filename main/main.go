@@ -32,4 +32,5 @@ func main(){
 	projetred.Wasted(&c1)
 	typeWriter(projetred.DisplayInfo(c1), 50*time.Millisecond)
 	typeWriter(projetred.AccessInventory(c1), 50*time.Millisecond)
+    typeWriter(projetred.AccessInventory(c1), 50*time.Millisecond)
 }
