@@ -10,6 +10,7 @@ type Character struct {
 	PVmax     int
 	PV        int
 	inventory []string
+	gold int
 }
 
 func removeIndex(s []string, index int) []string {
@@ -36,6 +37,7 @@ func InitCharacter() Character {
 			PV:        70,
 			power:     150,
 			inventory: []string{"Baton", "potion", "potion", "potion"},
+			gold : 10,
 		}
 	} else if class == "voleur" {
 		c = Character{
@@ -46,6 +48,7 @@ func InitCharacter() Character {
 			PV:        80,
 			power:     100,
 			inventory: []string{"Dague", "potion", "potion", "potion"},
+			gold : 10,
 		}
 	} else if class == "guerrier" {
 		c = Character{
@@ -56,6 +59,7 @@ func InitCharacter() Character {
 			PV:        100,
 			power:     80,
 			inventory: []string{"Epee", "potion", "potion", "potion"},
+			gold : 10,
 		}
 	}
 	return c
