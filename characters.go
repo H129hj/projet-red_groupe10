@@ -12,6 +12,10 @@ type Character struct {
 	inventory []string
 }
 
+func removeIndex(s []string, index int) []string {
+	return append(s[:index], s[index+1:]...)
+}
+
 func InitCharacter() Character {
 	var name string
 	var class string
@@ -55,4 +59,24 @@ func InitCharacter() Character {
 		}
 	}
 	return c
+}
+
+func DisplayInfo(c Character) string {
+	texte := fmt.Sprintf("Nom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nPower: %v", c.name, c.class, c.level, c.PV, c.PVmax, c.power)
+	return texte
+}
+
+func AccessInventory(c Character) string {
+	texte := fmt.Sprintf("Inventaire: %v", c.inventory)
+	return texte
+}
+
+func takePot(c *Character) []string {
+	for i := range c.inventory {
+		if c.inventory[i] == "potion" && c.PV < c.PVmax {
+			c.PV += 20
+			c.inventory = removeIndex(c.inventory, i)
+		}
+	}
+	return c.inventory
 }

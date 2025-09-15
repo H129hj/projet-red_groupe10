@@ -1,11 +1,11 @@
 package main
 
 import (
-	"projetred"
 	"fmt"
+	"projetred"
 )
 
-func main(){
+func main() {
 	c1 := projetred.InitCharacter()
 	fmt.Print(c1)
 }
