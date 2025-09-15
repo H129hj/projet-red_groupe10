@@ -11,10 +11,7 @@ type Character struct {
 	PV        int
 	inventory []string
 	gold      int
-}
-
-func removeIndex(s []string, index int) []string {
-	return append(s[:index], s[index+1:]...)
+	skills    []string
 }
 
 func InitCharacter() Character {
@@ -27,7 +24,7 @@ func InitCharacter() Character {
 	fmt.Scan(&class)
 	if class != "guerrier" && class != "mage" && class != "voleur" {
 		fmt.Println("Classe invalide, veuillez choisir entre guerrier, mage ou voleur.")
-		return InitCharacter()
+		InitCharacter()
 	} else if class == "mage" {
 		c = Character{
 			name:      name,
@@ -37,7 +34,8 @@ func InitCharacter() Character {
 			PV:        70,
 			power:     150,
 			inventory: []string{"Baton", "potion", "potion", "potion"},
-			gold:      10,
+			gold:      100,
+			skills:    []string{"Boule de feu", "Éclair magique", "Soin mineur"},
 		}
 	} else if class == "voleur" {
 		c = Character{
@@ -48,7 +46,8 @@ func InitCharacter() Character {
 			PV:        80,
 			power:     100,
 			inventory: []string{"Dague", "potion", "potion", "potion"},
-			gold:      10,
+			gold:      100,
+			skills:    []string{"Attaque sournoise", "Poison", "Évasion"},
 		}
 	} else if class == "guerrier" {
 		c = Character{
@@ -59,7 +58,8 @@ func InitCharacter() Character {
 			PV:        100,
 			power:     80,
 			inventory: []string{"Epee", "potion", "potion", "potion"},
-			gold:      10,
+			gold:      100,
+			skills:    []string{"Coup puissant", "Provocation", "Frappe tourbillonnante"},
 		}
 	}
 	return c
@@ -79,8 +79,19 @@ func takePot(c *Character) []string {
 	for i := range c.inventory {
 		if c.inventory[i] == "potion" && c.PV < c.PVmax {
 			c.PV += 20
-			c.inventory = removeIndex(c.inventory, i)
+			c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
+			if c.PV > c.PVmax {
+				c.PV = c.PVmax
+			}
 		}
 	}
 	return c.inventory
+}
+
+func limitedInventory(c *Character) bool {
+	if len(c.inventory) >= 10 {
+		typeWriter("Votre inventaire est plein, vous ne pouvez pas acheter d'objet.", textDelay)
+		return false
+	}
+	return true
 }

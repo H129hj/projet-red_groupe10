@@ -30,7 +30,7 @@ func Menu(c1 Character) {
 	typeWriter("1. Aller chez le marchand", 30*time.Millisecond)
 	typeWriter("2. Voir l'inventaire", 30*time.Millisecond)
 	typeWriter("3. Voir les statistiques du personnage", 30*time.Millisecond)
-	typeWriter("4. Quitter le jeu", 30*time.Millisecond)
+	typeWriter("4. Quitter le jeu", 30	*time.Millisecond)
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:

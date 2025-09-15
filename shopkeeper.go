@@ -34,7 +34,7 @@ func Shopkeeper(c *Character) {
 
 			switch choice2 {
 			case "1":
-				if c.gold >= 50 {
+				if c.gold >= 50 && !limitedInventory(c) {
 					c.inventory = append(c.inventory, "Epee")
 					c.gold -= 50
 					typeWriter("Vous avez achete une Epee.", textDelay)
@@ -42,7 +42,7 @@ func Shopkeeper(c *Character) {
 					typeWriter("Vous n'avez pas assez de pieces d'or.", textDelay)
 				}
 			case "2":
-				if c.gold >= 40 {
+				if c.gold >= 40 && !limitedInventory(c){
 					c.inventory = append(c.inventory, "Bouclier")
 					c.gold -= 40
 					typeWriter("Vous avez achete un Bouclier.", textDelay)
@@ -50,7 +50,7 @@ func Shopkeeper(c *Character) {
 					typeWriter("Vous n'avez pas assez de pieces d'or.", textDelay)
 				}
 			case "3":
-				if c.gold >= 10 {
+				if c.gold >= 10 && !limitedInventory(c){
 					c.inventory = append(c.inventory, "Potion")
 					c.gold -= 10
 					typeWriter("Vous avez achete une Potion de soin.", textDelay)
@@ -58,7 +58,7 @@ func Shopkeeper(c *Character) {
 					typeWriter("Vous n'avez pas assez de pieces d'or.", textDelay)
 				}
 			case "4":
-				if c.gold >= randomvalue {
+				if c.gold >= randomvalue && !limitedInventory(c){
 					c.inventory = append(c.inventory, "Bitcoin")
 					c.gold -= randomvalue
 					typeWriter("Vous avez achete un Bitcoin.", textDelay)
