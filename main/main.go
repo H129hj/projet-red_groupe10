@@ -26,43 +26,22 @@ func typeWriter(str string, delay time.Duration) {
 	fmt.Println()
 }
 
-<<<<<<< HEAD
 func main() {
 	var choice int
-=======
-<<<<<<< HEAD
-func main() {
-=======
-func main(){
-    var choice int
->>>>>>> 68d4e5c84ceab752c276bfdb514094afc53aec20
->>>>>>> c3e5476827cdfb140c77a947bc589e2e260ae950
 	c1 := projetred.InitCharacter()
 	c1.PV = 0
 	projetred.Wasted(&c1)
 	typeWriter(projetred.DisplayInfo(c1), 50*time.Millisecond)
 	typeWriter(projetred.AccessInventory(c1), 50*time.Millisecond)
-<<<<<<< HEAD
+	fmt.Println("Que souhaitez-vous faire?")
+	fmt.Println("1. Aller chez le marchand")
+	fmt.Println("2. Quitter le jeu")
+	fmt.Scan(&choice)
 	switch choice {
 	case 1:
-		typeWriter("Vous avez choisi l'option 1", 50*time.Millisecond)
+		projetred.Shopkeeper(&c1)
 	case 2:
-		typeWriter("Vous avez choisi l'option 2", 50*time.Millisecond)
-	default:
-		typeWriter("Choix invalide", 50*time.Millisecond)
+		typeWriter("Au revoir!", 50*time.Millisecond)
+		return
 	}
-=======
-<<<<<<< HEAD
-	typeWriter(projetred.AccessInventory(c1), 50*time.Millisecond)
-=======
-    switch choice {
-    case 1:
-        typeWriter("Vous avez choisi l'option 1", 50*time.Millisecond)
-    case 2:
-        typeWriter("Vous avez choisi l'option 2", 50*time.Millisecond)
-    default:
-        typeWriter("Choix invalide", 50*time.Millisecond)
-    }
->>>>>>> 68d4e5c84ceab752c276bfdb514094afc53aec20
->>>>>>> c3e5476827cdfb140c77a947bc589e2e260ae950
 }
