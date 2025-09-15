@@ -130,8 +130,8 @@ func Shopkeeper(c *Character) Character {
 		}
 	case "4":
 		fmt.Println("Merci de votre visite! A bientot.")
-		return *c
 	default:
 		fmt.Println("Choix invalide.")
 	}
+	return *c
 }
