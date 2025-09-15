@@ -7,7 +7,7 @@ import (
 
 func Shopkeeper(c *Character) {
 	var choice string
-	var item string
+	var choice2 string
 	var randomvalue int = 50 + rand.Intn(101)
 	fmt.Println("Bienvenue dans ma boutique! Que souhaitez-vous faire?")
 	fmt.Println("1. Acheter un objet")
@@ -19,15 +19,15 @@ func Shopkeeper(c *Character) {
 	switch choice {
 	case "1":
 		fmt.Println("Voici les objets disponibles a l'achat:")
-		fmt.Println("- Epee (50 pieces d'or)")
-		fmt.Println("- Bouclier (40 pieces d'or)")
-		fmt.Println("- Potion de soin (10 pieces d'or)")
-		fmt.Println("- Bitcoin", randomvalue, "pieces d'or)")
+		fmt.Println("1. - Epee (50 pieces d'or)")
+		fmt.Println("2. - Bouclier (40 pieces d'or)")
+		fmt.Println("3. - Potion de soin (10 pieces d'or)")
+		fmt.Println("4. - Bitcoin", randomvalue, "pieces d'or)")
 		fmt.Println("Quel objet souhaitez-vous acheter?")
 		fmt.Println("Vous disposez de ", c.gold, "pieces d'or.")
-		fmt.Scan(&item)
-		switch item {
-		case "Epee":
+		fmt.Scan(&choice2)
+		switch choice2 {
+		case "1":
 			if c.gold >= 50 {
 				c.inventory = append(c.inventory, "Epee")
 				c.gold -= 50
@@ -35,7 +35,7 @@ func Shopkeeper(c *Character) {
 			} else {
 				fmt.Println("Vous n'avez pas assez de pieces d'or.")
 			}
-		case "Bouclier":
+		case "2":
 			if c.gold >= 40 {
 				c.inventory = append(c.inventory, "Bouclier")
 				c.gold -= 40
@@ -43,7 +43,7 @@ func Shopkeeper(c *Character) {
 			} else {
 				fmt.Println("Vous n'avez pas assez de pieces d'or.")
 			}
-		case "Potion":
+		case "3":
 			if c.gold >= 10 {
 				c.inventory = append(c.inventory, "Potion")
 				c.gold -= 10
@@ -51,7 +51,7 @@ func Shopkeeper(c *Character) {
 			} else {
 				fmt.Println("Vous n'avez pas assez de pieces d'or.")
 			}
-		case "Bitcoin":
+		case "4":
 			if c.gold >= randomvalue {
 				c.inventory = append(c.inventory, "Bitcoin")
 				c.gold -= randomvalue
