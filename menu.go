@@ -26,11 +26,11 @@ func typeWriter(str string, delay time.Duration) {
 
 func Menu(c1 Character) {
 	var choice int
-	fmt.Println("Que souhaitez-vous faire?")
-	fmt.Println("1. Aller chez le marchand")
-	fmt.Println("2. Voir l'inventaire")
-	fmt.Println("3. Voir les statistiques du personnage")
-	fmt.Println("4. Quitter le jeu")
+	typeWriter("Que souhaitez-vous faire?", 30*time.Millisecond)
+	typeWriter("1. Aller chez le marchand", 30*time.Millisecond)
+	typeWriter("2. Voir l'inventaire", 30*time.Millisecond)
+	typeWriter("3. Voir les statistiques du personnage", 30*time.Millisecond)
+	typeWriter("4. Quitter le jeu", 30*time.Millisecond)
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
