@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-func Shopkeeper(c *Character) {
+func Shopkeeper(c *Character) Character {
 	var choice string
 	var choice2 string
 	var randomvalue int = 50 + rand.Intn(101)
@@ -34,6 +34,7 @@ func Shopkeeper(c *Character) {
 				fmt.Println("Vous avez achete une Epee.")
 			} else {
 				fmt.Println("Vous n'avez pas assez de pieces d'or.")
+				return Shopkeeper(c)
 			}
 		case "2":
 			if c.gold >= 40 {
@@ -65,7 +66,7 @@ func Shopkeeper(c *Character) {
 	case "2":
 		if len(c.inventory) == 0 {
 			fmt.Println("Vous n'avez aucun objet a vendre.")
-			return
+			return Shopkeeper(c)
 		}
 		fmt.Println("Voici les objets que vous pouvez vendre:")
 		for i, v := range c.inventory {
@@ -76,7 +77,7 @@ func Shopkeeper(c *Character) {
 		fmt.Scan(&sellChoice)
 		if sellChoice < 1 || sellChoice > len(c.inventory) {
 			fmt.Println("Choix invalide.")
-			return
+			return Shopkeeper(c)
 		}
 		itemToSell := c.inventory[sellChoice-1]
 		var sellPrice int
@@ -98,7 +99,7 @@ func Shopkeeper(c *Character) {
 	case "3":
 		if len(c.inventory) == 0 {
 			fmt.Println("Vous n'avez aucun objet a ameliorer.")
-			return
+			return Shopkeeper(c)
 		}
 		fmt.Println("Voici les objets que vous pouvez ameliorer:")
 		for i, v := range c.inventory {
@@ -109,7 +110,7 @@ func Shopkeeper(c *Character) {
 		fmt.Scan(&upgradeChoice)
 		if upgradeChoice < 1 || upgradeChoice > len(c.inventory) {
 			fmt.Println("Choix invalide.")
-			return
+			return Shopkeeper(c)
 		}
 		itemToUpgrade := c.inventory[upgradeChoice-1]
 		var upgradeCost int
@@ -129,10 +130,8 @@ func Shopkeeper(c *Character) {
 		}
 	case "4":
 		fmt.Println("Merci de votre visite! A bientot.")
-		Menu(*c)
-		return
+		return *c
 	default:
 		fmt.Println("Choix invalide.")
-		return
 	}
 }
