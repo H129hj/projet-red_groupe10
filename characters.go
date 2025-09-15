@@ -65,7 +65,7 @@ func InitCharacter() Character {
 	return c
 }
 
-func DisplayInfo(c Character) string {
+func DisplayStats(c Character) string {
 	texte := fmt.Sprintf("Nom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nPower: %v", c.name, c.class, c.level, c.PV, c.PVmax, c.power)
 	return texte
 }
