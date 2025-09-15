@@ -26,22 +26,22 @@ func typeWriter(str string, delay time.Duration) {
 	fmt.Println()
 }
 
-func main(){
-    var choice int
+func main() {
+	var choice int
 	c1 := projetred.InitCharacter()
 	c1.PV = 0
 	projetred.Wasted(&c1)
 	typeWriter(projetred.DisplayInfo(c1), 50*time.Millisecond)
 	typeWriter(projetred.AccessInventory(c1), 50*time.Millisecond)
-    fmt.Println("1. Aller au magasin")
-    fmt.Println("2. Quitter")
-    fmt.Print("Choisissez une option: ")
-    fmt.Scan(&choice)
-    switch choice {
-    case 1:
-        projetred.Shopkeeper(&c1)
-    case 2:
-        fmt.Println("Au revoir!")
-        return
-    }
+	fmt.Println("Que souhaitez-vous faire?")
+	fmt.Println("1. Aller chez le marchand")
+	fmt.Println("2. Quitter le jeu")
+	fmt.Scan(&choice)
+	switch choice {
+	case 1:
+		projetred.Shopkeeper(&c1)
+	case 2:
+		typeWriter("Au revoir!", 50*time.Millisecond)
+		return
+	}
 }

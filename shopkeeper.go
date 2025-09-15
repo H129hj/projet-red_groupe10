@@ -132,5 +132,6 @@ func Shopkeeper(c *Character) {
 		return
 	default:
 		fmt.Println("Choix invalide.")
+		return
 	}
 }
