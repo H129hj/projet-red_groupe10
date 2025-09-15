@@ -10,6 +10,7 @@ type Character struct {
 	PVmax     int
 	PV        int
 	inventory []string
+	gold      int
 }
 
 func removeIndex(s []string, index int) []string {
