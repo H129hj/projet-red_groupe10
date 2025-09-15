@@ -9,8 +9,5 @@ func Wasted(c *Character) {
 }
 
 func isdead(c Character) bool {
-	if c.PV <= 0 {
-		return true
-	}
-	return false
+	return c.PV <= 0
 }

@@ -129,6 +129,7 @@ func Shopkeeper(c *Character) {
 		}
 	case "4":
 		fmt.Println("Merci de votre visite! A bientot.")
+		Menu(*c)
 		return
 	default:
 		fmt.Println("Choix invalide.")
