@@ -12,6 +12,7 @@ type Character struct {
 	inventory []string
 	gold      int
 	skills    []string
+	equipement map[string]int
 }
 
 func InitCharacter() Character {
@@ -36,6 +37,7 @@ func InitCharacter() Character {
 			inventory: []string{"Baton", "potion", "potion", "potion"},
 			gold:      100,
 			skills:    []string{"Boule de feu", "Éclair magique", "Soin mineur"},
+			equipement: map[string]int{"Robe de mage": 10, "Chapeau pointu": 5, "Amulette magique": 7},
 		}
 	} else if class == "voleur" {
 		c = Character{
@@ -48,6 +50,7 @@ func InitCharacter() Character {
 			inventory: []string{"Dague", "potion", "potion", "potion"},
 			gold:      100,
 			skills:    []string{"Attaque sournoise", "Poison", "Évasion"},
+			equipement: map[string]int{"Cape": 10, "Masque": 5, "Gants": 7},
 		}
 	} else if class == "guerrier" {
 		c = Character{
@@ -60,6 +63,7 @@ func InitCharacter() Character {
 			inventory: []string{"Epee", "potion", "potion", "potion"},
 			gold:      100,
 			skills:    []string{"Coup puissant", "Provocation", "Frappe tourbillonnante"},
+			equipement: map[string]int{"Armure en bronze": 10, "Casque": 5, "Bouclier": 7},
 		}
 	}
 	return c
