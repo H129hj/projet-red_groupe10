@@ -1,8 +1,12 @@
 package projetred
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 type Character struct {
+<<<<<<< HEAD
 	name      string
 	class     string
 	level     int
@@ -15,6 +19,19 @@ type Character struct {
 
 func RemoveIndex(s []string, index int) []string {
 	return append(s[:index], s[index+1:]...)
+=======
+	name       string
+	class      string
+	level      int
+	power      int
+	PVmax      int
+	PV         int
+	inventory  []string
+	gold       int
+	skills     []string
+	equipement map[string]int
+	textDelay  int
+>>>>>>> f0001c727816dc2cbd3158f30c1eed5f44124882
 }
 
 func InitCharacter() Character {
@@ -27,39 +44,45 @@ func InitCharacter() Character {
 	fmt.Scan(&class)
 	if class != "guerrier" && class != "mage" && class != "voleur" {
 		fmt.Println("Classe invalide, veuillez choisir entre guerrier, mage ou voleur.")
-		return InitCharacter()
+		InitCharacter()
 	} else if class == "mage" {
 		c = Character{
-			name:      name,
-			class:     class,
-			level:     1,
-			PVmax:     70,
-			PV:        70,
-			power:     150,
-			inventory: []string{"Baton", "potion", "potion", "potion"},
-			gold:      10,
+			name:       name,
+			class:      class,
+			level:      1,
+			PVmax:      70,
+			PV:         70,
+			power:      150,
+			inventory:  []string{"Baton", "potion", "potion", "potion"},
+			gold:       100,
+			skills:     []string{"Boule de feu", "Éclair magique", "Soin mineur"},
+			equipement: map[string]int{"Robe de mage": 10, "Chapeau pointu": 5, "Amulette magique": 7},
 		}
 	} else if class == "voleur" {
 		c = Character{
-			name:      name,
-			class:     class,
-			level:     1,
-			PVmax:     80,
-			PV:        80,
-			power:     100,
-			inventory: []string{"Dague", "potion", "potion", "potion"},
-			gold:      10,
+			name:       name,
+			class:      class,
+			level:      1,
+			PVmax:      80,
+			PV:         80,
+			power:      100,
+			inventory:  []string{"Dague", "potion", "potion", "potion"},
+			gold:       100,
+			skills:     []string{"Attaque sournoise", "Poison", "Évasion"},
+			equipement: map[string]int{"Cape": 10, "Masque": 5, "Gants": 7},
 		}
 	} else if class == "guerrier" {
 		c = Character{
-			name:      name,
-			class:     class,
-			level:     1,
-			PVmax:     100,
-			PV:        100,
-			power:     80,
-			inventory: []string{"Epee", "potion", "potion", "potion"},
-			gold:      10,
+			name:       name,
+			class:      class,
+			level:      1,
+			PVmax:      100,
+			PV:         100,
+			power:      80,
+			inventory:  []string{"Epee", "potion", "potion", "potion"},
+			gold:       100,
+			skills:     []string{"Coup puissant", "Provocation", "Frappe tourbillonnante"},
+			equipement: map[string]int{"Armure en bronze": 10, "Casque": 5, "Bouclier": 7},
 		}
 	}
 	return c
@@ -79,8 +102,23 @@ func TakePot(c *Character) []string {
 	for i := range c.inventory {
 		if c.inventory[i] == "potion" && c.PV < c.PVmax {
 			c.PV += 20
+<<<<<<< HEAD
 			c.inventory = RemoveIndex(c.inventory, i)
+=======
+			c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
+			if c.PV > c.PVmax {
+				c.PV = c.PVmax
+			}
+>>>>>>> f0001c727816dc2cbd3158f30c1eed5f44124882
 		}
 	}
 	return c.inventory
+}
+
+func limitedInventory(c *Character) bool {
+	if len(c.inventory) >= 10 {
+		typeWriter("Votre inventaire est plein, vous ne pouvez pas acheter d'objet.", time.Duration(c.textDelay))
+		return false
+	}
+	return true
 }

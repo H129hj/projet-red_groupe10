@@ -1,5 +1,6 @@
 package projetred
 
+<<<<<<< HEAD
 func Equipementprotection(c *Character) int {
 	var protection int
 	for _, item := range c.inventory {
@@ -26,3 +27,15 @@ func Equipementprotection(c *Character) int {
 	}
 	return protection
 }     
+=======
+func (c *Character) AddEquipement(nom string, valeur int) {
+    if c.equipement == nil {
+        c.equipement = make(map[string]int)
+    }
+    c.equipement[nom] = valeur
+}
+
+func (c *Character) RemoveEquipement(nom string) {
+    delete(c.equipement, nom)
+}
+>>>>>>> f0001c727816dc2cbd3158f30c1eed5f44124882
