@@ -27,14 +27,16 @@ func typeWriter(str string, delay time.Duration) {
 func Menu(c1 Character) {
 	var choice int
 	typeWriter("Que souhaitez-vous faire?", 30*time.Millisecond)
-	typeWriter("1. Aller chez le marchand", 30*time.Millisecond)
+	typeWriter("1. Combattre Milhouse", 30*time.Millisecond)
 	typeWriter("2. Voir l'inventaire", 30*time.Millisecond)
 	typeWriter("3. Voir les statistiques du personnage", 30*time.Millisecond)
-	typeWriter("4. Quitter le jeu", 30	*time.Millisecond)
+	typeWriter("4. Aller chez le marchand", 30*time.Millisecond)
+	typeWriter("0. Quitter le jeu", 30*time.Millisecond)
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
-		Shopkeeper(&c1)
+		Milhouse := InitMonster("Milhouse", 100, 20)
+		characterTurn(&c1, &Milhouse, 1)
 	case 2:
 		typeWriter(AccessInventory(c1), 50*time.Millisecond)
 		Menu(c1)
@@ -42,6 +44,8 @@ func Menu(c1 Character) {
 		typeWriter(DisplayStats(c1), 50*time.Millisecond)
 		Menu(c1)
 	case 4:
+		Shopkeeper(&c1)
+	case 0:
 		typeWriter("Au revoir!", 50*time.Millisecond)
 		return 
 	}

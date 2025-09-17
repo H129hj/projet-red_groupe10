@@ -152,6 +152,7 @@ func Shopkeeper(c *Character) Character {
 
 		case "4":
 			fmt.Println("\n👋 Merci de votre visite, voyageur. À bientôt !")
+			Menu(*c)
 			return *c
 
 		default:

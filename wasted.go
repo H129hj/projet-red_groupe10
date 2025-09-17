@@ -7,7 +7,3 @@ func Wasted(c *Character) {
 		println("Vous avez ete ressuscite avec", c.PV, "PV.")
 	}
 }
-
-func isdead(c Character) bool {
-	return c.PV <= 0
-}

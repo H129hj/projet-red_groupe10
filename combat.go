@@ -44,7 +44,13 @@ func goblinPattern(m *Monster, turn int) {
 func characterTurn(c *Character, m *Monster, t int) {
 	var choice int
 	turn := t
-	typeWriter("Choisissez une action:", time.Duration(m.textDelay)*time.Millisecond)
+	if c.PV <= 0 {
+		Wasted(c)
+	} else if m.PV <= 0 {
+		typeWriter(fmt.Sprintf("Vous avez vaincu le %s!", m.name), time.Duration(m.textDelay)*time.Millisecond)
+		Menu(*c)
+	} else {
+		typeWriter("Choisissez une action:", time.Duration(m.textDelay)*time.Millisecond)
 	typeWriter("1. Attaquer", time.Duration(m.textDelay)*time.Millisecond)
 	typeWriter("2. Acceder à l'inventaire", time.Duration(m.textDelay)*time.Millisecond)
 	typeWriter("3. Fuir", time.Duration(m.textDelay)*time.Millisecond)
@@ -58,19 +64,12 @@ func characterTurn(c *Character, m *Monster, t int) {
 	case 2:
 		AccessInventory(*c)
 		characterTurn(c, m, turn)
+	case 3:
+		typeWriter("Vous avez fui le combat!", time.Duration(m.textDelay)*time.Millisecond)
+		Menu(*c)
 	default:
 		typeWriter("Choix invalide.", time.Duration(m.textDelay)*time.Millisecond)
 		characterTurn(c, m, turn)
 	}
 }
-
-func trainingFight(c *Character, m *Monster) {
-	turn := 1
-	for m.PV > 0 && c.PV > 0 {
-		characterTurn(c, m, turn)
-		turn++
-	}
-	if c.PV <= 0 {
-		Wasted(c)
-	}
 }
