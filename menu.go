@@ -27,11 +27,12 @@ func typeWriter(str string, delay time.Duration) {
 
 func Menu(c1 Character) {
 	var choice int
-	typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", 30*time.Millisecond)
-	typeWriter("1. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
-	typeWriter("2. 📊 Voir vos statistiques", 30*time.Millisecond)
-	typeWriter("3. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
-	typeWriter("0. 🚪 Rentrer à la maison", 30*time.Millisecond)
+	var textDelay = 20 * time.Millisecond
+	typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", textDelay)
+	typeWriter("1. 🎒 Regarder dans votre sac à dos", textDelay)
+	typeWriter("2. 📊 Voir vos statistiques", textDelay)
+	typeWriter("3. 🏪 Aller chez Apu au Kwik-E-Mart", textDelay)
+	typeWriter("0. 🚪 Rentrer à la maison", textDelay)
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
