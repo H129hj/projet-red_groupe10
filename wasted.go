@@ -5,5 +5,6 @@ func Wasted(c *Character) {
 		println("Vous etes mort !")
 		c.PV = c.PVmax / 2
 		println("Vous avez ete ressuscite avec", c.PV, "PV.")
+		Menu(*c)
 	}
 }
