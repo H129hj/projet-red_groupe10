@@ -83,7 +83,7 @@ func AccessInventory(c Character) string {
 	return texte
 }
 
-func takePot(c *Character) []string {
+func TakePot(c *Character) []string {
 	for i := range c.inventory {
 		if c.inventory[i] == "donut magique" && c.PV < c.PVmax {
 			c.PV += 20
