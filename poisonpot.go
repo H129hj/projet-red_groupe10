@@ -1,7 +1,7 @@
 package projetred
 
 func poisonPot(c *Character, m *Monster) {
-	if contains(c.inventory, "potion empoisonnee") {
+	if contains(c.inventory, "donut empoisonné") {
 		m.PV -= 20
 	}
 }
