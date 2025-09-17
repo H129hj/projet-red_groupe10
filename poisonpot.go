@@ -2,7 +2,7 @@ package projetred
 
 import "time"
 
-func poisonPot(c *Character) {
+func PoisonPot(c *Character) {
 	println("Vous avez bu une potion empoisonnee ! Vous perdez 20 PV.")
 	c.PV -= 20
 	if c.PV < 0 {

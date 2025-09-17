@@ -13,7 +13,7 @@ type Character struct {
 	gold      int
 }
 
-func removeIndex(s []string, index int) []string {
+func RemoveIndex(s []string, index int) []string {
 	return append(s[:index], s[index+1:]...)
 }
 
@@ -75,11 +75,11 @@ func AccessInventory(c Character) string {
 	return texte
 }
 
-func takePot(c *Character) []string {
+func TakePot(c *Character) []string {
 	for i := range c.inventory {
 		if c.inventory[i] == "potion" && c.PV < c.PVmax {
 			c.PV += 20
-			c.inventory = removeIndex(c.inventory, i)
+			c.inventory = RemoveIndex(c.inventory, i)
 		}
 	}
 	return c.inventory

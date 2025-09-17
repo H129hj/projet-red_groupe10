@@ -25,4 +25,4 @@ func Equipementprotection(c *Character) int {
 		}
 	}
 	return protection
-}
+}     
