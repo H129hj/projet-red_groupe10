@@ -6,14 +6,14 @@ func CharacterCreationPersonalized() Character {
 	var name string
 	var class string
 	var c Character
-	fmt.Print("Entrez le nom du personnage: ")
+	fmt.Print("🏠 Entrez le nom de votre enfant Simpson: ")
 	fmt.Scan(&name)
-	fmt.Print("Entrez la classe du personnage (guerrier, mage, voleur): ")
+	fmt.Print("🎭 Choisissez le style (bart, lisa, maggie): ")
 	fmt.Scan(&class)
-	if class != "guerrier" && class != "mage" && class != "voleur" {
-		fmt.Println("Classe invalide, veuillez choisir entre guerrier, mage ou voleur.")
+	if class != "bart" && class != "lisa" && class != "maggie" {
+		fmt.Println("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.")
 		return CharacterCreationPersonalized()
-	} else if class == "mage" {
+	} else if class == "lisa" {
 		c = Character{
 			name:      name,
 			class:     class,
@@ -21,10 +21,10 @@ func CharacterCreationPersonalized() Character {
 			PVmax:     70,
 			PV:        70,
 			power:     150,
-			inventory: []string{"Baton", "potion", "potion", "potion"},
+			inventory: []string{"Saxophone de Lisa", "donut magique", "donut magique", "donut magique"},
 			gold:      10,
 		}
-	} else if class == "voleur" {
+	} else if class == "bart" {
 		c = Character{
 			name:      name,
 			class:     class,
@@ -32,10 +32,10 @@ func CharacterCreationPersonalized() Character {
 			PVmax:     80,
 			PV:        80,
 			power:     100,
-			inventory: []string{"Dague", "potion", "potion", "potion"},
+			inventory: []string{"Lance-pierre de Bart", "donut magique", "donut magique", "donut magique"},
 			gold:      10,
 		}
-	} else if class == "guerrier" {
+	} else if class == "maggie" {
 		c = Character{
 			name:      name,
 			class:     class,
@@ -43,18 +43,18 @@ func CharacterCreationPersonalized() Character {
 			PVmax:     100,
 			PV:        100,
 			power:     80,
-			inventory: []string{"Epee", "potion", "potion", "potion"},
+			inventory: []string{"Biberon de Maggie", "donut magique", "donut magique", "donut magique"},
 			gold:      10,
 		}
 	}
-	fmt.Println("Personnage cree avec succes!")
-	fmt.Println("Nom:", c.name)
-	fmt.Println("Classe:", c.class)
-	fmt.Println("Niveau:", c.level)
-	fmt.Println("PV:", c.PV, "/", c.PVmax)
-	fmt.Println("Puissance:", c.power)
-	fmt.Println("Inventaire:", c.inventory)
-	fmt.Println("Or:", c.gold, "pieces d'or")
+	fmt.Println("🎉 Enfant Simpson créé avec succès !")
+	fmt.Println("👤 Nom:", c.name)
+	fmt.Println("🎭 Style:", c.class)
+	fmt.Println("🏆 Niveau:", c.level)
+	fmt.Println("❤️ PV:", c.PV, "/", c.PVmax)
+	fmt.Println("💪 Puissance:", c.power)
+	fmt.Println("🎒 Inventaire:", c.inventory)
+	fmt.Println("💰 Argent de poche:", c.gold, "dollars")
 	return c
 }
 
