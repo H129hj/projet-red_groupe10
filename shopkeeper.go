@@ -22,7 +22,7 @@ func Shopkeeper(c *Character) Character {
 		fmt.Println("1. - Epee (50 pieces d'or)")
 		fmt.Println("2. - Bouclier (40 pieces d'or)")
 		fmt.Println("3. - Potion de soin (10 pieces d'or)")
-		fmt.Println("4. - Bitcoin", randomvalue, "pieces d'or)")
+		fmt.Println("4. - Bitcoin", randomvalue, "(pieces d'or)")
 		fmt.Println("Quel objet souhaitez-vous acheter?")
 		fmt.Println("Vous disposez de ", c.gold, "pieces d'or.")
 		fmt.Scan(&choice2)

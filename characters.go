@@ -6,20 +6,6 @@ import (
 )
 
 type Character struct {
-<<<<<<< HEAD
-	name      string
-	class     string
-	level     int
-	power     int
-	PVmax     int
-	PV        int
-	inventory []string
-	gold      int
-}
-
-func RemoveIndex(s []string, index int) []string {
-	return append(s[:index], s[index+1:]...)
-=======
 	name       string
 	class      string
 	level      int
@@ -31,7 +17,6 @@ func RemoveIndex(s []string, index int) []string {
 	skills     []string
 	equipement map[string]int
 	textDelay  int
->>>>>>> f0001c727816dc2cbd3158f30c1eed5f44124882
 }
 
 func InitCharacter() Character {
@@ -102,14 +87,10 @@ func TakePot(c *Character) []string {
 	for i := range c.inventory {
 		if c.inventory[i] == "potion" && c.PV < c.PVmax {
 			c.PV += 20
-<<<<<<< HEAD
-			c.inventory = RemoveIndex(c.inventory, i)
-=======
 			c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
 			if c.PV > c.PVmax {
 				c.PV = c.PVmax
 			}
->>>>>>> f0001c727816dc2cbd3158f30c1eed5f44124882
 		}
 	}
 	return c.inventory
