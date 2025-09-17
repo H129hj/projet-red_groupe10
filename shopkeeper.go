@@ -3,37 +3,40 @@ package projetred
 import (
 	"fmt"
 	"math/rand"
+	"time"
 )
 
 func Shopkeeper(c *Character) Character {
 	randomvalue := 50 + rand.Intn(101)
+	textDelay := 20 * time.Millisecond
+
 	for {
-		fmt.Println("\n====================")
-		fmt.Println("   🏪 Kwik-E-Mart d'Apu")
-		fmt.Println("====================")
-		fmt.Println("🇮🇳 Apu : 'Bonjour mon ami ! Que puis-je faire pour vous ?'")
-		fmt.Println("1. Acheter un objet")
-		fmt.Println("2. Vendre un objet")
-		fmt.Println("3. Améliorer un objet")
-		fmt.Println("4. Quitter le magasin")
-		fmt.Println("--------------------")
-		fmt.Println("💰 Vous avez", c.gold, "dollars dans votre tirelire.")
-		fmt.Print("👉 Que voulez-vous faire ? ")
+		typeWriter("\n====================", textDelay)
+		typeWriter("   🏪 Kwik-E-Mart d'Apu", textDelay)
+		typeWriter("====================", textDelay)
+		typeWriter("🇮🇳 Apu : 'Bonjour mon ami ! Que puis-je faire pour vous ?'", textDelay)
+		typeWriter("1. Acheter un objet", textDelay)
+		typeWriter("2. Vendre un objet", textDelay)
+		typeWriter("3. Améliorer un objet", textDelay)
+		typeWriter("0. Quitter le magasin", textDelay)
+		typeWriter("--------------------", textDelay)
+		typeWriter(fmt.Sprintf("💰 Vous avez %d dollars dans votre tirelire.", c.gold), textDelay)
+		typeWriter("👉 Que voulez-vous faire ? ", textDelay)
 
 		var choice string
 		fmt.Scan(&choice)
 
 		switch choice {
 		case "1":
-			fmt.Println("\n--- 🛍️ Objets en vente chez Apu ---")
-			fmt.Println("1. Batte de baseball de Bart (50 dollars)")
-			fmt.Println("2. Bouclier fait maison (40 dollars)")
-			fmt.Println("3. Donut magique de chez Homer (10 dollars)")
-			fmt.Println("4. Carte rare Itchy & Scratchy (", randomvalue, " dollars)")
-			fmt.Println("5. Retour au menu d'Apu")
-			fmt.Println("------------------------------------")
-			fmt.Println("💰 Argent actuel :", c.gold, "dollars")
-			fmt.Print("👉 Quel objet souhaitez-vous acheter ? ")
+			typeWriter("\n--- 🛍️ Objets en vente chez Apu ---", textDelay)
+			typeWriter("1. Batte de baseball de Bart (50 dollars)", textDelay)
+			typeWriter("2. Bouclier fait maison (40 dollars)", textDelay)
+			typeWriter("3. Donut magique de chez Homer (10 dollars)", textDelay)
+			typeWriter(fmt.Sprintf("4. Carte rare Itchy & Scratchy (%d dollars)", randomvalue), textDelay)
+			typeWriter("5. Retour au menu d'Apu", textDelay)
+			typeWriter("------------------------------------", textDelay)
+			typeWriter(fmt.Sprintf("💰 Argent actuel : %d dollars", c.gold), textDelay)
+			typeWriter("👉 Quel objet souhaitez-vous acheter ? ", textDelay)
 
 			var choice2 string
 			fmt.Scan(&choice2)
@@ -43,55 +46,55 @@ func Shopkeeper(c *Character) Character {
 				if c.gold >= 50 {
 					c.inventory = append(c.inventory, "Batte de baseball")
 					c.gold -= 50
-					fmt.Println("✅ Apu : 'Excellente arme ! Il vous reste", c.gold, "dollars.'")
+					typeWriter(fmt.Sprintf("✅ Apu : 'Excellente arme ! Il vous reste %d dollars.'", c.gold), textDelay)
 				} else {
-					fmt.Println("❌ Apu : 'Désolé, pas assez d'argent mon ami !'")
+					typeWriter("❌ Apu : 'Désolé, pas assez d'argent mon ami !'", textDelay)
 				}
 			case "2":
 				if c.gold >= 40 {
 					c.inventory = append(c.inventory, "Bouclier fait maison")
 					c.gold -= 40
-					fmt.Println("✅ Apu : 'Protection garantie ! Il vous reste", c.gold, "dollars.'")
+					typeWriter(fmt.Sprintf("✅ Apu : 'Protection garantie ! Il vous reste %d dollars.'", c.gold), textDelay)
 				} else {
-					fmt.Println("❌ Apu : 'Vos poches sont vides comme le frigo des Simpson !'")
+					typeWriter("❌ Apu : 'Vos poches sont vides comme le frigo des Simpson !'", textDelay)
 				}
 			case "3":
 				if c.gold >= 10 {
 					c.inventory = append(c.inventory, "Donut magique")
 					c.gold -= 10
-					fmt.Println("✅ Apu : 'Mmm... donut magique ! Il vous reste", c.gold, "dollars.'")
+					typeWriter(fmt.Sprintf("✅ Apu : 'Mmm... donut magique ! Il vous reste %d dollars.'", c.gold), textDelay)
 				} else {
-					fmt.Println("❌ Apu : 'Même pas 10 dollars ? Allez voir Homer !'")
+					typeWriter("❌ Apu : 'Même pas 10 dollars ? Allez voir Homer !'", textDelay)
 				}
 			case "4":
 				if c.gold >= randomvalue {
 					c.inventory = append(c.inventory, "Carte Itchy & Scratchy")
 					c.gold -= randomvalue
-					fmt.Println("✅ Apu : 'Carte très rare ! Il vous reste", c.gold, "dollars.'")
+					typeWriter(fmt.Sprintf("✅ Apu : 'Carte très rare ! Il vous reste %d dollars.'", c.gold), textDelay)
 				} else {
-					fmt.Println("❌ Apu : 'Cette carte coûte plus cher que le salaire de Homer !'")
+					typeWriter("❌ Apu : 'Cette carte coûte plus cher que le salaire de Homer !'", textDelay)
 				}
 			case "5":
-				fmt.Println("↩ Apu : 'Très bien, très bien...'")
+				typeWriter("↩ Apu : 'Très bien, très bien...'", textDelay)
 			default:
-				fmt.Println("❌ Apu : 'Je ne comprends pas, parlez plus clairement !'")
+				typeWriter("❌ Apu : 'Je ne comprends pas, parlez plus clairement !'", textDelay)
 			}
 
 		case "2":
 			if len(c.inventory) == 0 {
-				fmt.Println("⚠ Apu : 'Vous n'avez rien à vendre, revenez plus tard !'")
+				typeWriter("⚠ Apu : 'Vous n'avez rien à vendre, revenez plus tard !'", textDelay)
 				continue
 			}
-			fmt.Println("\n--- 💸 Apu rachète vos objets ---")
+			typeWriter("\n--- 💸 Apu rachète vos objets ---", textDelay)
 			for i, v := range c.inventory {
-				fmt.Printf("%d. %s\n", i+1, v)
+				typeWriter(fmt.Sprintf("%d. %s", i+1, v), textDelay)
 			}
-			fmt.Print("👉 Apu : 'Quel objet voulez-vous vendre ?' ")
+			typeWriter("👉 Apu : 'Quel objet voulez-vous vendre ?' ", textDelay)
 
 			var sellChoice int
 			fmt.Scan(&sellChoice)
 			if sellChoice < 1 || sellChoice > len(c.inventory) {
-				fmt.Println("❌ Apu : 'Numéro invalide, comptez mieux que ça !'")
+				typeWriter("❌ Apu : 'Numéro invalide, comptez mieux que ça !'", textDelay)
 				continue
 			}
 
@@ -111,23 +114,23 @@ func Shopkeeper(c *Character) Character {
 			}
 			c.inventory = append(c.inventory[:sellChoice-1], c.inventory[sellChoice:]...)
 			c.gold += sellPrice
-			fmt.Printf("💸 Apu : 'J'ai acheté votre %s pour %d dollars. Solde : %d dollars.'\n", itemToSell, sellPrice, c.gold)
+			typeWriter(fmt.Sprintf("💸 Apu : 'J'ai acheté votre %s pour %d dollars. Solde : %d dollars.'", itemToSell, sellPrice, c.gold), textDelay)
 
 		case "3":
 			if len(c.inventory) == 0 {
-				fmt.Println("⚠ Apu : 'Aucun objet à améliorer dans vos poches !'")
+				typeWriter("⚠ Apu : 'Aucun objet à améliorer dans vos poches !'", textDelay)
 				continue
 			}
-			fmt.Println("\n--- 🔧 Atelier d'amélioration d'Apu ---")
+			typeWriter("\n--- 🔧 Atelier d'amélioration d'Apu ---", textDelay)
 			for i, v := range c.inventory {
-				fmt.Printf("%d. %s\n", i+1, v)
+				typeWriter(fmt.Sprintf("%d. %s", i+1, v), textDelay)
 			}
-			fmt.Print("👉 Apu : 'Quel objet voulez-vous que j'améliore ?' ")
+			typeWriter("👉 Apu : 'Quel objet voulez-vous que j'améliore ?' ", textDelay)
 
 			var upgradeChoice int
 			fmt.Scan(&upgradeChoice)
 			if upgradeChoice < 1 || upgradeChoice > len(c.inventory) {
-				fmt.Println("❌ Apu : 'Mauvais numéro, essayez encore !'")
+				typeWriter("❌ Apu : 'Mauvais numéro, essayez encore !'", textDelay)
 				continue
 			}
 
@@ -139,25 +142,25 @@ func Shopkeeper(c *Character) Character {
 			case "Bouclier fait maison":
 				upgradeCost = 25
 			default:
-				fmt.Println("⚠ Apu : 'Cet objet ne peut pas être amélioré, désolé !'")
+				typeWriter("⚠ Apu : 'Cet objet ne peut pas être amélioré, désolé !'", textDelay)
 				continue
 			}
 
 			if c.gold >= upgradeCost {
 				c.gold -= upgradeCost
 				c.inventory[upgradeChoice-1] = itemToUpgrade + " +1"
-				fmt.Printf("✨ Apu : 'Votre %s est maintenant amélioré pour %d dollars !'\n", itemToUpgrade, upgradeCost)
+				typeWriter(fmt.Sprintf("✨ Apu : 'Votre %s est maintenant amélioré pour %d dollars !'", itemToUpgrade, upgradeCost), textDelay)
 			} else {
-				fmt.Println("❌ Apu : 'Pas assez d'argent pour cette amélioration !'")
+				typeWriter("❌ Apu : 'Pas assez d'argent pour cette amélioration !'", textDelay)
 			}
 
-		case "4":
-			fmt.Println("\n👋 Apu : 'Merci pour votre visite ! Revenez vite au Kwik-E-Mart !'")
+		case "0":
+			typeWriter("\n👋 Apu : 'Merci pour votre visite ! Revenez vite au Kwik-E-Mart !'", textDelay)
 			Menu(*c)
 			return *c
 
 		default:
-			fmt.Println("❌ Apu : 'Je ne comprends pas votre choix, mon ami !'")
+			typeWriter("❌ Apu : 'Je ne comprends pas votre choix, mon ami !'", textDelay)
 		}
 	}
 }

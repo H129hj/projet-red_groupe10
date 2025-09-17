@@ -16,23 +16,21 @@ type Character struct {
 	gold       int
 	skills     []string
 	equipement map[string]int
-	textDelay  int
 }
 
 func InitCharacter() Character {
-	var name string
 	var class string
 	var c Character
-	fmt.Print("🏠 Bienvenue dans Springfield ! Choisissez le nom de votre enfant Simpson: ")
-	fmt.Scan(&name)
-	fmt.Print("🎭 Choisissez votre personnage (bart, lisa, maggie): ")
+	var textDelay = 30 * time.Millisecond
+
+	typeWriter("🏠 Bienvenue dans Springfield ! Choisissez votre personnage (bart, lisa, maggie): ", textDelay)
 	fmt.Scan(&class)
+
 	if class != "bart" && class != "lisa" && class != "maggie" {
-		fmt.Println("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.")
-		InitCharacter()
+		typeWriter("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.", textDelay)
+		return InitCharacter() // ⚠️ ajouté return pour éviter de perdre le personnage
 	} else if class == "lisa" {
 		c = Character{
-			name:       name,
 			class:      class,
 			level:      1,
 			PVmax:      70,
@@ -45,7 +43,6 @@ func InitCharacter() Character {
 		}
 	} else if class == "bart" {
 		c = Character{
-			name:       name,
 			class:      class,
 			level:      1,
 			PVmax:      80,
@@ -58,7 +55,6 @@ func InitCharacter() Character {
 		}
 	} else if class == "maggie" {
 		c = Character{
-			name:       name,
 			class:      class,
 			level:      1,
 			PVmax:      100,
@@ -91,6 +87,7 @@ func TakePot(c *Character) []string {
 			if c.PV > c.PVmax {
 				c.PV = c.PVmax
 			}
+			break 
 		}
 	}
 	return c.inventory
@@ -98,7 +95,7 @@ func TakePot(c *Character) []string {
 
 func limitedInventory(c *Character) bool {
 	if len(c.inventory) >= 10 {
-		typeWriter("🍩 Vos poches sont pleines de donuts ! Vous ne pouvez pas porter plus d'objets.", time.Duration(c.textDelay))
+		typeWriter("🍩 Vos poches sont pleines de donuts ! Vous ne pouvez pas porter plus d'objets.", 300*time.Millisecond)
 		return false
 	}
 	return true
