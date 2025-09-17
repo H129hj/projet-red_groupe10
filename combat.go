@@ -6,20 +6,20 @@ import (
 )
 
 type Monster struct {
-	name      string
-	PVmax     int
-	PV        int
-	power     int
-	textDelay int
+	name  string
+	PVmax int
+	PV    int
+	power int
 }
 
 func attackMonster(c *Character, m *Monster) {
+	var textDelay = 20 * time.Millisecond
 	damage := c.power
 	m.PV -= damage
 	if m.PV < 0 {
 		m.PV = 0
 	}
-	typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts !", c.name, m.name, damage), time.Duration(m.textDelay)*time.Millisecond)
+	typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts !", c.name, m.name, damage), textDelay)
 }
 
 func InitMonster(name string, PVmax int, power int) Monster {
@@ -32,28 +32,30 @@ func InitMonster(name string, PVmax int, power int) Monster {
 }
 
 func goblinPattern(m *Monster, turn int) {
+	var textDelay = 20 * time.Millisecond
 	if turn%3 == 0 {
 		damage := m.power * 2
-		typeWriter(fmt.Sprintf("🌟 %s utilise sa technique spéciale et inflige %d points de dégâts !", m.name, damage), time.Duration(m.textDelay)*time.Millisecond)
+		typeWriter(fmt.Sprintf("🌟 %s utilise sa technique spéciale et inflige %d points de dégâts !", m.name, damage), textDelay)
 	} else {
 		damage := m.power
-		typeWriter(fmt.Sprintf("👊 %s lance une attaque basique et inflige %d points de dégâts !", m.name, damage), time.Duration(m.textDelay)*time.Millisecond)
+		typeWriter(fmt.Sprintf("👊 %s lance une attaque basique et inflige %d points de dégâts !", m.name, damage), textDelay)
 	}
 }
 
 func characterTurn(c *Character, m *Monster, t int) {
 	var choice int
+	var textDelay = 20 * time.Millisecond
 	turn := t
 	if c.PV <= 0 {
 		Wasted(c)
 	} else if m.PV <= 0 {
-		typeWriter(fmt.Sprintf("🎉 Victoire ! Vous avez battu %s !", m.name), time.Duration(m.textDelay)*time.Millisecond)
+		typeWriter(fmt.Sprintf("🎉 Victoire ! Vous avez battu %s !", m.name), textDelay)
 		Menu(*c)
 	} else {
-		typeWriter("⚔️ À votre tour ! Choisissez une action :", time.Duration(m.textDelay)*time.Millisecond)
-		typeWriter("1. 💥 Attaquer", time.Duration(m.textDelay)*time.Millisecond)
-		typeWriter("2. 🎒 Fouiller dans votre sac", time.Duration(m.textDelay)*time.Millisecond)
-		typeWriter("3. 🏃 Fuir le combat", time.Duration(m.textDelay)*time.Millisecond)
+		typeWriter("⚔️ À votre tour ! Choisissez une action :", textDelay)
+		typeWriter("1. 💥 Attaquer", textDelay)
+		typeWriter("2. 🎒 Fouiller dans votre sac", textDelay)
+		typeWriter("3. 🏃 Fuir le combat", textDelay)
 		fmt.Scan(&choice)
 
 		switch choice {
@@ -65,10 +67,10 @@ func characterTurn(c *Character, m *Monster, t int) {
 			AccessInventory(*c)
 			characterTurn(c, m, turn)
 		case 3:
-			typeWriter("🏃💨 Vous fuyez le combat comme Milhouse devant Nelson !", time.Duration(m.textDelay)*time.Millisecond)
+			typeWriter("🏃💨 Vous fuyez le combat comme Milhouse devant Nelson !", textDelay)
 			Menu(*c)
 		default:
-			typeWriter("❌ Choix invalide. Même Ralph ferait mieux !", time.Duration(m.textDelay)*time.Millisecond)
+			typeWriter("❌ Choix invalide.", textDelay)
 			characterTurn(c, m, turn)
 		}
 	}

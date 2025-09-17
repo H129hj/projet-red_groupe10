@@ -26,12 +26,16 @@ func typeWriter(str string, delay time.Duration) {
 }
 
 func Menu(c1 Character) {
+	checkpoint := 0
 	var choice int
 	var textDelay = 20 * time.Millisecond
-	typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", textDelay)
-	typeWriter("1. 🎒 Regarder dans votre sac à dos", textDelay)
-	typeWriter("2. 📊 Voir vos statistiques", textDelay)
-	typeWriter("3. 🏪 Aller chez Apu au Kwik-E-Mart", textDelay)
+	if checkpoint == 0 {
+		typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", textDelay)
+		typeWriter("1. 💼 Sortir de la maison", textDelay)
+	}
+	typeWriter("2. 🎒 Regarder dans votre sac à dos", textDelay)
+	typeWriter("3. 📊 Voir vos statistiques", textDelay)
+	typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", textDelay)
 	typeWriter("0. 🚪 Rentrer à la maison", textDelay)
 	fmt.Scan(&choice)
 	switch choice {

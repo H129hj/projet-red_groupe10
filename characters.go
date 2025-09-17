@@ -16,6 +16,7 @@ type Character struct {
 	gold       int
 	skills     []string
 	equipement map[string]int
+	extendedInventory int
 }
 
 func InitCharacter() Character {
@@ -40,6 +41,7 @@ func InitCharacter() Character {
 			gold:       100,
 			skills:     []string{"Solo de jazz envoûtant", "Leçon de morale dévastatrice", "Méditation bouddhiste"},
 			equipement: map[string]int{"Robe de première de classe": 10, "Serre-tête": 5, "Collier de perles": 7},
+			extendedInventory: 0,
 		}
 	} else if class == "bart" {
 		c = Character{
@@ -52,6 +54,7 @@ func InitCharacter() Character {
 			gold:       100,
 			skills:     []string{"Coup de fronde vicieux", "Blague empoisonnée", "Échappée en skateboard"},
 			equipement: map[string]int{"T-shirt rouge": 10, "Short bleu": 5, "Chaussures de sport": 7},
+			extendedInventory: 0,
 		}
 	} else if class == "maggie" {
 		c = Character{
@@ -64,6 +67,7 @@ func InitCharacter() Character {
 			gold:       100,
 			skills:     []string{"Regard hypnotique", "Cri strident", "Attaque surprise du berceau"},
 			equipement: map[string]int{"Grenouillère bleue": 10, "Nœud rose": 5, "Tétine magique": 7},
+			extendedInventory: 0,
 		}
 	}
 	return c
@@ -94,7 +98,7 @@ func takePot(c *Character) []string {
 }
 
 func limitedInventory(c *Character) bool {
-	if len(c.inventory) >= 10 {
+	if len(c.inventory) >= 10+c.extendedInventory {
 		typeWriter("🍩 Vos poches sont pleines de donuts ! Vous ne pouvez pas porter plus d'objets.", 300*time.Millisecond)
 		return false
 	}

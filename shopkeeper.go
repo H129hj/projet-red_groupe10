@@ -33,7 +33,8 @@ func Shopkeeper(c *Character) Character {
 			typeWriter("2. Bouclier fait maison (40 dollars)", textDelay)
 			typeWriter("3. Donut magique de chez Homer (10 dollars)", textDelay)
 			typeWriter(fmt.Sprintf("4. Carte rare Itchy & Scratchy (%d dollars)", randomvalue), textDelay)
-			typeWriter("5. Retour au menu d'Apu", textDelay)
+			typeWriter("5. Agrandir l'inventaire (25 dollars)", textDelay)
+			typeWriter("6. Retour au menu d'Apu", textDelay)
 			typeWriter("------------------------------------", textDelay)
 			typeWriter(fmt.Sprintf("💰 Argent actuel : %d dollars", c.gold), textDelay)
 			typeWriter("👉 Quel objet souhaitez-vous acheter ? ", textDelay)
@@ -43,7 +44,7 @@ func Shopkeeper(c *Character) Character {
 
 			switch choice2 {
 			case "1":
-				if c.gold >= 50 {
+				if c.gold >= 50 && !contains(c.inventory, "Batte de baseball") && limitedInventory(c) {
 					c.inventory = append(c.inventory, "Batte de baseball")
 					c.gold -= 50
 					typeWriter(fmt.Sprintf("✅ Apu : 'Excellente arme ! Il vous reste %d dollars.'", c.gold), textDelay)
@@ -51,7 +52,7 @@ func Shopkeeper(c *Character) Character {
 					typeWriter("❌ Apu : 'Désolé, pas assez d'argent mon ami !'", textDelay)
 				}
 			case "2":
-				if c.gold >= 40 {
+				if c.gold >= 40 && !contains(c.inventory, "Batte de baseball") && limitedInventory(c){
 					c.inventory = append(c.inventory, "Bouclier fait maison")
 					c.gold -= 40
 					typeWriter(fmt.Sprintf("✅ Apu : 'Protection garantie ! Il vous reste %d dollars.'", c.gold), textDelay)
@@ -59,7 +60,7 @@ func Shopkeeper(c *Character) Character {
 					typeWriter("❌ Apu : 'Vos poches sont vides comme le frigo des Simpson !'", textDelay)
 				}
 			case "3":
-				if c.gold >= 10 {
+				if c.gold >= 10 && limitedInventory(c) {
 					c.inventory = append(c.inventory, "Donut magique")
 					c.gold -= 10
 					typeWriter(fmt.Sprintf("✅ Apu : 'Mmm... donut magique ! Il vous reste %d dollars.'", c.gold), textDelay)
@@ -67,7 +68,7 @@ func Shopkeeper(c *Character) Character {
 					typeWriter("❌ Apu : 'Même pas 10 dollars ? Allez voir Homer !'", textDelay)
 				}
 			case "4":
-				if c.gold >= randomvalue {
+				if c.gold >= randomvalue && limitedInventory(c) {
 					c.inventory = append(c.inventory, "Carte Itchy & Scratchy")
 					c.gold -= randomvalue
 					typeWriter(fmt.Sprintf("✅ Apu : 'Carte très rare ! Il vous reste %d dollars.'", c.gold), textDelay)
@@ -75,6 +76,14 @@ func Shopkeeper(c *Character) Character {
 					typeWriter("❌ Apu : 'Cette carte coûte plus cher que le salaire de Homer !'", textDelay)
 				}
 			case "5":
+				if c.gold >= 25 {
+					c.extendedInventory += 1
+					c.gold -= 25
+					typeWriter(fmt.Sprintf("✅ Apu : 'Votre inventaire a été agrandi ! Il vous reste %d dollars.'", c.gold), textDelay)
+				} else {
+					typeWriter("❌ Apu : 'Pas assez d'argent pour agrandir votre inventaire !'", textDelay)
+				}
+			case "6":
 				typeWriter("↩ Apu : 'Très bien, très bien...'", textDelay)
 			default:
 				typeWriter("❌ Apu : 'Je ne comprends pas, parlez plus clairement !'", textDelay)
