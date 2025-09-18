@@ -63,7 +63,7 @@ func characterTurnTahitiBob(c *Character, m *Monster, t int, progress *ScenarioP
 			tahitiBobPattern(m, turn)
 			characterTurnTahitiBob(c, m, turn+1, progress)
 		case 2:
-			AccessInventory(*c)
+			typeWriter(AccessInventory(*c), 30*time.Millisecond)
 			characterTurnTahitiBob(c, m, turn, progress)
 		case 3:
 			typeWriter("🏃💨 Impossible de fuir ! Tahiti Bob bloque la sortie !", 40*time.Millisecond)

@@ -127,7 +127,7 @@ func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProg
 			barneyPattern(m, turn)
 			characterTurnBarney(c, m, turn+1, progress)
 		case 2:
-			AccessInventory(*c)
+			typeWriter(AccessInventory(*c), 30*time.Millisecond)
 			characterTurnBarney(c, m, turn, progress)
 		case 3:
 			typeWriter("🏃💨 Vous fuyez le bar en évitant les chopes volantes !", 40*time.Millisecond)

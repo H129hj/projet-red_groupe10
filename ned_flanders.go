@@ -90,7 +90,7 @@ func characterTurnNed(c *Character, m *Monster, t int, progress *ScenarioProgres
 			nedPattern(m, turn)
 			characterTurnNed(c, m, turn+1, progress)
 		case 2:
-			AccessInventory(*c)
+			typeWriter(AccessInventory(*c), 30*time.Millisecond)
 			characterTurnNed(c, m, turn, progress)
 		default:
 			typeWriter("❌ Choix invalide.", 30*time.Millisecond)

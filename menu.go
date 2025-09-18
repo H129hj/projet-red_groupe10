@@ -25,7 +25,7 @@ func typeWriter(str string, delay time.Duration) {
 	fmt.Println()
 }
 
-func Menu(c1 Character) {
+func Menu(c Character) {
 	var choice int
 	var textDelay = 20 * time.Millisecond
 	typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", textDelay)
@@ -37,21 +37,21 @@ func Menu(c1 Character) {
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
-		progress := StartHomerScenario(&c1)
-		ScenarioMenu(&c1, &progress)
+		progress := StartHomerScenario(&c)
+		ScenarioMenu(&c, &progress)
 	case 2:
-		typeWriter(AccessInventory(c1), 50*time.Millisecond)
-		Menu(c1)
+		typeWriter(AccessInventory(c), textDelay)
+		Menu(c)
 	case 3:
-		typeWriter(DisplayStats(c1), 50*time.Millisecond)
-		Menu(c1)
+		typeWriter(DisplayStats(c), textDelay)
+		Menu(c)
 	case 4:
-		Shopkeeper(&c1)
+		Shopkeeper(&c)
 	case 0:
 		typeWriter("🏠 Marge vous appelle pour le dîner. À bientôt !", 50*time.Millisecond)
 		return
 	default:
 		typeWriter("❌ Choix invalide.", 30*time.Millisecond)
-		Menu(c1)
+		Menu(c)
 	}
 }

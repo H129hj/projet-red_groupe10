@@ -74,7 +74,7 @@ func InitCharacter() Character {
 }
 
 func DisplayStats(c Character) string {
-	texte := fmt.Sprintf("Nom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nPower: %v", c.name, c.class, c.level, c.PV, c.PVmax, c.power)
+	texte := fmt.Sprintf("Nom: %s\nNiveau: %d\nPV: %d/%d\nPower: %v", c.class, c.level, c.PV, c.PVmax, c.power)
 	return texte
 }
 

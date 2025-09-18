@@ -99,9 +99,9 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			AmusementPark(c, progress)
 		}
 	case 2:
-		typeWriter(AccessInventory(*c), 50*time.Millisecond)
+		typeWriter(AccessInventory(*c), 30*time.Millisecond)
 	case 3:
-		typeWriter(DisplayStats(*c), 50*time.Millisecond)
+		typeWriter(DisplayStats(*c), 30*time.Millisecond)
 	case 4:
 		Shopkeeper(c)
 	case 0:
