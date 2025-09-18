@@ -3,6 +3,7 @@ package projetred
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/faiface/beep"
 	"github.com/faiface/beep/mp3"
@@ -11,22 +12,23 @@ import (
 
 // MusiqueJouer lit et joue le fichier son.mp3 en boucle infinie
 func MusiqueJouer() {
-	f, err := os.Open("son.mp3")
+	f, err := os.Open("./son.mp3")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
 
 	streamer, format, err := mp3.Decode(f)
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer streamer.Close()
 
-	speaker.Init(format.SampleRate, format.SampleRate.N(1024))
+	speaker.Init(format.SampleRate, format.SampleRate.N(time.Second/10))
 
-	// Boucle infinie
-	loop := beep.Loop(-1, streamer)
-	speaker.Play(loop)
+	done := make(chan bool)
+	speaker.Play(beep.Seq(streamer, beep.Callback(func() {
+		done <- true
+	})))
 
-	select {} // bloque pour garder la musique active
+	<-done
 }
