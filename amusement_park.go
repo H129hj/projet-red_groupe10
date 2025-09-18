@@ -7,20 +7,15 @@ import (
 
 // Arène finale : Parc d'attractions
 func AmusementPark(c *Character, progress *ScenarioProgress) {
-	typeWriter("==================================================", 30*time.Millisecond)
-	typeWriter("🎡 ÉTAPE 4 : ARÈNE FINALE - PARC D'ATTRACTIONS", 50*time.Millisecond)
-	typeWriter("==================================================", 30*time.Millisecond)
+	typeWriter("======================", 30*time.Millisecond)
+	typeWriter("🎡 PARC D'ATTRACTIONS", 50*time.Millisecond)
+	typeWriter("======================", 30*time.Millisecond)
 	typeWriter("", 30*time.Millisecond)
 
 	typeWriter("🎢 Vous arrivez au parc d'attractions de Springfield...", 40*time.Millisecond)
 	typeWriter("🎪 Des lumières clignotantes et une musique de fête résonnent partout.", 40*time.Millisecond)
 	typeWriter("", 30*time.Millisecond)
 
-	typeWriter("🎯 Vous apercevez une grande bannière : 'GRAND CONCOURS DU DONUT COSMIQUE'", 40*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
-
-	typeWriter("🎯 Bart : 'Cool ! Un parc d'attractions ! Bon, où est papa ?'", 40*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
 	typeWriter("🌴 Soudain, une voix sinistre résonne derrière vous...", 40*time.Millisecond)
 	typeWriter("🔪 ??? : 'Enfin ! L'heure de ma vengeance a sonné, Bart Simpson !'", 40*time.Millisecond)
 	typeWriter("", 30*time.Millisecond)
@@ -32,20 +27,12 @@ func AmusementPark(c *Character, progress *ScenarioProgress) {
 
 
 func TahitiBobFight(c *Character, progress *ScenarioProgress) {
-	typeWriter("⚔️ COMBAT OBLIGATOIRE : TAHITI BOB", 50*time.Millisecond)
-	typeWriter("========================================", 30*time.Millisecond)
+	typeWriter("=======================", 30*time.Millisecond)
+	typeWriter("⚔️ COMBAT : TAHITI BOB", 50*time.Millisecond)
+	typeWriter("=======================", 30*time.Millisecond)
 	typeWriter("", 30*time.Millisecond)
 
-	typeWriter("🌴 Tahiti Bob : 'Bart Simpson ! Depuis des années j'attends ce moment !'", 40*time.Millisecond)
-	typeWriter("🌴 Tahiti Bob : 'Tes blagues stupides ont ruiné ma carrière d'acteur !'", 40*time.Millisecond)
-	typeWriter("🌴 Tahiti Bob : 'Aujourd'hui, justice sera rendue !'", 40*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
-
-	typeWriter("🎯 Bart : 'Oh oh... Tahiti Bob ! Euh... salut mec !'", 40*time.Millisecond)
-	typeWriter("🎯 Bart : 'Écoute, je cherche juste mon père, on peut pas faire ça plus tard ?'", 40*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
-
-	typeWriter("🌴 Tahiti Bob : 'JAMAIS ! En garde !'", 50*time.Millisecond)
+	typeWriter("🌴 Tahiti Bob : En garde !", 50*time.Millisecond)
 
 	// Combat obligatoire
 	bobMonster := InitMonster("Tahiti Bob (Vengeance)", 120, 35)
