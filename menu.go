@@ -27,12 +27,14 @@ func typeWriter(str string, delay time.Duration) {
 
 func Menu(c Character) {
 	var choice int
-	var textDelay = 20 * time.Millisecond
+	var textDelay = 15 * time.Millisecond
 	typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", textDelay)
-	typeWriter("1. 💼 Sortir de la maison", textDelay)
-	typeWriter("2. 🎒 Regarder dans votre sac à dos", textDelay)
+	typeWriter("1. 💼 Sortir de la maison (Scénario)", textDelay)
+	typeWriter("2. 🎒 Sac à dos et équipements", textDelay)
 	typeWriter("3. 📊 Voir vos statistiques", textDelay)
-	typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", textDelay)
+	typeWriter("4. ⚔️ Gérer les équipements", textDelay)
+	typeWriter("5. 🎯 Menu des compétences", textDelay)
+	typeWriter("6. 🏪 Kwik-E-Mart (Shop + Craft)", textDelay)
 	typeWriter("0. 🚪 Rentrer à la maison", textDelay)
 	fmt.Scan(&choice)
 	switch choice {
@@ -46,12 +48,18 @@ func Menu(c Character) {
 		typeWriter(DisplayStats(c), textDelay)
 		Menu(c)
 	case 4:
+		EquipmentMenu(&c)
+		Menu(c)
+	case 5:
+		SkillsMenuSimple(&c)
+		Menu(c)
+	case 6:
 		Shopkeeper(&c)
 	case 0:
-		typeWriter("🏠 Marge vous appelle pour le dîner. À bientôt !", 50*time.Millisecond)
+		typeWriter("🏠 Marge vous appelle pour le dîner. À bientôt !", 15*time.Millisecond)
 		return
 	default:
-		typeWriter("❌ Choix invalide.", 30*time.Millisecond)
+		typeWriter("❌ Choix invalide.", 15*time.Millisecond)
 		Menu(c)
 	}
 }

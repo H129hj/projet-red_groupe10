@@ -5,18 +5,16 @@ import (
 	"time"
 )
 
-// Structure pour suivre la progression du scénario
 type ScenarioProgress struct {
-	Stage          int // 0=début, 1=Ned, 2=Bar Moe, 3=Magasin BD, 4=Parc
+	Stage          int
 	NedCompleted   bool
 	MoeCompleted   bool
 	ComicCompleted bool
-	HasClue1       bool // Indice de Ned
-	HasClue2       bool // Indice de Barney
-	HasClue3       bool // Indice du Comic Book Guy
+	HasClue1       bool
+	HasClue2       bool
+	HasClue3       bool
 }
 
-// Initialise le scénario
 func InitScenario() ScenarioProgress {
 	return ScenarioProgress{
 		Stage:          0,
@@ -29,61 +27,60 @@ func InitScenario() ScenarioProgress {
 	}
 }
 
-// Introduction du scénario
 func StartHomerScenario(c *Character) ScenarioProgress {
 	progress := InitScenario()
 
-	typeWriter("==================================================", 20*time.Millisecond)
-	typeWriter("🏠 SPRINGFIELD RPG - À LA RECHERCHE D'HOMER", 40*time.Millisecond)
-	typeWriter("==================================================", 20*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
+	typeWriter("==================================================", 15*time.Millisecond)
+	typeWriter("🏠 SPRINGFIELD RPG - À LA RECHERCHE D'HOMER", 15*time.Millisecond)
+	typeWriter("==================================================", 15*time.Millisecond)
+	typeWriter("", 15*time.Millisecond)
 
-	typeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 40*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
+	typeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 15*time.Millisecond)
+	typeWriter("", 15*time.Millisecond)
 
-	typeWriter("💬 Marge : 'Oh mon dieu ! Homer n'est pas rentré de la taverne !'", 40*time.Millisecond)
-	typeWriter("💬 Marge : 'Il devait juste prendre UNE bière chez Moe...'", 40*time.Millisecond)
-	typeWriter("💬 Marge : 'Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?'", 40*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
+	typeWriter("💬 Marge : 'Oh mon dieu ! Homer n'est pas rentré de la taverne !'", 15*time.Millisecond)
+	typeWriter("💬 Marge : 'Il devait juste prendre UNE bière chez Moe...'", 15*time.Millisecond)
+	typeWriter("💬 Marge : 'Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?'", 15*time.Millisecond)
+	typeWriter("", 15*time.Millisecond)
 
-	typeWriter("", 30*time.Millisecond)
-	typeWriter("🎯 PREMIER OBJECTIF : Parler aux voisins", 40*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
+	typeWriter("", 15*time.Millisecond)
+	typeWriter("🎯 PREMIER OBJECTIF : Parler aux voisins", 15*time.Millisecond)
+	typeWriter("", 15*time.Millisecond)
 
 	progress.Stage = 1
 	return progress
 }
 
-// Menu du scénario principal
 func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 	var choice int
 
-	typeWriter("🗺️ Où voulez-vous aller ?", 30*time.Millisecond)
+	typeWriter("🗺️ Où voulez-vous aller ?", 15*time.Millisecond)
 
 	switch progress.Stage {
 	case 1:
-		typeWriter("1. 🏡 Aller voir Ned Flanders (voisin)", 30*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
+		typeWriter("1. 🏡 Aller voir Ned Flanders (voisin)", 15*time.Millisecond)
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
+		typeWriter("5. 🥊\u200b Casse la gueule à Milhouse pour passer le temps", 15*time.Millisecond)
 	case 2:
-		typeWriter("1. Allez au bar de Moe", 30*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
+		typeWriter("1. 🍻 Allez au bar de Moe", 15*time.Millisecond)
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
 	case 3:
-		typeWriter("1. 📚 Magasin de BD", 30*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
+		typeWriter("1. 📚 Magasin de BD", 15*time.Millisecond)
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
 	case 4:
-		typeWriter("1. 🎡 Parc d'attractions", 30*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
+		typeWriter("1. 🎡 Parc d'attractions", 15*time.Millisecond)
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
 	}
 
-	typeWriter("0. 🏠 Retourner à la maison", 30*time.Millisecond)
+	typeWriter("0. 🏠 Retourner à la maison", 15*time.Millisecond)
 	fmt.Scan(&choice)
 
 	switch choice {
@@ -99,17 +96,22 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			AmusementPark(c, progress)
 		}
 	case 2:
-		typeWriter(AccessInventory(*c), 30*time.Millisecond)
+		typeWriter(AccessInventory(*c), 15*time.Millisecond)
 	case 3:
-		typeWriter(DisplayStats(*c), 30*time.Millisecond)
+		typeWriter(DisplayStats(*c), 15*time.Millisecond)
 	case 4:
 		Shopkeeper(c)
+	case 5:
+		if progress.Stage == 1 {
+			traningFight(c, &Monster{name: "Milhouse", PVmax: 1000000, PV: 1000000, power: 2})
+			ScenarioMenu(c, progress)
+		}
 	case 0:
-		typeWriter("🏠 Vous retournez à la maison...", 50*time.Millisecond)
+		typeWriter("🏠 Vous retournez à la maison...", 15*time.Millisecond)
 		Menu(*c)
 		return
 	default:
-		typeWriter("❌ Choix invalide.", 30*time.Millisecond)
+		typeWriter("❌ Choix invalide.", 15*time.Millisecond)
 		ScenarioMenu(c, progress)
 	}
 }
