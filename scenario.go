@@ -11,12 +11,11 @@ type ScenarioProgress struct {
 	NedCompleted   bool
 	MoeCompleted   bool
 	ComicCompleted bool
-	HasClue1       bool // Indice de Ned
-	HasClue2       bool // Indice de Barney
-	HasClue3       bool // Indice du Comic Book Guy
+	HasClue1       bool
+	HasClue2       bool
+	HasClue3       bool
 }
 
-// Initialise le scénario
 func InitScenario() ScenarioProgress {
 	return ScenarioProgress{
 		Stage:          0,
@@ -68,7 +67,6 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	return progress
 }
 
-// Menu du scénario principal
 func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 	var choice int
 

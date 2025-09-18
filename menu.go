@@ -28,15 +28,6 @@ func typeWriter(str string, delay time.Duration) {
 func Menu(c1 Character) {
 	checkpoint := 0
 	var choice int
-<<<<<<< HEAD
-	typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", 30*time.Millisecond)
-	typeWriter("1. 🎬 NOUVEAU : À la recherche d'Homer (Scénario principal)", 30*time.Millisecond)
-	typeWriter("2. 🥊 Combat d'entraînement contre Ralph Wiggum", 30*time.Millisecond)
-	typeWriter("3. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
-	typeWriter("4. 📊 Voir vos statistiques", 30*time.Millisecond)
-	typeWriter("5. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
-	typeWriter("0. 🚪 Rentrer à la maison", 30*time.Millisecond)
-=======
 	var textDelay = 20 * time.Millisecond
 	if checkpoint == 0 {
 		typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", textDelay)
@@ -46,15 +37,12 @@ func Menu(c1 Character) {
 	typeWriter("3. 📊 Voir vos statistiques", textDelay)
 	typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", textDelay)
 	typeWriter("0. 🚪 Rentrer à la maison", textDelay)
->>>>>>> 6c0957eb8c47f03ac1280581fe4bc9ab941c9af4
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
-		// Nouveau scénario principal
 		progress := StartHomerScenario(&c1)
 		ScenarioMenu(&c1, &progress)
 	case 2:
-		// Combat d'entraînement
 		Ralph := InitMonster("Ralph Wiggum", 100, 20)
 		characterTurn(&c1, &Ralph, 1)
 	case 3:

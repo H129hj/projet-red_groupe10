@@ -52,17 +52,10 @@ func characterTurn(c *Character, m *Monster, t int) {
 		typeWriter(fmt.Sprintf("🎉 Victoire ! Vous avez battu %s !", m.name), textDelay)
 		Menu(*c)
 	} else {
-<<<<<<< HEAD
-		typeWriter("⚔️ À votre tour ! Choisissez une action :", time.Duration(m.textDelay)*time.Millisecond)
-		typeWriter("1. 💥 Attaquer", time.Duration(m.textDelay)*time.Millisecond)
-		typeWriter("2. 🎒 Fouiller dans votre sac", time.Duration(m.textDelay)*time.Millisecond)
-		typeWriter("3. 🏃 Fuir le combat", time.Duration(m.textDelay)*time.Millisecond)
-=======
 		typeWriter("⚔️ À votre tour ! Choisissez une action :", textDelay)
 		typeWriter("1. 💥 Attaquer", textDelay)
 		typeWriter("2. 🎒 Fouiller dans votre sac", textDelay)
 		typeWriter("3. 🏃 Fuir le combat", textDelay)
->>>>>>> 6c0957eb8c47f03ac1280581fe4bc9ab941c9af4
 		fmt.Scan(&choice)
 
 		switch choice {

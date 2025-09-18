@@ -6,16 +6,16 @@ import (
 )
 
 type Character struct {
-	name       string
-	class      string
-	level      int
-	power      int
-	PVmax      int
-	PV         int
-	inventory  []string
-	gold       int
-	skills     []string
-	equipement map[string]int
+	name              string
+	class             string
+	level             int
+	power             int
+	PVmax             int
+	PV                int
+	inventory         []string
+	gold              int
+	skills            []string
+	equipement        map[string]int
 	extendedInventory int
 }
 
@@ -29,44 +29,44 @@ func InitCharacter() Character {
 
 	if class != "bart" && class != "lisa" && class != "maggie" {
 		typeWriter("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.", textDelay)
-		return InitCharacter() // ⚠️ ajouté return pour éviter de perdre le personnage
+		return InitCharacter()
 	} else if class == "lisa" {
 		c = Character{
-			class:      class,
-			level:      1,
-			PVmax:      70,
-			PV:         70,
-			power:      150,
-			inventory:  []string{"Saxophone de Lisa", "donut magique", "donut magique", "donut magique"},
-			gold:       100,
-			skills:     []string{"Solo de jazz envoûtant", "Leçon de morale dévastatrice", "Méditation bouddhiste"},
-			equipement: map[string]int{"Robe de première de classe": 10, "Serre-tête": 5, "Collier de perles": 7},
+			class:             class,
+			level:             1,
+			PVmax:             70,
+			PV:                70,
+			power:             150,
+			inventory:         []string{"Saxophone de Lisa", "donut magique", "donut magique", "donut magique"},
+			gold:              100,
+			skills:            []string{"Solo de jazz envoûtant", "Leçon de morale dévastatrice", "Méditation bouddhiste"},
+			equipement:        map[string]int{"Robe de première de classe": 10, "Serre-tête": 5, "Collier de perles": 7},
 			extendedInventory: 0,
 		}
 	} else if class == "bart" {
 		c = Character{
-			class:      class,
-			level:      1,
-			PVmax:      80,
-			PV:         80,
-			power:      100,
-			inventory:  []string{"Lance-pierre de Bart", "donut magique", "donut magique", "donut magique"},
-			gold:       100,
-			skills:     []string{"Coup de fronde vicieux", "Blague empoisonnée", "Échappée en skateboard"},
-			equipement: map[string]int{"T-shirt rouge": 10, "Short bleu": 5, "Chaussures de sport": 7},
+			class:             class,
+			level:             1,
+			PVmax:             80,
+			PV:                80,
+			power:             100,
+			inventory:         []string{"Lance-pierre de Bart", "donut magique", "donut magique", "donut magique"},
+			gold:              100,
+			skills:            []string{"Coup de fronde vicieux", "Blague empoisonnée", "Échappée en skateboard"},
+			equipement:        map[string]int{"T-shirt rouge": 10, "Short bleu": 5, "Chaussures de sport": 7},
 			extendedInventory: 0,
 		}
 	} else if class == "maggie" {
 		c = Character{
-			class:      class,
-			level:      1,
-			PVmax:      100,
-			PV:         100,
-			power:      80,
-			inventory:  []string{"Biberon de Maggie", "donut magique", "donut magique", "donut magique"},
-			gold:       100,
-			skills:     []string{"Regard hypnotique", "Cri strident", "Attaque surprise du berceau"},
-			equipement: map[string]int{"Grenouillère bleue": 10, "Nœud rose": 5, "Tétine magique": 7},
+			class:             class,
+			level:             1,
+			PVmax:             100,
+			PV:                100,
+			power:             80,
+			inventory:         []string{"Biberon de Maggie", "donut magique", "donut magique", "donut magique"},
+			gold:              100,
+			skills:            []string{"Regard hypnotique", "Cri strident", "Attaque surprise du berceau"},
+			equipement:        map[string]int{"Grenouillère bleue": 10, "Nœud rose": 5, "Tétine magique": 7},
 			extendedInventory: 0,
 		}
 	}
@@ -91,7 +91,7 @@ func TakePot(c *Character) []string {
 			if c.PV > c.PVmax {
 				c.PV = c.PVmax
 			}
-			break 
+			break
 		}
 	}
 	return c.inventory

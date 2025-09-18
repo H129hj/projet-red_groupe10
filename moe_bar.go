@@ -67,13 +67,11 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 		typeWriter("", 30*time.Millisecond)
 		typeWriter("⚔️ Barney entre en mode IVROGNE FURIEUX !", 50*time.Millisecond)
 
-		// Combat contre Barney
 		barneyMonster := InitMonster("Barney Gumble (Ivrogne Furieux)", 90, 22)
 		characterTurnBarney(c, &barneyMonster, 1, progress)
 		return
 
 	case 3:
-		// Réponse neutre
 		typeWriter("🍺 Barney : '*rot* Homer... oui... il avait un papier bizarre...'", 40*time.Millisecond)
 		typeWriter("🍺 Barney : 'Quelque chose sur un concours de donuts... *rot*'", 40*time.Millisecond)
 		typeWriter("🍺 Barney : 'Va voir le Comic Book Guy, il saura peut-être...'", 40*time.Millisecond)
@@ -96,7 +94,6 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 	ScenarioMenu(c, progress)
 }
 
-// Combat spécialisé contre Barney
 func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProgress) {
 	var choice int
 	turn := t

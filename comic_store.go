@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-// Arène 2 : Magasin de BD
 func ComicBookStore(c *Character, progress *ScenarioProgress) {
 	typeWriter("📚 ÉTAPE 3 : ARÈNE 2 - MAGASIN DE BD", 50*time.Millisecond)
 	typeWriter("==================================================", 30*time.Millisecond)
@@ -42,7 +41,6 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 
 	switch choice {
 	case 1:
-		// Réponse polie - Indice direct
 		typeWriter("👨‍💻 Comic Book Guy : 'Ah ! Enfin de la politesse ! Très rafraîchissant.'", 40*time.Millisecond)
 		typeWriter("👨‍💻 Comic Book Guy : 'Ton père est venu ce matin avec un ticket étrange...'", 40*time.Millisecond)
 		typeWriter("👨‍💻 Comic Book Guy : 'Il parlait d'un \"Grand Concours du Donut Cosmique\" au parc d'attractions.'", 40*time.Millisecond)
@@ -54,7 +52,6 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 		progress.Stage = 4
 
 	case 2:
-		// Réponse impolie - Combat optionnel !
 		typeWriter("👨‍💻 Comic Book Guy : 'QUOI ?! L'audace ! L'impudence !'", 40*time.Millisecond)
 		typeWriter("👨‍💻 Comic Book Guy : 'Personne ne parle ainsi au maître de la culture geek !'", 40*time.Millisecond)
 		typeWriter("", 30*time.Millisecond)
@@ -81,7 +78,6 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 		}
 
 	case 3:
-		// Réponse flatteuse - Indice détaillé
 		typeWriter("👨‍💻 Comic Book Guy : '*rougit* Mes connaissances encyclopédiques ! Enfin quelqu'un qui apprécie !'", 40*time.Millisecond)
 		typeWriter("👨‍💻 Comic Book Guy : 'Ton père, Homer Simpson, est venu avec un ticket mystérieux...'", 40*time.Millisecond)
 		typeWriter("👨‍💻 Comic Book Guy : 'Il s'agit du légendaire \"Grand Concours du Donut Cosmique\"...'", 40*time.Millisecond)
