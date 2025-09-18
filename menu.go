@@ -28,22 +28,35 @@ func typeWriter(str string, delay time.Duration) {
 func Menu(c1 Character) {
 	var choice int
 	typeWriter("🏠 Vous êtes dans la maison des Simpson. Que voulez-vous faire ?", 30*time.Millisecond)
-	typeWriter("1. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
-	typeWriter("2. 📊 Voir vos statistiques", 30*time.Millisecond)
-	typeWriter("3. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
+	typeWriter("1. 🎬 NOUVEAU : À la recherche d'Homer (Scénario principal)", 30*time.Millisecond)
+	typeWriter("2. 🥊 Combat d'entraînement contre Ralph Wiggum", 30*time.Millisecond)
+	typeWriter("3. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
+	typeWriter("4. 📊 Voir vos statistiques", 30*time.Millisecond)
+	typeWriter("5. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
 	typeWriter("0. 🚪 Rentrer à la maison", 30*time.Millisecond)
 	fmt.Scan(&choice)
 	switch choice {
 	case 1:
+		// Nouveau scénario principal
+		progress := StartHomerScenario(&c1)
+		ScenarioMenu(&c1, &progress)
+	case 2:
+		// Combat d'entraînement
+		Ralph := InitMonster("Ralph Wiggum", 100, 20)
+		characterTurn(&c1, &Ralph, 1)
+	case 3:
 		typeWriter(AccessInventory(c1), 50*time.Millisecond)
 		Menu(c1)
-	case 2:
+	case 4:
 		typeWriter(DisplayStats(c1), 50*time.Millisecond)
 		Menu(c1)
-	case 3:
+	case 5:
 		Shopkeeper(&c1)
 	case 0:
 		typeWriter("🏠 Marge vous appelle pour le dîner. À bientôt !", 50*time.Millisecond)
 		return
+	default:
+		typeWriter("❌ Choix invalide.", 30*time.Millisecond)
+		Menu(c1)
 	}
 }
