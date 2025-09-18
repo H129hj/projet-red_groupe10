@@ -31,47 +31,50 @@ func InitMonster(name string, PVmax int, power int) Monster {
 	}
 }
 
-func goblinPattern(m *Monster, turn int) {
-	var textDelay = 20 * time.Millisecond
-	if turn%3 == 0 {
-		damage := m.power * 2
-		typeWriter(fmt.Sprintf("🌟 %s utilise sa technique spéciale et inflige %d points de dégâts !", m.name, damage), textDelay)
-	} else {
-		damage := m.power
-		typeWriter(fmt.Sprintf("👊 %s lance une attaque basique et inflige %d points de dégâts !", m.name, damage), textDelay)
+func traningFight(c *Character, m *Monster) {
+	var choice int
+	typeWriter(fmt.Sprintf("👾 Milhouse (pv restant) :  %d PV !", m.PV), 30*time.Millisecond)
+	typeWriter("⚔️ À votre tour ! Choisissez une action :", 30*time.Millisecond)
+	typeWriter("1. 💥 Attaquer", 30*time.Millisecond)
+	typeWriter("2. 🎒 Fouiller dans votre sac", 30*time.Millisecond)
+	typeWriter("3. 🏃 Fuir le combat", 30*time.Millisecond)
+	fmt.Scan(&choice)
+	switch choice {
+	case 1:
+		attackMonster(c, m)
+		if m.PV <= 0 {
+			typeWriter(fmt.Sprintf("🎉 Victoire ! Vous avez vaincu %s !", m.name), 40*time.Millisecond)
+			return
+		}
+		milhousePattern(m, 3)
+		traningFight(c, m)
+	case 2:
+		typeWriter(AccessInventory(*c), 30*time.Millisecond)
+		traningFight(c, m)
+	case 3:
+		typeWriter("🏃💨 Vous fuyez le combat !", 40*time.Millisecond)
+		return
+	default:
+		typeWriter("❌ Choix invalide.", 30*time.Millisecond)
+		traningFight(c, m)
 	}
 }
 
-func characterTurn(c *Character, m *Monster, t int) {
-	var choice int
-	var textDelay = 20 * time.Millisecond
-	turn := t
-	if c.PV <= 0 {
-		Wasted(c)
-	} else if m.PV <= 0 {
-		typeWriter(fmt.Sprintf("🎉 Victoire ! Vous avez battu %s !", m.name), textDelay)
-		Menu(*c)
+func milhousePattern(m *Monster, turn int) {
+	if turn%3 == 0 {
+		damage := m.power * 2
+		typeWriter("🕶️ Milhouse utilise 'CRISE DE NERFS PARALYSANTE' !", 40*time.Millisecond)
+		typeWriter("👦 Milhouse : 'Bart... pourquoi moi toujours ?!'", 40*time.Millisecond)
+		typeWriter(fmt.Sprintf("📚 Dégâts embarrassants : %d points !", damage), 30*time.Millisecond)
+	} else if turn%2 == 0 {
+		damage := m.power + 10
+		typeWriter("🖍️ Milhouse utilise 'CRAYON MAGIQUE' !", 40*time.Millisecond)
+		typeWriter("👦 Milhouse : 'Ce crayon m'a été donné par Lisa !'", 40*time.Millisecond)
+		typeWriter(fmt.Sprintf("⚡ Dégâts artistiques : %d points !", damage), 30*time.Millisecond)
 	} else {
-		typeWriter("⚔️ À votre tour ! Choisissez une action :", textDelay)
-		typeWriter("1. 💥 Attaquer", textDelay)
-		typeWriter("2. 🎒 Fouiller dans votre sac", textDelay)
-		typeWriter("3. 🏃 Fuir le combat", textDelay)
-		fmt.Scan(&choice)
-
-		switch choice {
-		case 1:
-			attackMonster(c, m)
-			goblinPattern(m, turn)
-			characterTurn(c, m, turn)
-		case 2:
-			AccessInventory(*c)
-			characterTurn(c, m, turn)
-		case 3:
-			typeWriter("🏃💨 Vous fuyez le combat comme Milhouse devant Nelson !", textDelay)
-			Menu(*c)
-		default:
-			typeWriter("❌ Choix invalide.", textDelay)
-			characterTurn(c, m, turn)
-		}
+		damage := m.power
+		typeWriter("😨 Milhouse utilise 'PLAINTES DÉSESPÉRÉES' !", 40*time.Millisecond)
+		typeWriter("👦 Milhouse : 'Oh non, pas encore !'", 40*time.Millisecond)
+		typeWriter(fmt.Sprintf("😓 Dégâts de désespoir : %d points !", damage), 30*time.Millisecond)
 	}
 }

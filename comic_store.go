@@ -132,7 +132,7 @@ func characterTurnComicGuy(c *Character, m *Monster, t int, progress *ScenarioPr
 			comicGuyPattern(m, turn)
 			characterTurnComicGuy(c, m, turn+1, progress)
 		case 2:
-			AccessInventory(*c)
+			typeWriter(AccessInventory(*c), 30*time.Millisecond)
 			characterTurnComicGuy(c, m, turn, progress)
 		case 3:
 			typeWriter("🏃💨 Vous fuyez en évitant les comics qui volent !", 40*time.Millisecond)
