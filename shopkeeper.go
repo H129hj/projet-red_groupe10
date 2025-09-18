@@ -14,7 +14,7 @@ func Shopkeeper(c *Character) Character {
 		typeWriter("\n====================", textDelay)
 		typeWriter("   🏪 Kwik-E-Mart d'Apu", textDelay)
 		typeWriter("====================", textDelay)
-		typeWriter("🇮🇳 Apu : 'Bonjour mon ami ! Que puis-je faire pour vous ?'", textDelay)
+		typeWriter("Apu : 'Bonjour mon ami ! Que puis-je faire pour vous ?'", textDelay)
 		typeWriter("1. Acheter un objet", textDelay)
 		typeWriter("2. Vendre un objet", textDelay)
 		typeWriter("3. Améliorer un objet", textDelay)

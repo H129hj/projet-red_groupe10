@@ -33,11 +33,9 @@ func InitScenario() ScenarioProgress {
 func StartHomerScenario(c *Character) ScenarioProgress {
 	progress := InitScenario()
 
-	typeWriter("🏠 SPRINGFIELD RPG - À LA RECHERCHE D'HOMER", 50*time.Millisecond)
-	typeWriter("==================================================", 30*time.Millisecond)
-	typeWriter("", 30*time.Millisecond)
-
-	typeWriter("🎬 INTRODUCTION", 40*time.Millisecond)
+	typeWriter("==================================================", 20*time.Millisecond)
+	typeWriter("🏠 SPRINGFIELD RPG - À LA RECHERCHE D'HOMER", 40*time.Millisecond)
+	typeWriter("==================================================", 20*time.Millisecond)
 	typeWriter("", 30*time.Millisecond)
 
 	typeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 40*time.Millisecond)
@@ -47,18 +45,6 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	typeWriter("💬 Marge : 'Il devait juste prendre UNE bière chez Moe...'", 40*time.Millisecond)
 	typeWriter("💬 Marge : 'Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?'", 40*time.Millisecond)
 	typeWriter("", 30*time.Millisecond)
-
-	switch c.class {
-	case "bart":
-		typeWriter("🎯 Bart : 'Cool ! Une vraie mission d'espionnage !'", 40*time.Millisecond)
-		typeWriter("🎯 Bart : 'Je vais retrouver papa et peut-être faire quelques blagues en chemin !'", 40*time.Millisecond)
-	case "lisa":
-		typeWriter("🎷 Lisa : 'Ne t'inquiète pas Maman, je vais mener une enquête méthodique.'", 40*time.Millisecond)
-		typeWriter("🎷 Lisa : 'J'analyserai tous les indices de manière rationnelle.'", 40*time.Millisecond)
-	case "maggie":
-		typeWriter("👶 Maggie : '*suce sa tétine avec détermination*'", 40*time.Millisecond)
-		typeWriter("👶 Maggie : '*regard mystérieux qui semble dire : \"Je le retrouverai\"*'", 40*time.Millisecond)
-	}
 
 	typeWriter("", 30*time.Millisecond)
 	typeWriter("🎯 PREMIER OBJECTIF : Parler aux voisins", 40*time.Millisecond)
@@ -77,25 +63,24 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 	switch progress.Stage {
 	case 1:
 		typeWriter("1. 🏡 Aller voir Ned Flanders (voisin)", 30*time.Millisecond)
-		if progress.HasClue1 {
-			typeWriter("2. 🍺 Bar de Moe (indice obtenu !)", 30*time.Millisecond)
-		}
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
 	case 2:
-		if progress.HasClue1 {
-			typeWriter("1. 🍺 Bar de Moe", 30*time.Millisecond)
-		}
-		if progress.HasClue2 {
-			typeWriter("2. 📚 Magasin de BD (nouvel indice !)", 30*time.Millisecond)
-		}
+		typeWriter("1. Allez au bar de Moe", 30*time.Millisecond)
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
 	case 3:
-		if progress.HasClue2 {
-			typeWriter("1. 📚 Magasin de BD", 30*time.Millisecond)
-		}
-		if progress.HasClue3 {
-			typeWriter("2. 🎡 Parc d'attractions (destination finale !)", 30*time.Millisecond)
-		}
+		typeWriter("1. 📚 Magasin de BD", 30*time.Millisecond)
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
 	case 4:
-		typeWriter("1. 🎡 Parc d'attractions (retrouver Homer !)", 30*time.Millisecond)
+		typeWriter("1. 🎡 Parc d'attractions", 30*time.Millisecond)
+		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
+		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
+		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
 	}
 
 	typeWriter("0. 🏠 Retourner à la maison", 30*time.Millisecond)
@@ -107,36 +92,18 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 		case 1:
 			NedFlanders(c, progress)
 		case 2:
-			if progress.HasClue1 {
-				MoeBar(c, progress)
-			}
+			MoeBar(c, progress)
 		case 3:
-			if progress.HasClue2 {
-				ComicBookStore(c, progress)
-			}
+			ComicBookStore(c, progress)
 		case 4:
-			if progress.HasClue3 {
-				AmusementPark(c, progress)
-			}
+			AmusementPark(c, progress)
 		}
 	case 2:
-		switch progress.Stage {
-		case 1:
-			if progress.HasClue1 {
-				progress.Stage = 2
-				MoeBar(c, progress)
-			}
-		case 2:
-			if progress.HasClue2 {
-				progress.Stage = 3
-				ComicBookStore(c, progress)
-			}
-		case 3:
-			if progress.HasClue3 {
-				progress.Stage = 4
-				AmusementPark(c, progress)
-			}
-		}
+		typeWriter(AccessInventory(*c), 50*time.Millisecond)
+	case 3:
+		typeWriter(DisplayStats(*c), 50*time.Millisecond)
+	case 4:
+		Shopkeeper(c)
 	case 0:
 		typeWriter("🏠 Vous retournez à la maison...", 50*time.Millisecond)
 		Menu(*c)
