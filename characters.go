@@ -1,6 +1,7 @@
 package projetred
 
 import (
+	"slices"
 	"fmt"
 	"time"
 )
@@ -18,6 +19,7 @@ type Character struct {
 	equipement map[string]int
 	extendedInventory int
 }
+
 
 func InitCharacter() Character {
 	var class string
@@ -37,7 +39,7 @@ func InitCharacter() Character {
 			PVmax:      70,
 			PV:         70,
 			power:      150,
-			inventory:  []string{"Saxophone de Lisa", "donut magique", "donut magique", "donut magique"},
+			inventory:  []string{"Saxophone de Lisa", "donut magique"},
 			gold:       100,
 			skills:     []string{"Solo de jazz envoûtant", "Leçon de morale dévastatrice", "Méditation bouddhiste"},
 			equipement: map[string]int{"Robe de première de classe": 10, "Serre-tête": 5, "Collier de perles": 7},
@@ -50,7 +52,7 @@ func InitCharacter() Character {
 			PVmax:      80,
 			PV:         80,
 			power:      100,
-			inventory:  []string{"Lance-pierre de Bart", "donut magique", "donut magique", "donut magique"},
+			inventory:  []string{"Lance-pierre de Bart", "donut magique"},
 			gold:       100,
 			skills:     []string{"Coup de fronde vicieux", "Blague empoisonnée", "Échappée en skateboard"},
 			equipement: map[string]int{"T-shirt rouge": 10, "Short bleu": 5, "Chaussures de sport": 7},
@@ -63,7 +65,7 @@ func InitCharacter() Character {
 			PVmax:      100,
 			PV:         100,
 			power:      80,
-			inventory:  []string{"Biberon de Maggie", "donut magique", "donut magique", "donut magique"},
+			inventory:  []string{"Biberon de Maggie", "donut magique"},
 			gold:       100,
 			skills:     []string{"Regard hypnotique", "Cri strident", "Attaque surprise du berceau"},
 			equipement: map[string]int{"Grenouillère bleue": 10, "Nœud rose": 5, "Tétine magique": 7},
@@ -79,7 +81,10 @@ func DisplayStats(c Character) string {
 }
 
 func AccessInventory(c Character) string {
-	texte := fmt.Sprintf("Inventaire: %v", c.inventory)
+	texte := ""
+	for _, item := range c.inventory {
+		texte += fmt.Sprintf("%s\n", item)
+	}
 	return texte
 }
 
@@ -106,10 +111,5 @@ func limitedInventory(c *Character) bool {
 }
 
 func contains(slice []string, item string) bool {
-	for _, v := range slice {
-		if v == item {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(slice, item)
 }
