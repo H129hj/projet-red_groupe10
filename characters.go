@@ -16,23 +16,22 @@ type Character struct {
 	gold       int
 	skills     []string
 	equipement map[string]int
-	textDelay  int
+	extendedInventory int
 }
 
 func InitCharacter() Character {
-	var name string
 	var class string
 	var c Character
-	fmt.Print("🏠 Bienvenue dans Springfield ! Choisissez le nom de votre enfant Simpson: ")
-	fmt.Scan(&name)
-	fmt.Print("🎭 Choisissez votre personnage (bart, lisa, maggie): ")
+	var textDelay = 30 * time.Millisecond
+
+	typeWriter("🏠 Bienvenue dans Springfield ! Choisissez votre personnage (bart, lisa, maggie): ", textDelay)
 	fmt.Scan(&class)
+
 	if class != "bart" && class != "lisa" && class != "maggie" {
-		fmt.Println("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.")
-		InitCharacter()
+		typeWriter("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.", textDelay)
+		return InitCharacter() // ⚠️ ajouté return pour éviter de perdre le personnage
 	} else if class == "lisa" {
 		c = Character{
-			name:       name,
 			class:      class,
 			level:      1,
 			PVmax:      70,
@@ -42,10 +41,10 @@ func InitCharacter() Character {
 			gold:       100,
 			skills:     []string{"Solo de jazz envoûtant", "Leçon de morale dévastatrice", "Méditation bouddhiste"},
 			equipement: map[string]int{"Robe de première de classe": 10, "Serre-tête": 5, "Collier de perles": 7},
+			extendedInventory: 0,
 		}
 	} else if class == "bart" {
 		c = Character{
-			name:       name,
 			class:      class,
 			level:      1,
 			PVmax:      80,
@@ -55,10 +54,10 @@ func InitCharacter() Character {
 			gold:       100,
 			skills:     []string{"Coup de fronde vicieux", "Blague empoisonnée", "Échappée en skateboard"},
 			equipement: map[string]int{"T-shirt rouge": 10, "Short bleu": 5, "Chaussures de sport": 7},
+			extendedInventory: 0,
 		}
 	} else if class == "maggie" {
 		c = Character{
-			name:       name,
 			class:      class,
 			level:      1,
 			PVmax:      100,
@@ -68,6 +67,7 @@ func InitCharacter() Character {
 			gold:       100,
 			skills:     []string{"Regard hypnotique", "Cri strident", "Attaque surprise du berceau"},
 			equipement: map[string]int{"Grenouillère bleue": 10, "Nœud rose": 5, "Tétine magique": 7},
+			extendedInventory: 0,
 		}
 	}
 	return c
@@ -83,7 +83,7 @@ func AccessInventory(c Character) string {
 	return texte
 }
 
-func takePot(c *Character) []string {
+func TakePot(c *Character) []string {
 	for i := range c.inventory {
 		if c.inventory[i] == "donut magique" && c.PV < c.PVmax {
 			c.PV += 20
@@ -91,14 +91,15 @@ func takePot(c *Character) []string {
 			if c.PV > c.PVmax {
 				c.PV = c.PVmax
 			}
+			break 
 		}
 	}
 	return c.inventory
 }
 
 func limitedInventory(c *Character) bool {
-	if len(c.inventory) >= 10 {
-		typeWriter("🍩 Vos poches sont pleines de donuts ! Vous ne pouvez pas porter plus d'objets.", time.Duration(c.textDelay))
+	if len(c.inventory) >= 10+c.extendedInventory {
+		typeWriter("🍩 Vos poches sont pleines de donuts ! Vous ne pouvez pas porter plus d'objets.", 300*time.Millisecond)
 		return false
 	}
 	return true
