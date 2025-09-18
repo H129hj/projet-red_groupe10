@@ -3,6 +3,7 @@ package projetred
 import "fmt"
 
 func CharacterCreationPersonalized() Character {
+	MusiqueJouer()
 	var name string
 	var class string
 	var c Character
