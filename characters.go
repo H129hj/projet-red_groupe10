@@ -7,16 +7,16 @@ import (
 )
 
 type Character struct {
-	name       string
-	class      string
-	level      int
-	power      int
-	PVmax      int
-	PV         int
-	inventory  []string
-	gold       int
-	skills     []string
-	equipement map[string]int
+	name              string
+	class             string
+	level             int
+	power             int
+	PVmax             int
+	PV                int
+	inventory         []string
+	gold              int
+	skills            []string
+	equipement        map[string]int
 	extendedInventory int
 }
 
@@ -31,7 +31,7 @@ func InitCharacter() Character {
 
 	if class != "bart" && class != "lisa" && class != "maggie" {
 		typeWriter("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.", textDelay)
-		return InitCharacter() // ⚠️ ajouté return pour éviter de perdre le personnage
+		return InitCharacter()
 	} else if class == "lisa" {
 		c = Character{
 			class:      class,
@@ -96,7 +96,7 @@ func TakePot(c *Character) []string {
 			if c.PV > c.PVmax {
 				c.PV = c.PVmax
 			}
-			break 
+			break
 		}
 	}
 	return c.inventory

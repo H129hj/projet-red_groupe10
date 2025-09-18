@@ -5,18 +5,16 @@ import (
 	"time"
 )
 
-// Structure pour suivre la progression du scénario
 type ScenarioProgress struct {
-	Stage          int // 0=début, 1=Ned, 2=Bar Moe, 3=Magasin BD, 4=Parc
+	Stage          int
 	NedCompleted   bool
 	MoeCompleted   bool
 	ComicCompleted bool
-	HasClue1       bool // Indice de Ned
-	HasClue2       bool // Indice de Barney
-	HasClue3       bool // Indice du Comic Book Guy
+	HasClue1       bool
+	HasClue2       bool
+	HasClue3       bool
 }
 
-// Initialise le scénario
 func InitScenario() ScenarioProgress {
 	return ScenarioProgress{
 		Stage:          0,
@@ -29,7 +27,6 @@ func InitScenario() ScenarioProgress {
 	}
 }
 
-// Introduction du scénario
 func StartHomerScenario(c *Character) ScenarioProgress {
 	progress := InitScenario()
 
@@ -54,7 +51,6 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	return progress
 }
 
-// Menu du scénario principal
 func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 	var choice int
 
@@ -66,8 +62,9 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
 		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
 		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
+		typeWriter("5. 🥊\u200b Casse la gueule à Milhouse pour passer le temps", 30*time.Millisecond)
 	case 2:
-		typeWriter("1. Allez au bar de Moe", 30*time.Millisecond)
+		typeWriter("1. 🍻 Allez au bar de Moe", 30*time.Millisecond)
 		typeWriter("2. 🎒 Regarder dans votre sac à dos", 30*time.Millisecond)
 		typeWriter("3. 📊 Voir vos statistiques", 30*time.Millisecond)
 		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 30*time.Millisecond)
@@ -104,6 +101,11 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 		typeWriter(DisplayStats(*c), 30*time.Millisecond)
 	case 4:
 		Shopkeeper(c)
+	case 5:
+		if progress.Stage == 1 {
+			traningFight(c, &Monster{name: "Milhouse", PVmax: 1000000, PV: 1000000, power: 2})
+			ScenarioMenu(c, progress)
+		}
 	case 0:
 		typeWriter("🏠 Vous retournez à la maison...", 50*time.Millisecond)
 		Menu(*c)
