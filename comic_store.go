@@ -67,7 +67,7 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 
 		if fightChoice == 1 {
 			typeWriter("⚔️ Comic Book Guy entre en mode CRITIQUE ULTIME !", 15*time.Millisecond)
-			comicGuyMonster := InitMonster("Comic Book Guy (Critique Ultime)", 85, 28)
+			comicGuyMonster := InitMonster("Comic Book Guy (Critique Ultime)", 350, 28)
 			ScenarioCombat(c, &comicGuyMonster, progress, comicGuyPattern, "comic")
 			return
 		} else {
