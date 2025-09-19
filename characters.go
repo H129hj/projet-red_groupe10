@@ -82,7 +82,6 @@ func InitCharacter() Character {
 
 	theme := GetCharacterTheme(c.class)
 	fmt.Println()
-	VictoryEffect()
 	ThemedTypeWriter(fmt.Sprintf("🎉 Personnage %s créé avec succès !", strings.ToUpper(c.class)), textDelay, theme, "primary")
 
 	switch c.class {

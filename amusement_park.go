@@ -6,9 +6,9 @@ import (
 )
 
 func AmusementPark(c *Character, progress *ScenarioProgress) {
-	typeWriter("======================", 15*time.Millisecond)
-	typeWriter("🎡 PARC DATTRACTIONS", 15*time.Millisecond)
-	typeWriter("======================", 15*time.Millisecond)
+	typeWriter("=========================================", 15*time.Millisecond)
+	typeWriter("🎡 ARÈNE Finale - PARC DATTRACTIONS", 15*time.Millisecond)
+	typeWriter("=========================================", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
 	typeWriter("🎢 Vous arrivez au parc dattractions de Springfield...", 15*time.Millisecond)

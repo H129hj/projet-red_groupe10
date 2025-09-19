@@ -6,6 +6,7 @@ import (
 )
 
 func ComicBookStore(c *Character, progress *ScenarioProgress) {
+	typeWriter("==================================================", 15*time.Millisecond)
 	typeWriter("📚 ÉTAPE 3 : ARÈNE 2 - MAGASIN DE BD", 15*time.Millisecond)
 	typeWriter("==================================================", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
