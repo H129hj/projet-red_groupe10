@@ -120,7 +120,7 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 
 		if m.PV > 0 {
 			time.Sleep(800 * time.Millisecond)
-			typeWriter("\n🔄 Tour de lennemi...", combatDelay)
+			typeWriter("\n🔄 Tour de l'ennemi...", combatDelay)
 			time.Sleep(300 * time.Millisecond)
 			enemyPatternInstant(m, turn, enemyPattern)
 
@@ -307,6 +307,12 @@ func DisplayVictory(c *Character, m *Monster) {
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
 
+	if m.name != "Milhouse" {
+		c.level++
+		c.power += 10
+		c.PVmax += 15
+		typeWriter("⬆️ Niveau +1 ! (+10 puissance, +15 PV max)", 15*time.Millisecond)
+	}
 }
 
 func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyPattern func(*Monster, int), scenarioType string) {
@@ -407,6 +413,13 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 	goldReward := 25 + (m.PVmax / 10)
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
+
+	if m.name != "Milhouse" {
+		c.level++
+		c.power += 10
+		c.PVmax += 15
+		typeWriter("⬆️ Niveau +1 ! (+10 puissance, +15 PV max)", 15*time.Millisecond)
+	}
 
 	switch scenarioType {
 	case "ned":

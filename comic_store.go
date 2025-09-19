@@ -68,7 +68,7 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 		if fightChoice == 1 {
 			typeWriter("⚔️ Comic Book Guy entre en mode CRITIQUE ULTIME !", 15*time.Millisecond)
 			comicGuyMonster := InitMonster("Comic Book Guy (Critique Ultime)", 85, 28)
-			characterTurnComicGuy(c, &comicGuyMonster, 1, progress)
+			ScenarioCombat(c, &comicGuyMonster, progress, comicGuyPattern, "comic")
 			return
 		} else {
 			typeWriter("👨‍💻 Comic Book Guy : 'Hmph ! Bon... ton père parlait du parc d'attractions.'", 15*time.Millisecond)
@@ -104,55 +104,6 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 	typeWriter("", 15*time.Millisecond)
 
 	ScenarioMenu(c, progress)
-}
-
-func characterTurnComicGuy(c *Character, m *Monster, t int, progress *ScenarioProgress) {
-	var choice int
-	turn := t
-	if c.PV <= 0 {
-		Wasted(c)
-	} else if m.PV <= 0 {
-		typeWriter("🎉 Victoire ! Comic Book Guy ajuste ses lunettes...", 15*time.Millisecond)
-		typeWriter("👨‍💻 Comic Book Guy : 'Impossible ! J'ai été vaincu par... un amateur !'", 15*time.Millisecond)
-		typeWriter("👨‍💻 Comic Book Guy : 'Bon... ton père est au parc d'attractions...'", 15*time.Millisecond)
-		typeWriter("👨‍💻 Comic Book Guy : 'Il participe au Grand Concours du Donut Cosmique !'", 15*time.Millisecond)
-		typeWriter("", 15*time.Millisecond)
-
-		AddIngredient(c, "Carte Itchy & Scratchy", "le magasin de BD")
-
-		typeWriter("🔍 INDICE OBTENU : Homer au concours de donuts du parc d'attractions !", 15*time.Millisecond)
-		progress.HasClue3 = true
-		progress.ComicCompleted = true
-		progress.Stage = 4
-		ScenarioMenu(c, progress)
-	} else {
-		typeWriter("⚔️ À votre tour ! Choisissez une action :", 15*time.Millisecond)
-		typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
-		typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
-		typeWriter("3. 🏃 Fuir le combat", 15*time.Millisecond)
-		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
-		fmt.Scan(&choice)
-
-		switch choice {
-		case 1:
-			attackMonster(c, m)
-			comicGuyPattern(m, turn)
-			characterTurnComicGuy(c, m, turn+1, progress)
-		case 2:
-			typeWriter(AccessInventory(*c), 15*time.Millisecond)
-			characterTurnComicGuy(c, m, turn, progress)
-		case 3:
-			typeWriter("🏃💨 Vous fuyez en évitant les comics qui volent !", 15*time.Millisecond)
-			typeWriter("👨‍💻 Comic Book Guy : 'Fuyez ! Votre père est au parc d'attractions !'", 15*time.Millisecond)
-			progress.HasClue3 = true
-			progress.ComicCompleted = true
-			progress.Stage = 4
-			ScenarioMenu(c, progress)
-		default:
-			typeWriter("❌ Choix invalide.", 15*time.Millisecond)
-			characterTurnComicGuy(c, m, turn, progress)
-		}
-	}
 }
 
 func comicGuyPattern(m *Monster, turn int) {
