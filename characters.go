@@ -3,6 +3,7 @@ package projetred
 import (
 	"fmt"
 	"slices"
+	"strings"
 	"time"
 )
 
@@ -25,11 +26,18 @@ func InitCharacter() Character {
 	var c Character
 	var textDelay = 15 * time.Millisecond
 
-	typeWriter("🏠 Bienvenue dans Springfield ! Choisissez votre personnage (bart, lisa, maggie): ", textDelay)
+	MenuHeader("SÉLECTION DE PERSONNAGE", SystemTheme)
+	ThemedTypeWriter("🏠 Bienvenue dans Springfield ! Choisissez votre héros Simpson :", textDelay, SystemTheme, "primary")
+	fmt.Println()
+	ThemedTypeWriter("🎭 bart  - Le garnement rebelle", textDelay, BartTheme, "primary")
+	ThemedTypeWriter("🎓 lisa  - Le génie de la famille", textDelay, LisaTheme, "primary")
+	ThemedTypeWriter("👶 maggie - La petite mystérieuse", textDelay, MaggieTheme, "primary")
+	fmt.Println()
+	ColoredTypeWriter("➤ Votre choix : ", textDelay, BrightCyan+Bold)
 	fmt.Scan(&class)
 
 	if class != "bart" && class != "lisa" && class != "maggie" {
-		typeWriter("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.", textDelay)
+		ColoredTypeWriter("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.", textDelay, BrightRed+Bold)
 		return InitCharacter()
 	} else if class == "lisa" {
 		c = Character{
@@ -71,38 +79,75 @@ func InitCharacter() Character {
 			extendedInventory: 0,
 		}
 	}
+
+	theme := GetCharacterTheme(c.class)
+	fmt.Println()
+	VictoryEffect()
+	ThemedTypeWriter(fmt.Sprintf("🎉 Personnage %s créé avec succès !", strings.ToUpper(c.class)), textDelay, theme, "primary")
+
+	switch c.class {
+	case "lisa":
+		ThemedTypeWriter("🎷 Lisa Simpson - L'intellectuelle de Springfield", textDelay, theme, "text")
+		ThemedTypeWriter("📚 Spécialité : Intelligence supérieure et attaques sonores", textDelay, theme, "secondary")
+	case "bart":
+		ThemedTypeWriter("🛹 Bart Simpson - Le roi des bêtises", textDelay, theme, "text")
+		ThemedTypeWriter("🎯 Spécialité : Attaques sournoises et évasion", textDelay, theme, "secondary")
+	case "maggie":
+		ThemedTypeWriter("👶 Maggie Simpson - Le mystère en couches", textDelay, theme, "text")
+		ThemedTypeWriter("🍼 Spécialité : Attaques surprises et résistance", textDelay, theme, "secondary")
+	}
+
+	fmt.Println()
 	return c
 }
 
 func DisplayStats(c Character) string {
+	theme := GetCharacterTheme(c.class)
 	equipmentBonus := GetTotalEquipmentBonus(&c)
-	texte := fmt.Sprintf("👤 Nom: %s\n🏆 Niveau: %d\n❤️ PV: %d/%d\n💪 Power: %d", c.class, c.level, c.PV, c.PVmax, c.power)
+
+	var texte string
+	texte += ColorizeThemed(fmt.Sprintf("👤 Personnage: %s", strings.ToUpper(c.class)), theme, "primary") + "\n"
+	texte += ColorizeThemed(fmt.Sprintf("🏆 Niveau: %d", c.level), theme, "accent") + "\n"
+	texte += HealthBar(c.PV, c.PVmax, 20) + "\n"
+	texte += ColorizeThemed(fmt.Sprintf("💪 Puissance: %d", c.power), theme, "text")
 	if equipmentBonus > 0 {
-		texte += fmt.Sprintf(" (+%d'équipement)", equipmentBonus)
+		texte += Colorize(fmt.Sprintf(" (+%d équipement)", equipmentBonus), BrightGreen)
 	}
-	texte += fmt.Sprintf("\n💰 Or: %d dollars", c.gold)
-	texte += fmt.Sprintf("\n🎒 Objets: %d/%d", len(c.inventory), 10+c.extendedInventory)
-	texte += fmt.Sprintf("\n⚔️ Équipements: %d", len(c.equipement))
+	texte += "\n" + CurrencyDisplay(c.gold) + "\n"
+	texte += ProgressBar(len(c.inventory), 10+c.extendedInventory, 15, theme) + " 🎒 Inventaire\n"
+	texte += ColorizeThemed(fmt.Sprintf("⚔️ Équipements: %d objets portés", len(c.equipement)), theme, "secondary")
+
 	return texte
 }
 
 func AccessInventory(c Character) string {
-	texte := "🎒 SAC À DOS :\n"
-	texte += "============\n"
+	theme := GetCharacterTheme(c.class)
+	var texte string
+
+	texte += ColorizeThemed("🎒 SAC À DOS", theme, "primary") + "\n"
+	texte += ColorizeThemed("============", theme, "accent") + "\n"
 	if len(c.inventory) == 0 {
-		texte += "❌ Votre sac à dos est vide.\n"
+		texte += Colorize("❌ Votre sac à dos est vide.", BrightRed) + "\n"
 	} else {
 		for i, item := range c.inventory {
-			texte += fmt.Sprintf("%d. %s\n", i+1, item)
+			rarity := "common"
+			if strings.Contains(item, "magique") || strings.Contains(item, "Spirituel") || strings.Contains(item, "Super") {
+				rarity = "legendary"
+			} else if strings.Contains(item, "rare") || strings.Contains(item, "Itchy") {
+				rarity = "rare"
+			}
+			texte += fmt.Sprintf("%s. %s\n", ColorizeThemed(fmt.Sprintf("%d", i+1), theme, "accent"), ItemDisplay(item, rarity))
 		}
 	}
-	texte += "\n⚔️ ÉQUIPEMENTS PORTÉS :\n"
-	texte += "======================\n"
+
+	texte += "\n" + ColorizeThemed("⚔️ ÉQUIPEMENTS PORTÉS", theme, "primary") + "\n"
+	texte += ColorizeThemed("======================", theme, "accent") + "\n"
 	if len(c.equipement) == 0 {
-		texte += "❌ Aucun équipement porté.\n"
+		texte += Colorize("❌ Aucun équipement porté.", BrightRed) + "\n"
 	} else {
 		for equipName, value := range c.equipement {
-			texte += fmt.Sprintf("✅ %s (valeur: %d)\n", equipName, value)
+			powerDisplay := Colorize(fmt.Sprintf("(+%d)", value), BrightGreen+Bold)
+			texte += fmt.Sprintf("✅ %s %s\n", ItemDisplay(equipName, "rare"), powerDisplay)
 		}
 	}
 	return texte
@@ -133,7 +178,6 @@ func limitedInventory(c *Character) bool {
 func contains(slice []string, item string) bool {
 	return slices.Contains(slice, item)
 }
-
 
 func AddIngredient(c *Character, ingredient string, source string) {
 	if !limitedInventory(c) {

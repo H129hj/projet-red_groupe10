@@ -11,35 +11,40 @@ func Shopkeeper(c *Character) Character {
 	textDelay := 15 * time.Millisecond
 
 	for {
-		typeWriter("\n====================", textDelay)
-		typeWriter("   🏪 Kwik-E-Mart dApu", textDelay)
-		typeWriter("====================", textDelay)
-		typeWriter("Apu : Bonjour mon ami ! Que puis-je faire pour vous ?", textDelay)
-		typeWriter("1. Acheter un objet", textDelay)
-		typeWriter("2. Vendre un objet", textDelay)
-		typeWriter("3. Améliorer un objet", textDelay)
-		typeWriter("4. Atelier de bricolage dApu", textDelay)
-		typeWriter("0. Quitter le magasin", textDelay)
-		typeWriter("--------------------", textDelay)
-		typeWriter(fmt.Sprintf("💰 Vous avez %d dollars dans votre tirelire.", c.gold), textDelay)
-		typeWriter("👉 Que voulez-vous faire ? ", textDelay)
+		fmt.Println()
+		MenuHeader("KWIK-E-MART D'APU", ShopTheme)
+		DialogueBox("🏪 Apu", "Bonjour mon ami ! Que puis-je faire pour vous ?", ShopTheme)
+		fmt.Println()
+
+		typeWriter("1. 🛍️ Acheter un objet", textDelay)
+		typeWriter("2. 💰 Vendre un objet", textDelay)
+		typeWriter("3. ⬆️ Améliorer un objet", textDelay)
+		typeWriter("4. 🔧 Atelier de bricolage d'Apu", textDelay)
+		typeWriter("0. 🚪 Quitter le magasin", textDelay)
+
+		fmt.Println()
+		ColoredTypeWriter(CurrencyDisplay(c.gold), textDelay, "")
+		ColoredTypeWriter("👉 Que voulez-vous faire ? ", textDelay, BrightCyan+Bold)
 
 		var choice string
 		fmt.Scan(&choice)
 
 		switch choice {
 		case "1":
-			typeWriter("\n--- 🛍️ Objets en vente chez Apu ---", textDelay)
-			typeWriter("1. Batte de baseball de Bart (50 dollars) - Arme", textDelay)
-			typeWriter("2. Bouclier fait maison (40 dollars) - Armure", textDelay)
-			typeWriter("3. Donut magique de chez Homer (10 dollars) - Consommable", textDelay)
-			typeWriter(fmt.Sprintf("4. Carte rare Itchy & Scratchy (%d dollars) - Matériau", randomvalue), textDelay)
-			typeWriter("5. Kit de craft basique (75 dollars) - Matériaux", textDelay)
-			typeWriter("6. Agrandir linventaire (25 dollars) - Amélioration", textDelay)
-			typeWriter("7. Retour au menu dApu", textDelay)
-			typeWriter("------------------------------------", textDelay)
-			typeWriter(fmt.Sprintf("💰 Argent actuel : %d dollars", c.gold), textDelay)
-			typeWriter("👉 Quel objet souhaitez-vous acheter ? ", textDelay)
+			fmt.Println()
+			MenuHeader("BOUTIQUE D'APU", ShopTheme)
+
+			typeWriter("1. "+ItemDisplay("Batte de baseball de Bart", "rare")+" (50 dollars) - Arme", textDelay)
+			typeWriter("2. "+ItemDisplay("Bouclier fait maison", "common")+" (40 dollars) - Armure", textDelay)
+			typeWriter("3. "+ItemDisplay("Donut magique de chez Homer", "legendary")+" (10 dollars) - Consommable", textDelay)
+			typeWriter(fmt.Sprintf("4. "+ItemDisplay("Carte rare Itchy & Scratchy", "rare")+" (%d dollars) - Matériau", randomvalue), textDelay)
+			typeWriter("5. "+ItemDisplay("Kit de craft basique", "common")+" (75 dollars) - Matériaux", textDelay)
+			typeWriter("6. ⬆️ Agrandir l'inventaire (25 dollars) - Amélioration", textDelay)
+			typeWriter("7. 🔙 Retour au menu d'Apu", textDelay)
+
+			fmt.Println()
+			ColoredTypeWriter(CurrencyDisplay(c.gold), textDelay, "")
+			ColoredTypeWriter("👉 Quel objet souhaitez-vous acheter ? ", textDelay, BrightCyan+Bold)
 
 			var choice2 string
 			fmt.Scan(&choice2)
