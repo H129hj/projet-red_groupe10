@@ -181,7 +181,7 @@ func Shopkeeper(c *Character) Character {
 
 		case "0":
 			typeWriter("\n👋 Apu : 'Merci pour votre visite ! Revenez vite au Kwik-E-Mart !'", textDelay)
-			Menu(*c)
+			ScenarioMenu(c, &ScenarioProgress{})
 			return *c
 
 		default:

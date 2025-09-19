@@ -30,7 +30,7 @@ func EquipmentMenu(c *Character) {
 		typeWriter("2. 🔄 Déséquiper un objet", textDelay)
 		typeWriter("3. 📊 Voir équipements portés", textDelay)
 		typeWriter("4. 🎒 Voir le sac à dos complet", textDelay)
-		typeWriter("0. 🚪 Retour", textDelay)
+		typeWriter("0. 🚪 Retour au menu principal", textDelay)
 		typeWriter("", textDelay)
 
 		var choice string

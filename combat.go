@@ -54,6 +54,7 @@ func InitMonster(name string, PVmax int, power int) Monster {
 }
 
 func traningFight(c *Character, m *Monster) {
+<<<<<<< HEAD
 	CombatInterface(c, m, 1, milhousePatternInstant)
 }
 
@@ -146,6 +147,33 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 		}
 
 		turn++
+=======
+	var choice int
+	typeWriter(fmt.Sprintf("👾 Milhouse (pv restant) :  %d PV !", m.PV), 15*time.Millisecond)
+	typeWriter("⚔️ À votre tour ! Choisissez une action :", 15*time.Millisecond)
+	typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
+	typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
+	typeWriter("3. 🏃 Fuir le combat", 15*time.Millisecond)
+	fmt.Scan(&choice)
+	switch choice {
+	case 1:
+		attackMonster(c, m)
+		if m.PV <= 0 {
+			typeWriter(fmt.Sprintf("🎉 Victoire ! Vous avez vaincu %s !", m.name), 15*time.Millisecond)
+			return
+		}
+		milhousePattern(m, 3)
+		traningFight(c, m)
+	case 2:
+		typeWriter(AccessInventory(*c), 15*time.Millisecond)
+		traningFight(c, m)
+	case 3:
+		typeWriter("🏃💨 Vous fuyez le combat !", 15*time.Millisecond)
+		return
+	default:
+		typeWriter("❌ Choix invalide.", 15*time.Millisecond)
+		traningFight(c, m)
+>>>>>>> c32b19db4f584fb0588cce1a903a6e1816ace89c
 	}
 }
 
