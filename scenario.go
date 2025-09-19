@@ -5,6 +5,109 @@ import (
 	"time"
 )
 
+const (
+	Reset     = "\u001b[0m"
+	Red       = "\u001b[31m"
+	Green     = "\u001b[32m"
+	Yellow    = "\u001b[33m"
+	Blue      = "\u001b[34m"
+	Magenta   = "\u001b[35m"
+	Cyan      = "\u001b[36m"
+	Bold      = "\u001b[1m"
+	Underline = "\u001b[4m"
+)
+
+func typeWriter(str string, delay time.Duration) {
+	for _, r := range str {
+		fmt.Printf("%c", r)
+		time.Sleep(delay)
+	}
+	fmt.Println()
+}
+
+func ScenarioMenu(c *Character, progress *ScenarioProgress) {
+	// Initialize scenario only once: if progress provided, continue from it; otherwise start now
+	var progressLocal ScenarioProgress
+	if progress != nil {
+		progressLocal = *progress
+	} else {
+		progressLocal = StartHomerScenario(c)
+	}
+
+	for {
+		var stageChoice int
+		typeWriter("🗺️ Où voulez-vous aller ?", 15*time.Millisecond)
+
+		switch progressLocal.Stage {
+		case 1:
+			typeWriter("1. 🏡 Aller voir Ned Flanders (voisin)", 15*time.Millisecond)
+			typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+			typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+			typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
+			typeWriter("5. ⚔️ Gérer les équipements", 15*time.Millisecond)
+			typeWriter("6. 🥊\u200b Casse la gueule à Milhouse pour passer le temps (entrainement)", 15*time.Millisecond)
+		case 2:
+			typeWriter("1. 🍻 Allez au bar de Moe", 15*time.Millisecond)
+			typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+			typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+			typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
+			typeWriter("5. ⚔️ Gérer les équipements", 15*time.Millisecond)
+		case 3:
+			typeWriter("1. 📚 Magasin de BD", 15*time.Millisecond)
+			typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+			typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+			typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
+			typeWriter("5. ⚔️ Gérer les équipements", 15*time.Millisecond)
+		case 4:
+			typeWriter("1. 🎡 Parc d'attractions", 15*time.Millisecond)
+			typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
+			typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
+			typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
+			typeWriter("5. ⚔️ Gérer les équipements", 15*time.Millisecond)
+		}
+
+		typeWriter("0. 🏠 Retourner à la maison", 15*time.Millisecond)
+		fmt.Scan(&stageChoice)
+
+		switch stageChoice {
+		case 1:
+			switch progressLocal.Stage {
+			case 1:
+				NedFlanders(c, &progressLocal)
+			case 2:
+				MoeBar(c, &progressLocal)
+			case 3:
+				ComicBookStore(c, &progressLocal)
+			case 4:
+				AmusementPark(c, &progressLocal)
+			}
+		case 2:
+			typeWriter(AccessInventory(*c), 15*time.Millisecond)
+			continue
+		case 3:
+			typeWriter(DisplayStats(*c), 15*time.Millisecond)
+			continue
+		case 4:
+			Shopkeeper(c)
+			continue
+		case 5:
+			EquipmentMenu(c)
+			continue
+		case 6:
+			if progressLocal.Stage == 1 {
+				traningFight(c, &Monster{name: "Milhouse", PVmax: 1000000, PV: 1000000, power: 2})
+				continue
+			}
+		case 0:
+			typeWriter("🏠 Vous retournez à la maison...", 15*time.Millisecond)
+			return
+		default:
+			typeWriter("❌ Choix invalide.", 15*time.Millisecond)
+			continue
+		}
+	}
+}
+
 type ScenarioProgress struct {
 	Stage          int
 	NedCompleted   bool
@@ -51,67 +154,4 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	return progress
 }
 
-func ScenarioMenu(c *Character, progress *ScenarioProgress) {
-	var choice int
-
-	typeWriter("🗺️ Où voulez-vous aller ?", 15*time.Millisecond)
-
-	switch progress.Stage {
-	case 1:
-		typeWriter("1. 🏡 Aller voir Ned Flanders (voisin)", 15*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
-		typeWriter("5. 🥊\u200b Casse la gueule à Milhouse pour passer le temps", 15*time.Millisecond)
-	case 2:
-		typeWriter("1. 🍻 Allez au bar de Moe", 15*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
-	case 3:
-		typeWriter("1. 📚 Magasin de BD", 15*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
-	case 4:
-		typeWriter("1. 🎡 Parc d'attractions", 15*time.Millisecond)
-		typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
-		typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
-		typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
-	}
-
-	typeWriter("0. 🏠 Retourner à la maison", 15*time.Millisecond)
-	fmt.Scan(&choice)
-
-	switch choice {
-	case 1:
-		switch progress.Stage {
-		case 1:
-			NedFlanders(c, progress)
-		case 2:
-			MoeBar(c, progress)
-		case 3:
-			ComicBookStore(c, progress)
-		case 4:
-			AmusementPark(c, progress)
-		}
-	case 2:
-		typeWriter(AccessInventory(*c), 15*time.Millisecond)
-	case 3:
-		typeWriter(DisplayStats(*c), 15*time.Millisecond)
-	case 4:
-		Shopkeeper(c)
-	case 5:
-		if progress.Stage == 1 {
-			traningFight(c, &Monster{name: "Milhouse", PVmax: 1000000, PV: 1000000, power: 2})
-			ScenarioMenu(c, progress)
-		}
-	case 0:
-		typeWriter("🏠 Vous retournez à la maison...", 15*time.Millisecond)
-		Menu(*c)
-		return
-	default:
-		typeWriter("❌ Choix invalide.", 15*time.Millisecond)
-		ScenarioMenu(c, progress)
-	}
-}
+// ScenarioStageMenu merged into ScenarioMenu
