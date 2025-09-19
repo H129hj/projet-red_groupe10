@@ -152,4 +152,3 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	progress.Stage = 1
 	return progress
 }
-
