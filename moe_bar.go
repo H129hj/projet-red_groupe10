@@ -68,7 +68,7 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("⚔️ Barney entre en mode IVROGNE FURIEUX !", 15*time.Millisecond)
 
-		barneyMonster := InitMonster("Barney Gumble (Ivrogne Furieux)", 90, 22)
+		barneyMonster := InitMonster("Barney Gumble (Ivrogne Furieux)", 300, 22)
 		ScenarioCombat(c, &barneyMonster, progress, barneyPattern, "barney")
 		return
 

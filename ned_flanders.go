@@ -49,7 +49,7 @@ func NedFlanders(c *Character, progress *ScenarioProgress) {
 		fmt.Println()
 		typeWriter("⚔️ Ned se transforme en CHEVALIER BIBLIQUE !", 15*time.Millisecond)
 
-		nedMonster := InitMonster("Ned Flanders (Mode Biblique)", 80, 25)
+		nedMonster := InitMonster("Ned Flanders (Mode Biblique)", 200, 15)
 		ScenarioCombat(c, &nedMonster, progress, nedPattern, "ned")
 		return
 

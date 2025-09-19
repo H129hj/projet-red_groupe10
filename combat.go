@@ -256,7 +256,7 @@ func DisplayInventoryInCombat(c *Character) {
 	hasUsableItems := false
 
 	for i, item := range c.inventory {
-		if item == "Donut magique" || item == "Donut empoisonné" {
+		if item == "donut magique" || item == "Donut empoisonné" {
 			typeWriter(fmt.Sprintf("%d. %s", i+1, item), combatDelay)
 			hasUsableItems = true
 		}
@@ -275,9 +275,16 @@ func DisplayInventoryInCombat(c *Character) {
 
 		if choice > 0 && choice <= len(c.inventory) {
 			item := c.inventory[choice-1]
-			if item == "Donut magique" {
+			if item == "donut magique" {
+				oldPV := c.PV
 				TakePot(c)
-				typeWriter("✨ Vous utilisez un donut magique !", combatDelay)
+				healed := c.PV - oldPV
+				if healed > 0 {
+					typeWriter("✨ Vous utilisez un donut magique !", combatDelay)
+					typeWriter(fmt.Sprintf("❤️ Vous récupérez %d PV (%d/%d)", healed, c.PV, c.PVmax), combatDelay)
+				} else {
+					typeWriter("ℹ️ Vous êtes déjà au maximum de PV.", combatDelay)
+				}
 			}
 		}
 	}

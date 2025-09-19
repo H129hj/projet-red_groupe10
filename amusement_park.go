@@ -44,7 +44,7 @@ func BartVsTahitiBob(c *Character, progress *ScenarioProgress) {
 
 	typeWriter("🌴 Tahiti Bob : En garde !", 15*time.Millisecond)
 
-	bobMonster := InitMonster("Tahiti Bob (Vengeance)", 120, 35)
+	bobMonster := InitMonster("Tahiti Bob (Vengeance)", 450, 35)
 	ScenarioCombat(c, &bobMonster, progress, tahitiBobPattern, "bob")
 }
 
@@ -64,7 +64,7 @@ func LisaVsGencivesSanglantes(c *Character, progress *ScenarioProgress) {
 
 	typeWriter("🎺 Gencives Sanglantes : Que la bataille musicale commence !", 15*time.Millisecond)
 
-	gencivesMonster := InitMonster("Gencives Sanglantes (Esprit du Jazz)", 110, 32)
+	gencivesMonster := InitMonster("Gencives Sanglantes (Esprit du Jazz)", 450, 32)
 	ScenarioCombat(c, &gencivesMonster, progress, gencivesSanglantesPattern, "gencives")
 }
 
@@ -84,7 +84,7 @@ func MaggieVsBebeFurieux(c *Character, progress *ScenarioProgress) {
 
 	typeWriter("👶 Bébé Furieux : GRRRRR GA GA !", 15*time.Millisecond)
 
-	bebeMonster := InitMonster("Bébé Furieux (Rival Mystérieux)", 100, 28)
+	bebeMonster := InitMonster("Bébé Furieux (Rival Mystérieux)", 450, 28)
 	ScenarioCombat(c, &bebeMonster, progress, bebeFurieuxPattern, "bebe")
 }
 
