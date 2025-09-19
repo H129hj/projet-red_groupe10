@@ -26,7 +26,6 @@ func typeWriter(str string, delay time.Duration) {
 }
 
 func ScenarioMenu(c *Character, progress *ScenarioProgress) {
-	// Initialize scenario only once: if progress provided, continue from it; otherwise start now
 	var progressLocal ScenarioProgress
 	if progress != nil {
 		progressLocal = *progress
@@ -154,4 +153,3 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	return progress
 }
 
-// ScenarioStageMenu merged into ScenarioMenu
