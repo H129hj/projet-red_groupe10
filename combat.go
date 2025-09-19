@@ -282,9 +282,6 @@ func DisplayInventoryInCombat(c *Character) {
 		}
 	}
 
-	typeWriter("", combatDelay)
-	typeWriter("Appuyez sur Entrée pour continuer...", combatDelay)
-	fmt.Scanln()
 }
 
 func DisplayVictory(c *Character, m *Monster) {
@@ -301,9 +298,6 @@ func DisplayVictory(c *Character, m *Monster) {
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
 
-	typeWriter("", 15*time.Millisecond)
-	typeWriter("Appuyez sur Entrée pour continuer...", 15*time.Millisecond)
-	fmt.Scanln()
 }
 
 func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyPattern func(*Monster, int), scenarioType string) {
@@ -466,10 +460,6 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 
 		AddIngredient(c, "Biberon de Respect", "le Bébé Furieux")
 	}
-
-	typeWriter("", 15*time.Millisecond)
-	typeWriter("Appuyez sur Entrée pour continuer...", 15*time.Millisecond)
-	fmt.Scanln()
 
 	ScenarioMenu(c, progress)
 }

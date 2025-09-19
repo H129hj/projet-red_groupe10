@@ -5,9 +5,8 @@ import (
 	"time"
 )
 
-
 func MoeBar(c *Character, progress *ScenarioProgress) {
-	typeWriter("🍺 ÉTAPE 2 : ARÈNE 1 - BAR DE MOE", 15*time.Millisecond)
+	typeWriter("🍺 BAR DE MOE", 15*time.Millisecond)
 	typeWriter("==================================================", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
@@ -37,16 +36,15 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 	typeWriter("👨‍🦲 Moe : Si tu veux retrouver ton père, suis la trace des verres de bière vides...", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-
 	typeWriter("🍺 Soudain, Barney Gumble se lève de son tabouret...", 15*time.Millisecond)
 	typeWriter("🍺 Barney : *rot* Hé toi ! Tu cherches Homer ?", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
 	var choice int
 	typeWriter("💭 Comment répondre à Barney ?", 15*time.Millisecond)
-	typeWriter("1. 😊 'Oui, peux-tu m'aider s'il te plaît ?", 15*time.Millisecond)
-	typeWriter("2. 😤 J'aime pas ta tête, Barney !'", 15*time.Millisecond)
-	typeWriter("3. 🤔 'Tu as des informations utiles ?", 15*time.Millisecond)
+	typeWriter("1. 😊 Oui, peux-tu m'aider s'il te plaît ?", 15*time.Millisecond)
+	typeWriter("2. 😤 J'aime pas ta tête, Barney !", 15*time.Millisecond)
+	typeWriter("3. 🤔 Tu as des informations utiles ?", 15*time.Millisecond)
 	fmt.Scan(&choice)
 
 	switch choice {
@@ -106,7 +104,6 @@ func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProg
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("📋 Barney vous tend un ticket froissé : CONCOURS DONUT GÉANT - Comic Book Store", 15*time.Millisecond)
 
-
 		AddIngredient(c, "Carte Itchy & Scratchy", "le bar de Moe")
 
 		typeWriter("", 15*time.Millisecond)
@@ -139,7 +136,6 @@ func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProg
 		}
 	}
 }
-
 
 func barneyPattern(m *Monster, turn int) {
 	if turn%3 == 0 {

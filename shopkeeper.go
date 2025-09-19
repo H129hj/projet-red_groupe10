@@ -298,9 +298,6 @@ func ShowCraftRecipesInShop(c *Character, textDelay time.Duration) {
 		typeWriter(fmt.Sprintf("   🎁 Résultat : %s", recipe.Result), textDelay)
 		typeWriter("", textDelay)
 	}
-
-	typeWriter("Appuyez sur Entrée pour continuer...", textDelay)
-	fmt.Scanln()
 }
 
 func CraftItemInShop(c *Character, textDelay time.Duration) {

@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-
 func SkillsMenuSimple(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -35,7 +34,6 @@ func SkillsMenuSimple(c *Character) {
 	}
 }
 
-
 func ShowSkillsFromCharacter(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -48,7 +46,6 @@ func ShowSkillsFromCharacter(c *Character) {
 
 	for i, skill := range c.skills {
 		typeWriter(fmt.Sprintf("%d. ✅ %s", i+1, skill), textDelay)
-
 
 		switch skill {
 		case "Coup de fronde vicieux":
@@ -74,11 +71,7 @@ func ShowSkillsFromCharacter(c *Character) {
 		}
 		typeWriter("", textDelay)
 	}
-
-	typeWriter("Appuyez sur Entrée pour continuer...", textDelay)
-	fmt.Scanln()
 }
-
 
 func UseHealingSkillFromCharacter(c *Character) {
 	textDelay := 15 * time.Millisecond
@@ -87,7 +80,6 @@ func UseHealingSkillFromCharacter(c *Character) {
 		typeWriter("❤️ Vous êtes déjà en pleine forme !", textDelay)
 		return
 	}
-
 
 	healingSkills := []string{}
 	healingAmounts := map[string]int{}
@@ -142,7 +134,6 @@ func UseHealingSkillFromCharacter(c *Character) {
 	selectedSkill := healingSkills[choice-1]
 	healAmount := healingAmounts[selectedSkill]
 
-
 	oldPV := c.PV
 	c.PV += healAmount
 	if c.PV > c.PVmax {
@@ -165,10 +156,8 @@ func UseHealingSkillFromCharacter(c *Character) {
 	typeWriter(fmt.Sprintf("❤️ Vous récupérez %d PV ! (%d/%d)", actualHeal, c.PV, c.PVmax), textDelay)
 }
 
-
 func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	textDelay := 15 * time.Millisecond
-
 
 	attackSkills := []string{}
 	attackDamages := map[string]int{}
@@ -232,7 +221,6 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-
 	m.PV -= damage
 	if m.PV < 0 {
 		m.PV = 0
@@ -260,7 +248,6 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	} else {
 		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts !", m.name, damage), textDelay)
 	}
-
 
 	switch selectedSkill {
 	case "Solo de jazz envoûtant":
