@@ -15,13 +15,14 @@ type Monster struct {
 
 func attackMonster(c *Character, m *Monster) {
 	var textDelay = 15 * time.Millisecond
+	theme := GetCharacterTheme(c.class)
 	baseDamage := c.power
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
 	if contains(c.inventory, "Donut empoisonné") {
 		damage += 30
-		typeWriter("☠️ Votre attaque est empoisonnée par le donut toxique !", textDelay)
+		ColoredTypeWriter("☠️ Votre attaque est empoisonnée par le donut toxique !", textDelay, BrightMagenta+Bold)
 
 		for i, item := range c.inventory {
 			if item == "Donut empoisonné" {
@@ -36,10 +37,14 @@ func attackMonster(c *Character, m *Monster) {
 		m.PV = 0
 	}
 
+	attackText := fmt.Sprintf("💥 %s attaque %s", strings.ToUpper(c.class), m.name)
+	damageText := DamageNumber(damage, damage > baseDamage+equipmentBonus)
+
 	if equipmentBonus > 0 {
-		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts ! (+%d'équipement)", c.class, m.name, damage, equipmentBonus), textDelay)
+		bonusText := Colorize(fmt.Sprintf("(+%d équipement)", equipmentBonus), BrightGreen+Bold)
+		ThemedTypeWriter(attackText+" "+damageText+" "+bonusText, textDelay, theme, "primary")
 	} else {
-		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts !", c.class, m.name, damage), textDelay)
+		ThemedTypeWriter(attackText+" "+damageText, textDelay, theme, "primary")
 	}
 }
 
@@ -162,50 +167,53 @@ func DisplayCombatScreen(c *Character, m *Monster, turn int) {
 
 func DisplayCombatHeader(c *Character, m *Monster) {
 	combatDelay := 0 * time.Millisecond
-	typeWriter("═══════════════════════════════════════════════════", combatDelay)
-	typeWriter("                ⚔️  COMBAT EN COURS  ⚔️", combatDelay)
-	typeWriter("═══════════════════════════════════════════════════", combatDelay)
+
+	ColoredTypeWriter("═══════════════════════════════════════════════════", combatDelay, BrightRed+Bold)
+	ColoredTypeWriter("                ⚔️  COMBAT EN COURS  ⚔️", combatDelay, BrightYellow+Bold)
+	ColoredTypeWriter("═══════════════════════════════════════════════════", combatDelay, BrightRed+Bold)
 	typeWriter("", combatDelay)
 }
 
 func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	combatDelay := 0 * time.Millisecond
+	theme := GetCharacterTheme(c.class)
 
-	playerHealthBar := CreateHealthBar(c.PV, c.PVmax, 20, "❤️", "💔")
-	typeWriter(fmt.Sprintf("👤 %s", strings.ToUpper(c.class)), combatDelay)
-	typeWriter(fmt.Sprintf("   %s %d/%d PV", playerHealthBar, c.PV, c.PVmax), combatDelay)
+	playerHealthBar := HealthBar(c.PV, c.PVmax, 20)
+	ThemedTypeWriter(fmt.Sprintf("👤 %s", strings.ToUpper(c.class)), combatDelay, theme, "primary")
+	ColoredTypeWriter(fmt.Sprintf("   %s", playerHealthBar), combatDelay, "")
 
 	equipBonus := GetTotalEquipmentBonus(c)
 	if equipBonus > 0 {
-		typeWriter(fmt.Sprintf("   💪 Power: %d (+%d'équipement)", c.power, equipBonus), combatDelay)
+		powerText := fmt.Sprintf("💪 Power: %d %s", c.power, Colorize(fmt.Sprintf("(+%d équipement)", equipBonus), BrightGreen+Bold))
+		ColoredTypeWriter(fmt.Sprintf("   %s", powerText), combatDelay, BrightWhite)
 	} else {
-		typeWriter(fmt.Sprintf("   💪 Power: %d", c.power), combatDelay)
+		ThemedTypeWriter(fmt.Sprintf("   💪 Power: %d", c.power), combatDelay, theme, "text")
 	}
 
 	typeWriter("", combatDelay)
-	typeWriter("                      🆚", combatDelay)
+	ColoredTypeWriter("                      🆚", combatDelay, BrightMagenta+Bold)
 	typeWriter("", combatDelay)
 
-	enemyHealthBar := CreateHealthBar(m.PV, m.PVmax, 20, "💀", "🖤")
-	typeWriter(fmt.Sprintf("👹 %s", strings.ToUpper(m.name)), combatDelay)
-	typeWriter(fmt.Sprintf("   %s %d/%d PV", enemyHealthBar, m.PV, m.PVmax), combatDelay)
-	typeWriter(fmt.Sprintf("   ⚡ Power: %d", m.power), combatDelay)
+	enemyHealthBar := HealthBar(m.PV, m.PVmax, 20)
+	ColoredTypeWriter(fmt.Sprintf("👹 %s", strings.ToUpper(m.name)), combatDelay, BrightRed+Bold)
+	ColoredTypeWriter(fmt.Sprintf("   %s", enemyHealthBar), combatDelay, "")
+	ColoredTypeWriter(fmt.Sprintf("   ⚡ Power: %d", m.power), combatDelay, BrightYellow)
 
 	typeWriter("", combatDelay)
-	typeWriter(fmt.Sprintf("🔄 Tour: %d", turn), combatDelay)
+	ColoredTypeWriter(fmt.Sprintf("🔄 Tour: %d", turn), combatDelay, BrightCyan+Bold)
 	typeWriter("", combatDelay)
 }
 
 func DisplayActionMenu() {
 	combatDelay := 0 * time.Millisecond
-	typeWriter("┌─────────────────────────────────────────────────┐", combatDelay)
-	typeWriter("│                 ⚔️ ACTIONS ⚔️                   │", combatDelay)
-	typeWriter("├─────────────────────────────────────────────────┤", combatDelay)
-	typeWriter("│ 1. 💥 Attaquer                                  │", combatDelay)
-	typeWriter("│ 2. 🎯 Utiliser une compétence                   │", combatDelay)
-	typeWriter("│ 3. 🎒 Consulter linventaire                    │", combatDelay)
-	typeWriter("│ 4. 🏃 Fuir le combat                           │", combatDelay)
-	typeWriter("└─────────────────────────────────────────────────┘", combatDelay)
+	ColoredTypeWriter("┌─────────────────────────────────────────────────┐", combatDelay, BrightCyan)
+	ColoredTypeWriter("│                 ⚔️ ACTIONS ⚔️                   │", combatDelay, BrightCyan+Bold)
+	ColoredTypeWriter("├─────────────────────────────────────────────────┤", combatDelay, BrightCyan)
+	ColoredTypeWriter("│ 1. 💥 Attaquer                                  │", combatDelay, BrightWhite)
+	ColoredTypeWriter("│ 2. 🎯 Utiliser une compétence                   │", combatDelay, BrightWhite)
+	ColoredTypeWriter("│ 3. 🎒 Consulter l'inventaire                   │", combatDelay, BrightWhite)
+	ColoredTypeWriter("│ 4. 🏃 Fuir le combat                           │", combatDelay, BrightWhite)
+	ColoredTypeWriter("└─────────────────────────────────────────────────┘", combatDelay, BrightCyan)
 	typeWriter("", combatDelay)
 }
 

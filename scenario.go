@@ -5,18 +5,6 @@ import (
 	"time"
 )
 
-const (
-	Reset     = "\u001b[0m"
-	Red       = "\u001b[31m"
-	Green     = "\u001b[32m"
-	Yellow    = "\u001b[33m"
-	Blue      = "\u001b[34m"
-	Magenta   = "\u001b[35m"
-	Cyan      = "\u001b[36m"
-	Bold      = "\u001b[1m"
-	Underline = "\u001b[4m"
-)
-
 func typeWriter(str string, delay time.Duration) {
 	for _, r := range str {
 		fmt.Printf("%c", r)
@@ -33,9 +21,13 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 		progressLocal = StartHomerScenario(c)
 	}
 
+	theme := GetCharacterTheme(c.class)
+
 	for {
 		var stageChoice int
-		typeWriter("🗺️  Où voulez-vous aller ?", 15*time.Millisecond)
+		fmt.Println()
+		MenuHeader("MENU DE NAVIGATION", SystemTheme)
+		ThemedTypeWriter("🗺️ Où voulez-vous aller ?", 15*time.Millisecond, theme, "primary")
 
 		switch progressLocal.Stage {
 		case 1:
@@ -43,7 +35,7 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
 			typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
 			typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
-			typeWriter("5. ⚔️  Gérer les équipements", 15*time.Millisecond)
+			typeWriter("5. ⚔️ Gérer les équipements", 15*time.Millisecond)
 			typeWriter("6. 🥊 Casse la gueule à Milhouse pour passer le temps (entrainement)", 15*time.Millisecond)
 		case 2:
 			typeWriter("1. 🍻 Allez au bar de Moe", 15*time.Millisecond)
@@ -65,6 +57,7 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			typeWriter("5. ⚔️ Gérer les équipements", 15*time.Millisecond)
 		}
 
+		fmt.Println()
 		typeWriter("0. 🏠 Retourner à la maison", 15*time.Millisecond)
 		fmt.Scan(&stageChoice)
 
@@ -132,22 +125,19 @@ func InitScenario() ScenarioProgress {
 func StartHomerScenario(c *Character) ScenarioProgress {
 	progress := InitScenario()
 
-	typeWriter("==================================================", 15*time.Millisecond)
-	typeWriter("🏠 SPRINGFIELD RPG - À LA RECHERCHE D'HOMER", 15*time.Millisecond)
-	typeWriter("==================================================", 15*time.Millisecond)
-	typeWriter("", 15*time.Millisecond)
+	fmt.Println()
+	MenuHeader("À LA RECHERCHE D'HOMER", BossTheme)
 
-	typeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 15*time.Millisecond)
-	typeWriter("", 15*time.Millisecond)
+	ColoredTypeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 15*time.Millisecond, BrightBlue+Bold)
+	fmt.Println()
 
-	typeWriter("💬 Marge : Oh mon dieu ! Homer n'est pas rentré de la taverne !", 15*time.Millisecond)
-	typeWriter("💬 Marge : Il devait juste prendre UNE bière chez Moe...", 15*time.Millisecond)
-	typeWriter("💬 Marge : Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", 15*time.Millisecond)
-	typeWriter("", 15*time.Millisecond)
+	DialogueBox("💬 Marge", "Oh mon dieu ! Homer n'est pas rentré de la taverne !", MargeTheme)
+	DialogueBox("💬 Marge", "Il devait juste prendre UNE bière chez Moe...", MargeTheme)
+	DialogueBox("💬 Marge", "Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", MargeTheme)
+	fmt.Println()
 
-	typeWriter("", 15*time.Millisecond)
-	typeWriter("🎯 PREMIER OBJECTIF : Parler aux voisins", 15*time.Millisecond)
-	typeWriter("", 15*time.Millisecond)
+	BoxedText("🎯 PREMIER OBJECTIF : Parler aux voisins", SystemTheme)
+	fmt.Println()
 
 	progress.Stage = 1
 	return progress
