@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-
 func (c *Character) AddEquipement(nom string, valeur int) {
 	if c.equipement == nil {
 		c.equipement = make(map[string]int)
@@ -16,7 +15,6 @@ func (c *Character) AddEquipement(nom string, valeur int) {
 func (c *Character) RemoveEquipement(nom string) {
 	delete(c.equipement, nom)
 }
-
 
 func EquipmentMenu(c *Character) {
 	textDelay := 15 * time.Millisecond
@@ -34,6 +32,7 @@ func EquipmentMenu(c *Character) {
 		typeWriter("", textDelay)
 
 		var choice string
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {
@@ -45,9 +44,6 @@ func EquipmentMenu(c *Character) {
 			ShowEquippedItems(c)
 		case "4":
 			typeWriter(AccessInventory(*c), textDelay)
-			typeWriter("", textDelay)
-			typeWriter("Appuyez sur Entrée pour continuer...", textDelay)
-			fmt.Scanln()
 		case "0":
 			return
 		default:
@@ -55,7 +51,6 @@ func EquipmentMenu(c *Character) {
 		}
 	}
 }
-
 
 func EquipFromInventory(c *Character) {
 	textDelay := 15 * time.Millisecond
@@ -68,7 +63,6 @@ func EquipFromInventory(c *Character) {
 	typeWriter("🎒 OBJETS DANS VOTRE SAC À DOS", textDelay)
 	typeWriter("==============================", textDelay)
 	typeWriter("", textDelay)
-
 
 	equipableItems := []string{}
 	for _, item := range c.inventory {
@@ -91,6 +85,7 @@ func EquipFromInventory(c *Character) {
 	typeWriter("👉 Quel objet voulez-vous équiper ?", textDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {
@@ -104,12 +99,10 @@ func EquipFromInventory(c *Character) {
 
 	selectedItem := equipableItems[choice-1]
 
-
 	if _, equipped := c.equipement[selectedItem]; equipped {
 		typeWriter("❌ Cet objet est déjà équipé !", textDelay)
 		return
 	}
-
 
 	equipValue := GetEquipmentValue(selectedItem)
 	c.AddEquipement(selectedItem, equipValue)
@@ -117,7 +110,6 @@ func EquipFromInventory(c *Character) {
 	typeWriter(fmt.Sprintf("✅ %s équipé avec succès !", selectedItem), textDelay)
 	typeWriter(fmt.Sprintf("⚡ Valeur déquipement : %d", equipValue), textDelay)
 }
-
 
 func UnequipToInventory(c *Character) {
 	textDelay := 15 * time.Millisecond
@@ -146,6 +138,7 @@ func UnequipToInventory(c *Character) {
 	typeWriter("👉 Quel objet voulez-vous déséquiper ?", textDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {
@@ -159,18 +152,15 @@ func UnequipToInventory(c *Character) {
 
 	selectedItem := equippedItems[choice-1]
 
-
 	if !limitedInventory(c) {
 		return
 	}
-
 
 	c.RemoveEquipement(selectedItem)
 
 	typeWriter(fmt.Sprintf("✅ %s déséquipé avec succès !", selectedItem), textDelay)
 	typeWriter("📦 Lobjet reste dans votre inventaire.", textDelay)
 }
-
 
 func ShowEquippedItems(c *Character) {
 	textDelay := 15 * time.Millisecond
@@ -190,12 +180,7 @@ func ShowEquippedItems(c *Character) {
 		typeWriter("", textDelay)
 		typeWriter(fmt.Sprintf("💪 Valeur totale d'équipement : %d", totalValue), textDelay)
 	}
-
-	typeWriter("", textDelay)
-	typeWriter("Appuyez sur Entrée pour continuer...", textDelay)
-	fmt.Scanln()
 }
-
 
 func IsEquipable(itemName string) bool {
 	equipableItems := []string{
@@ -215,7 +200,6 @@ func IsEquipable(itemName string) bool {
 	}
 	return false
 }
-
 
 func GetEquipmentValue(itemName string) int {
 	equipmentValues := map[string]int{
@@ -246,7 +230,6 @@ func GetEquipmentValue(itemName string) int {
 	}
 	return 10
 }
-
 
 func GetTotalEquipmentBonus(c *Character) int {
 	total := 0

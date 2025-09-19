@@ -242,6 +242,7 @@ func GetPlayerAction() int {
 	typeWriter("👉 Choisissez votre action (1-4): ", combatDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	return choice
@@ -271,6 +272,7 @@ func DisplayInventoryInCombat(c *Character) {
 
 		var choice int
 		typeWriter("👉 Utiliser un objet (numéro) ou 0 pour retour: ", combatDelay)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		if choice > 0 && choice <= len(c.inventory) {
@@ -289,9 +291,6 @@ func DisplayInventoryInCombat(c *Character) {
 		}
 	}
 
-	typeWriter("", combatDelay)
-	typeWriter("Appuyez sur Entrée pour continuer...", combatDelay)
-	fmt.Scanln()
 }
 
 func DisplayVictory(c *Character, m *Monster) {
@@ -308,9 +307,6 @@ func DisplayVictory(c *Character, m *Monster) {
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
 
-	typeWriter("", 15*time.Millisecond)
-	typeWriter("Appuyez sur Entrée pour continuer...", 15*time.Millisecond)
-	fmt.Scanln()
 }
 
 func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyPattern func(*Monster, int), scenarioType string) {
@@ -474,10 +470,6 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 		AddIngredient(c, "Biberon de Respect", "le Bébé Furieux")
 	}
 
-	typeWriter("", 15*time.Millisecond)
-	typeWriter("Appuyez sur Entrée pour continuer...", 15*time.Millisecond)
-	fmt.Scanln()
-
 	ScenarioMenu(c, progress)
 }
 
@@ -560,6 +552,7 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	typeWriter("👉 Quelle compétence voulez-vous utiliser ?", combatDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {
