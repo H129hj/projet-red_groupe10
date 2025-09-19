@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Arène 1 : Bar de Moe
+
 func MoeBar(c *Character, progress *ScenarioProgress) {
 	typeWriter("🍺 ÉTAPE 2 : ARÈNE 1 - BAR DE MOE", 15*time.Millisecond)
 	typeWriter("==================================================", 15*time.Millisecond)
@@ -37,7 +37,7 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 	typeWriter("👨‍🦲 Moe : 'Si tu veux retrouver ton père, suis la trace des verres de bière vides...'", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-	// Déclencheur du combat selon le scénario
+
 	typeWriter("🍺 Soudain, Barney Gumble se lève de son tabouret...", 15*time.Millisecond)
 	typeWriter("🍺 Barney : '*rot* Hé toi ! Tu cherches Homer ?'", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
@@ -51,7 +51,7 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 
 	switch choice {
 	case 1:
-		// Réponse polie
+
 		typeWriter("🍺 Barney : '*rot* Ouais, Homer avait un ticket... quelque chose avec des donuts...'", 15*time.Millisecond)
 		typeWriter("🍺 Barney : 'Il parlait du Comic Book Guy... *rot* ...et d'un concours...'", 15*time.Millisecond)
 		typeWriter("", 15*time.Millisecond)
@@ -61,7 +61,7 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 		progress.Stage = 3
 
 	case 2:
-		// Combat déclenché !
+
 		typeWriter("🍺 Barney : '*rot* QUOI ?! Personne insulte Barney Gumble !'", 15*time.Millisecond)
 		typeWriter("👨‍🦲 Moe : 'Oh non... voilà que ça recommence...'", 15*time.Millisecond)
 		typeWriter("", 15*time.Millisecond)
@@ -106,7 +106,7 @@ func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProg
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("📋 Barney vous tend un ticket froissé : 'CONCOURS DONUT GÉANT - Comic Book Store'", 15*time.Millisecond)
 
-		// Ajouter un ingrédient après le combat
+
 		AddIngredient(c, "Carte Itchy & Scratchy", "le bar de Moe")
 
 		typeWriter("", 15*time.Millisecond)
@@ -140,7 +140,7 @@ func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProg
 	}
 }
 
-// Attaques spéciales de Barney
+
 func barneyPattern(m *Monster, turn int) {
 	if turn%3 == 0 {
 		damage := m.power * 2

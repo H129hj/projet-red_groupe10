@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Menu des compétences utilisant la structure existante
+
 func SkillsMenuSimple(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -35,7 +35,7 @@ func SkillsMenuSimple(c *Character) {
 	}
 }
 
-// Afficher les compétences du personnage en utilisant la structure existante
+
 func ShowSkillsFromCharacter(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -49,7 +49,7 @@ func ShowSkillsFromCharacter(c *Character) {
 	for i, skill := range c.skills {
 		typeWriter(fmt.Sprintf("%d. ✅ %s", i+1, skill), textDelay)
 
-		// Description basée sur le nom de la compétence (utilise les skills existants de characters.go)
+
 		switch skill {
 		case "Coup de fronde vicieux":
 			typeWriter("   📝 Attaque précise avec le lance-pierre (+45 dégâts)", textDelay)
@@ -79,7 +79,7 @@ func ShowSkillsFromCharacter(c *Character) {
 	fmt.Scanln()
 }
 
-// Utiliser une compétence de soin basée sur les skills du personnage
+
 func UseHealingSkillFromCharacter(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -88,7 +88,7 @@ func UseHealingSkillFromCharacter(c *Character) {
 		return
 	}
 
-	// Vérifier les compétences de soin disponibles dans les skills du personnage
+
 	healingSkills := []string{}
 	healingAmounts := map[string]int{}
 
@@ -142,7 +142,7 @@ func UseHealingSkillFromCharacter(c *Character) {
 	selectedSkill := healingSkills[choice-1]
 	healAmount := healingAmounts[selectedSkill]
 
-	// Appliquer les soins
+
 	oldPV := c.PV
 	c.PV += healAmount
 	if c.PV > c.PVmax {
@@ -165,11 +165,11 @@ func UseHealingSkillFromCharacter(c *Character) {
 	typeWriter(fmt.Sprintf("❤️ Vous récupérez %d PV ! (%d/%d)", actualHeal, c.PV, c.PVmax), textDelay)
 }
 
-// Utiliser une compétence d'attaque en combat
+
 func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	textDelay := 15 * time.Millisecond
 
-	// Trouver les compétences d'attaque disponibles dans les skills du personnage
+
 	attackSkills := []string{}
 	attackDamages := map[string]int{}
 
@@ -232,7 +232,7 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-	// Appliquer les dégâts
+
 	m.PV -= damage
 	if m.PV < 0 {
 		m.PV = 0
@@ -261,10 +261,10 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts !", m.name, damage), textDelay)
 	}
 
-	// Effets spéciaux selon la compétence
+
 	switch selectedSkill {
 	case "Solo de jazz envoûtant":
-		// Lisa récupère aussi des PV
+
 		oldPV := c.PV
 		c.PV += 15
 		if c.PV > c.PVmax {

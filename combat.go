@@ -19,11 +19,11 @@ func attackMonster(c *Character, m *Monster) {
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-	// Vérifier si on a un donut empoisonné
+
 	if contains(c.inventory, "Donut empoisonné") {
 		damage += 30
 		typeWriter("☠️ Votre attaque est empoisonnée par le donut toxique !", textDelay)
-		// Retirer le donut empoisonné après usage
+
 		for i, item := range c.inventory {
 			if item == "Donut empoisonné" {
 				c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
@@ -57,12 +57,12 @@ func traningFight(c *Character, m *Monster) {
 	CombatInterface(c, m, 1, milhousePatternInstant)
 }
 
-// Interface de combat visuelle complète avec affichage instantané
+
 func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Monster, int)) {
-	combatDelay := 0 * time.Millisecond // Texte instantané en combat
+	combatDelay := 0 * time.Millisecond
 
 	for {
-		// Vérifier l'état du combat
+
 		if c.PV <= 0 {
 			Wasted(c)
 			return
@@ -72,14 +72,14 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 			return
 		}
 
-		// Afficher l'interface de combat
+
 		DisplayCombatScreen(c, m, turn)
 
-		// Tour du joueur
+
 		action := GetPlayerAction()
 
 		switch action {
-		case 1: // Attaquer
+		case 1:
 			ClearScreen()
 			DisplayCombatHeader(c, m)
 			attackMonsterInstant(c, m)
@@ -88,7 +88,7 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 				return
 			}
 
-		case 2: // Compétences
+		case 2:
 			ClearScreen()
 			DisplayCombatHeader(c, m)
 			if UseCombatSkillFromCharacterInstant(c, m) {
@@ -97,16 +97,16 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 					return
 				}
 			} else {
-				continue // Retour au menu si annulé
+				continue
 			}
 
-		case 3: // Inventaire
+		case 3:
 			ClearScreen()
 			DisplayCombatHeader(c, m)
 			DisplayInventoryInCombat(c)
 			continue
 
-		case 4: // Fuir
+		case 4:
 			ClearScreen()
 			typeWriter("🏃💨 Vous fuyez le combat !", combatDelay)
 			return
@@ -117,18 +117,18 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 			continue
 		}
 
-		// Tour de l'ennemi
+
 		if m.PV > 0 {
-			time.Sleep(800 * time.Millisecond) // Pause courte pour la lisibilité
+			time.Sleep(800 * time.Millisecond)
 			typeWriter("\n🔄 Tour de l'ennemi...", combatDelay)
 			time.Sleep(300 * time.Millisecond)
 			enemyPatternInstant(m, turn, enemyPattern)
 
-			// Appliquer les dégâts de l'ennemi
-			defense := GetTotalEquipmentBonus(c) / 4 // La défense réduit les dégâts
+
+			defense := GetTotalEquipmentBonus(c) / 4
 			damage := m.power - defense
 			if damage < 1 {
-				damage = 1 // Dégâts minimum
+				damage = 1
 			}
 
 			c.PV -= damage
@@ -142,36 +142,36 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 				typeWriter(fmt.Sprintf("💔 Vous subissez %d dégâts !", damage), combatDelay)
 			}
 
-			time.Sleep(800 * time.Millisecond) // Pause courte avant le prochain tour
+			time.Sleep(800 * time.Millisecond)
 		}
 
 		turn++
 	}
 }
 
-// Nettoyer l'écran (simulation)
+
 func ClearScreen() {
-	// Afficher des lignes vides pour simuler un nettoyage d'écran
+
 	for i := 0; i < 5; i++ {
 		fmt.Println()
 	}
 }
 
-// Afficher l'écran de combat complet
+
 func DisplayCombatScreen(c *Character, m *Monster, turn int) {
 	ClearScreen()
 
-	// En-tête du combat
+
 	DisplayCombatHeader(c, m)
 
-	// Informations détaillées
+
 	DisplayCombatDetails(c, m, turn)
 
-	// Menu d'actions
+
 	DisplayActionMenu()
 }
 
-// En-tête du combat
+
 func DisplayCombatHeader(c *Character, m *Monster) {
 	combatDelay := 0 * time.Millisecond
 	typeWriter("═══════════════════════════════════════════════════", combatDelay)
@@ -180,15 +180,15 @@ func DisplayCombatHeader(c *Character, m *Monster) {
 	typeWriter("", combatDelay)
 }
 
-// Détails du combat
+
 func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	combatDelay := 0 * time.Millisecond
-	// Barre de vie du joueur
+
 	playerHealthBar := CreateHealthBar(c.PV, c.PVmax, 20, "❤️", "💔")
 	typeWriter(fmt.Sprintf("👤 %s", strings.ToUpper(c.class)), combatDelay)
 	typeWriter(fmt.Sprintf("   %s %d/%d PV", playerHealthBar, c.PV, c.PVmax), combatDelay)
 
-	// Stats du joueur
+
 	equipBonus := GetTotalEquipmentBonus(c)
 	if equipBonus > 0 {
 		typeWriter(fmt.Sprintf("   💪 Power: %d (+%d équipement)", c.power, equipBonus), combatDelay)
@@ -200,7 +200,7 @@ func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	typeWriter("                      🆚", combatDelay)
 	typeWriter("", combatDelay)
 
-	// Barre de vie de l'ennemi
+
 	enemyHealthBar := CreateHealthBar(m.PV, m.PVmax, 20, "💀", "🖤")
 	typeWriter(fmt.Sprintf("👹 %s", strings.ToUpper(m.name)), combatDelay)
 	typeWriter(fmt.Sprintf("   %s %d/%d PV", enemyHealthBar, m.PV, m.PVmax), combatDelay)
@@ -211,7 +211,7 @@ func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	typeWriter("", combatDelay)
 }
 
-// Menu d'actions
+
 func DisplayActionMenu() {
 	combatDelay := 0 * time.Millisecond
 	typeWriter("┌─────────────────────────────────────────────────┐", combatDelay)
@@ -225,7 +225,7 @@ func DisplayActionMenu() {
 	typeWriter("", combatDelay)
 }
 
-// Créer une barre de vie visuelle
+
 func CreateHealthBar(current, max, length int, fullChar, emptyChar string) string {
 	if max == 0 {
 		return strings.Repeat(emptyChar, length)
@@ -246,7 +246,7 @@ func CreateHealthBar(current, max, length int, fullChar, emptyChar string) strin
 	return strings.Repeat(fullChar, filledLength) + strings.Repeat(emptyChar, emptyLength)
 }
 
-// Obtenir l'action du joueur
+
 func GetPlayerAction() int {
 	combatDelay := 0 * time.Millisecond
 	typeWriter("👉 Choisissez votre action (1-4): ", combatDelay)
@@ -257,7 +257,7 @@ func GetPlayerAction() int {
 	return choice
 }
 
-// Afficher l'inventaire en combat
+
 func DisplayInventoryInCombat(c *Character) {
 	combatDelay := 0 * time.Millisecond
 	typeWriter("🎒 INVENTAIRE DE COMBAT", combatDelay)
@@ -298,7 +298,7 @@ func DisplayInventoryInCombat(c *Character) {
 	fmt.Scanln()
 }
 
-// Afficher la victoire
+
 func DisplayVictory(c *Character, m *Monster) {
 	ClearScreen()
 
@@ -309,7 +309,7 @@ func DisplayVictory(c *Character, m *Monster) {
 	typeWriter(fmt.Sprintf("🏆 %s a vaincu %s !", strings.ToUpper(c.class), m.name), 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-	// Récompenses
+
 	goldReward := 25 + (m.PVmax / 10)
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
@@ -319,10 +319,10 @@ func DisplayVictory(c *Character, m *Monster) {
 	fmt.Scanln()
 }
 
-// Combat de scénario avec gestion de la progression
+
 func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyPattern func(*Monster, int), scenarioType string) {
 	for turn := 1; ; turn++ {
-		// Vérifier l'état du combat
+
 		if c.PV <= 0 {
 			Wasted(c)
 			return
@@ -332,14 +332,14 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 			return
 		}
 
-		// Afficher l'interface de combat
+
 		DisplayCombatScreen(c, m, turn)
 
-		// Tour du joueur
+
 		action := GetPlayerAction()
 
 		switch action {
-		case 1: // Attaquer
+		case 1:
 			ClearScreen()
 			DisplayCombatHeader(c, m)
 			attackMonster(c, m)
@@ -348,7 +348,7 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 				return
 			}
 
-		case 2: // Compétences
+		case 2:
 			ClearScreen()
 			DisplayCombatHeader(c, m)
 			if UseCombatSkillFromCharacter(c, m) {
@@ -357,19 +357,19 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 					return
 				}
 			} else {
-				continue // Retour au menu si annulé
+				continue
 			}
 
-		case 3: // Inventaire
+		case 3:
 			ClearScreen()
 			DisplayCombatHeader(c, m)
 			DisplayInventoryInCombat(c)
 			continue
 
-		case 4: // Fuir
+		case 4:
 			ClearScreen()
 			typeWriter("🏃💨 Vous fuyez le combat !", 15*time.Millisecond)
-			// Retour au menu du scénario
+
 			ScenarioMenu(c, progress)
 			return
 
@@ -379,18 +379,18 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 			continue
 		}
 
-		// Tour de l'ennemi
+
 		if m.PV > 0 {
 			time.Sleep(1 * time.Second)
 			typeWriter("\n🔄 Tour de l'ennemi...", 15*time.Millisecond)
 			time.Sleep(500 * time.Millisecond)
 			enemyPattern(m, turn)
 
-			// Appliquer les dégâts de l'ennemi
-			defense := GetTotalEquipmentBonus(c) / 4 // La défense réduit les dégâts
+
+			defense := GetTotalEquipmentBonus(c) / 4
 			damage := m.power - defense
 			if damage < 1 {
-				damage = 1 // Dégâts minimum
+				damage = 1
 			}
 
 			c.PV -= damage
@@ -409,7 +409,7 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 	}
 }
 
-// Afficher la victoire dans un scénario
+
 func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress, scenarioType string) {
 	ClearScreen()
 
@@ -420,12 +420,12 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 	typeWriter(fmt.Sprintf("🏆 %s a vaincu %s !", strings.ToUpper(c.class), m.name), 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-	// Récompenses
+
 	goldReward := 25 + (m.PVmax / 10)
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
 
-	// Gestion spécifique selon le type de scénario
+
 	switch scenarioType {
 	case "ned":
 		typeWriter("👨‍🦳 Ned : 'Oh... désolé pour cet éclat ! Diddly-dang, que m'est-il arrivé ?'", 15*time.Millisecond)
@@ -434,7 +434,7 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("🔍 INDICE OBTENU : Homer était louche en allant chez Moe !", 15*time.Millisecond)
 
-		// Ajouter un ingrédient après le combat
+
 		AddIngredient(c, "Matériau de base", "la maison de Ned")
 
 		progress.Stage = 2
@@ -445,7 +445,7 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("📋 Barney vous tend un ticket froissé : 'CONCOURS DONUT GÉANT - Comic Book Store'", 15*time.Millisecond)
 
-		// Ajouter un ingrédient après le combat
+
 		AddIngredient(c, "Carte Itchy & Scratchy", "le bar de Moe")
 
 		typeWriter("", 15*time.Millisecond)
@@ -460,7 +460,7 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 		typeWriter("👨‍💻 Comic Book Guy : 'Il participe au Grand Concours du Donut Cosmique !'", 15*time.Millisecond)
 		typeWriter("", 15*time.Millisecond)
 
-		// Ajouter un ingrédient rare après le combat
+
 		AddIngredient(c, "Carte Itchy & Scratchy", "le magasin de BD")
 
 		typeWriter("🔍 INDICE OBTENU : Homer au concours de donuts du parc d'attractions !", 15*time.Millisecond)
@@ -472,32 +472,50 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 		typeWriter("🌴 Tahiti Bob : 'Impossible ! Vaincu par un gamin !'", 15*time.Millisecond)
 		typeWriter("🌴 Tahiti Bob : 'Bon... ton père est dans la Maison des Donuts Magiques...'", 15*time.Millisecond)
 
-		// Ajouter un ingrédient spécial après le boss final
+
 		AddIngredient(c, "Matériau de base", "le parc d'attractions")
+
+	case "gencives":
+		typeWriter("👻 Gencives Sanglantes : 'Impossible... vaincu par mon ancienne élève...'", 15*time.Millisecond)
+		typeWriter("🎺 Gencives Sanglantes : 'Tu as... évolué, Lisa... Le jazz vit en toi...'", 15*time.Millisecond)
+		typeWriter("👻 Gencives Sanglantes : 'Ton père... il est dans la Maison des Donuts... Joue pour lui...'", 15*time.Millisecond)
+		typeWriter("🎷 *La silhouette fantomatique disparaît dans une mélodie apaisante*", 15*time.Millisecond)
+
+
+		AddIngredient(c, "Note de Jazz Éternelle", "l'esprit de Gencives Sanglantes")
+
+	case "bebe":
+		typeWriter("😭 Bébé Furieux : 'WAAAAHHH... NO WIN... (Je ne gagne pas...)'", 15*time.Millisecond)
+		typeWriter("👶 Bébé Furieux : 'YOU STRONG BABY... (Tu es un bébé fort...)'", 15*time.Millisecond)
+		typeWriter("😊 Bébé Furieux : 'PAPA HOMER... DONUT HOUSE... (Papa Homer... maison donuts...)'", 15*time.Millisecond)
+		typeWriter("👶 *Le Bébé Furieux tend un biberon en signe de respect*", 15*time.Millisecond)
+
+
+		AddIngredient(c, "Biberon de Respect", "le Bébé Furieux")
 	}
 
 	typeWriter("", 15*time.Millisecond)
 	typeWriter("Appuyez sur Entrée pour continuer...", 15*time.Millisecond)
 	fmt.Scanln()
 
-	// Retour au menu du scénario
+
 	ScenarioMenu(c, progress)
 }
 
-// Versions instantanées pour les combats (texte immédiat)
 
-// Attaque instantanée pour les combats
+
+
 func attackMonsterInstant(c *Character, m *Monster) {
 	combatDelay := 0 * time.Millisecond
 	baseDamage := c.power
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-	// Vérifier si on a un donut empoisonné
+
 	if contains(c.inventory, "Donut empoisonné") {
 		damage += 30
 		typeWriter("☠️ Votre attaque est empoisonnée par le donut toxique !", combatDelay)
-		// Retirer le donut empoisonné après usage
+
 		for i, item := range c.inventory {
 			if item == "Donut empoisonné" {
 				c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
@@ -518,11 +536,11 @@ func attackMonsterInstant(c *Character, m *Monster) {
 	}
 }
 
-// Compétences de combat instantanées
+
 func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	combatDelay := 0 * time.Millisecond
 
-	// Trouver les compétences d'attaque disponibles dans les skills du personnage
+
 	attackSkills := []string{}
 	attackDamages := map[string]int{}
 
@@ -585,7 +603,7 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-	// Appliquer les dégâts
+
 	m.PV -= damage
 	if m.PV < 0 {
 		m.PV = 0
@@ -614,10 +632,10 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts !", m.name, damage), combatDelay)
 	}
 
-	// Effets spéciaux selon la compétence
+
 	switch selectedSkill {
 	case "Solo de jazz envoûtant":
-		// Lisa récupère aussi des PV
+
 		oldPV := c.PV
 		c.PV += 15
 		if c.PV > c.PVmax {
@@ -632,13 +650,13 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	return true
 }
 
-// Pattern d'ennemi instantané
+
 func enemyPatternInstant(m *Monster, turn int, pattern func(*Monster, int)) {
-	// Appeler le pattern original mais modifier les délais dans les patterns spécifiques
+
 	pattern(m, turn)
 }
 
-// Pattern d'attaque pour Milhouse (combat d'entraînement)
+
 func milhousePatternInstant(m *Monster, turn int) {
 	combatDelay := 0 * time.Millisecond
 	if turn%3 == 0 {

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Interaction avec Ned Flanders
+
 func NedFlanders(c *Character, progress *ScenarioProgress) {
 	typeWriter("==================================================", 15*time.Millisecond)
 	typeWriter("🏡 DEVANT LA MAISON DE NED FLANDERS", 15*time.Millisecond)
@@ -33,7 +33,7 @@ func NedFlanders(c *Character, progress *ScenarioProgress) {
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("🔍 INDICE OBTENU : Homer avait un plan secret impliquant de la bière gratuite !", 15*time.Millisecond)
 
-		// Ajouter un ingrédient pour la coopération
+
 		AddIngredient(c, "Matériau de base", "l'aide de Ned")
 
 		progress.NedCompleted = true
@@ -46,7 +46,7 @@ func NedFlanders(c *Character, progress *ScenarioProgress) {
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("🔍 INDICE OBTENU : Homer est allé chez Moe avec une détermination inhabituelle !", 15*time.Millisecond)
 
-		// Ajouter un ingrédient pour la coopération
+
 		AddIngredient(c, "Matériau de base", "l'aide de Ned")
 
 		progress.Stage = 2
@@ -71,7 +71,7 @@ func NedFlanders(c *Character, progress *ScenarioProgress) {
 	ScenarioMenu(c, progress)
 }
 
-// Combat spécialisé contre Ned avec ses attaques spéciales
+
 func characterTurnNed(c *Character, m *Monster, t int, progress *ScenarioProgress) {
 	var choice int
 	turn := t
@@ -85,7 +85,7 @@ func characterTurnNed(c *Character, m *Monster, t int, progress *ScenarioProgres
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("🔍 INDICE OBTENU : Homer était louche en allant chez Moe !", 15*time.Millisecond)
 
-		// Ajouter un ingrédient après le combat
+
 		AddIngredient(c, "Matériau de base", "la maison de Ned")
 
 		progress.Stage = 2
@@ -111,7 +111,7 @@ func characterTurnNed(c *Character, m *Monster, t int, progress *ScenarioProgres
 	}
 }
 
-// Attaques spéciales de Ned
+
 func nedPattern(m *Monster, turn int) {
 	combatDelay := 0 * time.Millisecond
 	if turn%3 == 0 {

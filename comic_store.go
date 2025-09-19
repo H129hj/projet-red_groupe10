@@ -102,7 +102,7 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 	ScenarioMenu(c, progress)
 }
 
-// Combat optionnel contre Comic Book Guy
+
 func characterTurnComicGuy(c *Character, m *Monster, t int, progress *ScenarioProgress) {
 	var choice int
 	turn := t
@@ -115,7 +115,7 @@ func characterTurnComicGuy(c *Character, m *Monster, t int, progress *ScenarioPr
 		typeWriter("👨‍💻 Comic Book Guy : 'Il participe au Grand Concours du Donut Cosmique !'", 15*time.Millisecond)
 		typeWriter("", 15*time.Millisecond)
 
-		// Ajouter un ingrédient rare après le combat
+
 		AddIngredient(c, "Carte Itchy & Scratchy", "le magasin de BD")
 
 		typeWriter("🔍 INDICE OBTENU : Homer au concours de donuts du parc d'attractions !", 15*time.Millisecond)
@@ -140,7 +140,7 @@ func characterTurnComicGuy(c *Character, m *Monster, t int, progress *ScenarioPr
 			characterTurnComicGuy(c, m, turn, progress)
 		case 3:
 			typeWriter("🏃💨 Vous fuyez en évitant les comics qui volent !", 15*time.Millisecond)
-			// Même si on fuit, on obtient l'indice
+
 			typeWriter("👨‍💻 Comic Book Guy : 'Fuyez ! Votre père est au parc d'attractions !'", 15*time.Millisecond)
 			progress.HasClue3 = true
 			progress.ComicCompleted = true
@@ -153,7 +153,7 @@ func characterTurnComicGuy(c *Character, m *Monster, t int, progress *ScenarioPr
 	}
 }
 
-// Attaques spéciales du Comic Book Guy
+
 func comicGuyPattern(m *Monster, turn int) {
 	if turn%3 == 0 {
 		damage := m.power * 2

@@ -8,7 +8,7 @@ func main() {
 	go projetred.MusiqueJouer()
 	c1 := projetred.InitCharacter()
 	projetred.ScenarioMenu(&c1, nil)
-	//projetred.playSoundAsync()
-	//projetred.MusiqueJouer()
-	//projetred.MusiqueArreter()
+
+
+
 }

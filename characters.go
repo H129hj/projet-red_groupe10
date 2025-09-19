@@ -134,7 +134,7 @@ func contains(slice []string, item string) bool {
 	return slices.Contains(slice, item)
 }
 
-// Ajouter un ingrédient après combat ou interaction
+
 func AddIngredient(c *Character, ingredient string, source string) {
 	if !limitedInventory(c) {
 		return

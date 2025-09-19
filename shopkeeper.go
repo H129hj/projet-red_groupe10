@@ -79,7 +79,7 @@ func Shopkeeper(c *Character) Character {
 				}
 			case "5":
 				if c.gold >= 75 && limitedInventory(c) {
-					// Ajouter des matériaux de craft
+
 					c.inventory = append(c.inventory, "Matériau de base", "Matériau de base")
 					c.gold -= 75
 					typeWriter(fmt.Sprintf("✅ Apu : 'Kit de craft acheté ! Il vous reste %d dollars.'", c.gold), textDelay)
@@ -190,7 +190,7 @@ func Shopkeeper(c *Character) Character {
 	}
 }
 
-// Recettes de craft intégrées
+
 type CraftRecipe struct {
 	Name        string
 	Ingredients []string
@@ -229,9 +229,21 @@ var craftRecipes = []CraftRecipe{
 		Result:      "Biberon Cosmique",
 		Description: "Le biberon le plus puissant de l'univers",
 	},
+	{
+		Name:        "Saxophone Spirituel",
+		Ingredients: []string{"Saxophone de Lisa", "Note de Jazz Éternelle"},
+		Result:      "Saxophone Spirituel",
+		Description: "Un saxophone béni par l'esprit du jazz",
+	},
+	{
+		Name:        "Super Biberon",
+		Ingredients: []string{"Biberon de Maggie", "Biberon de Respect"},
+		Result:      "Super Biberon",
+		Description: "Le biberon ultime des bébés champions",
+	},
 }
 
-// Menu de craft intégré dans le shop
+
 func CraftMenuInShop(c *Character, textDelay time.Duration) {
 	for {
 		typeWriter("\n🔧 ATELIER DE BRICOLAGE D'APU", textDelay)
@@ -261,7 +273,7 @@ func CraftMenuInShop(c *Character, textDelay time.Duration) {
 	}
 }
 
-// Afficher les recettes dans le shop
+
 func ShowCraftRecipesInShop(c *Character, textDelay time.Duration) {
 	typeWriter("📋 RECETTES DE CRAFT DISPONIBLES", textDelay)
 	typeWriter("=================================", textDelay)
@@ -289,13 +301,13 @@ func ShowCraftRecipesInShop(c *Character, textDelay time.Duration) {
 	fmt.Scanln()
 }
 
-// Créer un objet dans le shop
+
 func CraftItemInShop(c *Character, textDelay time.Duration) {
 	typeWriter("🔨 CRÉATION D'OBJET", textDelay)
 	typeWriter("===================", textDelay)
 	typeWriter("", textDelay)
 
-	// Trouver les recettes disponibles
+
 	availableRecipes := []CraftRecipe{}
 	for _, recipe := range craftRecipes {
 		canCraft := true
@@ -338,12 +350,12 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 
 	selectedRecipe := availableRecipes[choice-1]
 
-	// Vérifier si l'inventaire a de la place
+
 	if !limitedInventory(c) {
 		return
 	}
 
-	// Confirmer la création
+
 	typeWriter(fmt.Sprintf("🔨 Voulez-vous vraiment créer : %s ?", selectedRecipe.Name), textDelay)
 	typeWriter("1. Oui", textDelay)
 	typeWriter("2. Non", textDelay)
@@ -356,7 +368,7 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 		return
 	}
 
-	// Retirer les ingrédients
+
 	for _, ingredient := range selectedRecipe.Ingredients {
 		for i, item := range c.inventory {
 			if item == ingredient {
@@ -366,7 +378,7 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 		}
 	}
 
-	// Ajouter le résultat
+
 	c.inventory = append(c.inventory, selectedRecipe.Result)
 
 	typeWriter("✨ BRICOLAGE RÉUSSI !", textDelay)
