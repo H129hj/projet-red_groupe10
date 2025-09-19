@@ -12,13 +12,13 @@ func Shopkeeper(c *Character) Character {
 
 	for {
 		typeWriter("\n====================", textDelay)
-		typeWriter("   🏪 Kwik-E-Mart d'Apu", textDelay)
+		typeWriter("   🏪 Kwik-E-Mart dApu", textDelay)
 		typeWriter("====================", textDelay)
-		typeWriter("Apu : 'Bonjour mon ami ! Que puis-je faire pour vous ?'", textDelay)
+		typeWriter("Apu : Bonjour mon ami ! Que puis-je faire pour vous ?", textDelay)
 		typeWriter("1. Acheter un objet", textDelay)
 		typeWriter("2. Vendre un objet", textDelay)
 		typeWriter("3. Améliorer un objet", textDelay)
-		typeWriter("4. Atelier de bricolage d'Apu", textDelay)
+		typeWriter("4. Atelier de bricolage dApu", textDelay)
 		typeWriter("0. Quitter le magasin", textDelay)
 		typeWriter("--------------------", textDelay)
 		typeWriter(fmt.Sprintf("💰 Vous avez %d dollars dans votre tirelire.", c.gold), textDelay)
@@ -35,8 +35,8 @@ func Shopkeeper(c *Character) Character {
 			typeWriter("3. Donut magique de chez Homer (10 dollars) - Consommable", textDelay)
 			typeWriter(fmt.Sprintf("4. Carte rare Itchy & Scratchy (%d dollars) - Matériau", randomvalue), textDelay)
 			typeWriter("5. Kit de craft basique (75 dollars) - Matériaux", textDelay)
-			typeWriter("6. Agrandir l'inventaire (25 dollars) - Amélioration", textDelay)
-			typeWriter("7. Retour au menu d'Apu", textDelay)
+			typeWriter("6. Agrandir linventaire (25 dollars) - Amélioration", textDelay)
+			typeWriter("7. Retour au menu dApu", textDelay)
 			typeWriter("------------------------------------", textDelay)
 			typeWriter(fmt.Sprintf("💰 Argent actuel : %d dollars", c.gold), textDelay)
 			typeWriter("👉 Quel objet souhaitez-vous acheter ? ", textDelay)
@@ -49,74 +49,74 @@ func Shopkeeper(c *Character) Character {
 				if c.gold >= 50 && !contains(c.inventory, "Batte de baseball") && limitedInventory(c) {
 					c.inventory = append(c.inventory, "Batte de baseball")
 					c.gold -= 50
-					typeWriter(fmt.Sprintf("✅ Apu : 'Excellente arme ! Il vous reste %d dollars.'", c.gold), textDelay)
+					typeWriter(fmt.Sprintf("✅ Apu : Excellente arme ! Il vous reste %d dollars.", c.gold), textDelay)
 				} else {
-					typeWriter("❌ Apu : 'Désolé, pas assez d'argent mon ami !'", textDelay)
+					typeWriter("❌ Apu : Désolé, pas assez dargent mon ami !", textDelay)
 				}
 			case "2":
 				if c.gold >= 40 && !contains(c.inventory, "Batte de baseball") && limitedInventory(c) {
 					c.inventory = append(c.inventory, "Bouclier fait maison")
 					c.gold -= 40
-					typeWriter(fmt.Sprintf("✅ Apu : 'Protection garantie ! Il vous reste %d dollars.'", c.gold), textDelay)
+					typeWriter(fmt.Sprintf("✅ Apu : Protection garantie ! Il vous reste %d dollars.", c.gold), textDelay)
 				} else {
-					typeWriter("❌ Apu : 'Vos poches sont vides comme le frigo des Simpson !'", textDelay)
+					typeWriter("❌ Apu : Vos poches sont vides comme le frigo des Simpson !", textDelay)
 				}
 			case "3":
 				if c.gold >= 10 && limitedInventory(c) {
 					c.inventory = append(c.inventory, "Donut magique")
 					c.gold -= 10
-					typeWriter(fmt.Sprintf("✅ Apu : 'Mmm... donut magique ! Il vous reste %d dollars.'", c.gold), textDelay)
+					typeWriter(fmt.Sprintf("✅ Apu : Mmm... donut magique ! Il vous reste %d dollars.", c.gold), textDelay)
 				} else {
-					typeWriter("❌ Apu : 'Même pas 10 dollars ? Allez voir Homer !'", textDelay)
+					typeWriter("❌ Apu : Même pas 10 dollars ? Allez voir Homer !", textDelay)
 				}
 			case "4":
 				if c.gold >= randomvalue && limitedInventory(c) {
 					c.inventory = append(c.inventory, "Carte Itchy & Scratchy")
 					c.gold -= randomvalue
-					typeWriter(fmt.Sprintf("✅ Apu : 'Carte très rare ! Il vous reste %d dollars.'", c.gold), textDelay)
+					typeWriter(fmt.Sprintf("✅ Apu : Carte très rare ! Il vous reste %d dollars.", c.gold), textDelay)
 				} else {
-					typeWriter("❌ Apu : 'Cette carte coûte plus cher que le salaire de Homer !'", textDelay)
+					typeWriter("❌ Apu : Cette carte coûte plus cher que le sal'aire de Homer !", textDelay)
 				}
 			case "5":
 				if c.gold >= 75 && limitedInventory(c) {
 
 					c.inventory = append(c.inventory, "Matériau de base", "Matériau de base")
 					c.gold -= 75
-					typeWriter(fmt.Sprintf("✅ Apu : 'Kit de craft acheté ! Il vous reste %d dollars.'", c.gold), textDelay)
+					typeWriter(fmt.Sprintf("✅ Apu : Kit de craft acheté ! Il vous reste %d dollars.", c.gold), textDelay)
 				} else if !limitedInventory(c) {
-					typeWriter("❌ Apu : 'Inventaire plein !'", textDelay)
+					typeWriter("❌ Apu : Inventaire plein !", textDelay)
 				} else {
-					typeWriter("❌ Apu : 'Pas assez d'argent pour le kit de craft !'", textDelay)
+					typeWriter("❌ Apu : Pas assez dargent pour le kit de craft !", textDelay)
 				}
 			case "6":
 				if c.gold >= 25 {
 					c.extendedInventory += 1
 					c.gold -= 25
-					typeWriter(fmt.Sprintf("✅ Apu : 'Votre inventaire a été agrandi ! Il vous reste %d dollars.'", c.gold), textDelay)
+					typeWriter(fmt.Sprintf("✅ Apu : Votre inventaire a été agrandi ! Il vous reste %d dollars.", c.gold), textDelay)
 				} else {
-					typeWriter("❌ Apu : 'Pas assez d'argent pour agrandir votre inventaire !'", textDelay)
+					typeWriter("❌ Apu : Pas assez dargent pour agrandir votre inventaire !", textDelay)
 				}
 			case "7":
-				typeWriter("↩ Apu : 'Très bien, très bien...'", textDelay)
+				typeWriter("↩ Apu : Très bien, très bien...", textDelay)
 			default:
-				typeWriter("❌ Apu : 'Je ne comprends pas, parlez plus clairement !'", textDelay)
+				typeWriter("❌ Apu : Je ne comprends pas, parlez plus cl'airement !", textDelay)
 			}
 
 		case "2":
 			if len(c.inventory) == 0 {
-				typeWriter("⚠ Apu : 'Vous n'avez rien à vendre, revenez plus tard !'", textDelay)
+				typeWriter("⚠ Apu : Vous navez rien à vendre, revenez plus tard !", textDelay)
 				continue
 			}
 			typeWriter("\n--- 💸 Apu rachète vos objets ---", textDelay)
 			for i, v := range c.inventory {
 				typeWriter(fmt.Sprintf("%d. %s", i+1, v), textDelay)
 			}
-			typeWriter("👉 Apu : 'Quel objet voulez-vous vendre ?' ", textDelay)
+			typeWriter("👉 Apu : Quel objet voulez-vous vendre ? ", textDelay)
 
 			var sellChoice int
 			fmt.Scan(&sellChoice)
 			if sellChoice < 1 || sellChoice > len(c.inventory) {
-				typeWriter("❌ Apu : 'Numéro invalide, comptez mieux que ça !'", textDelay)
+				typeWriter("❌ Apu : Numéro invalide, comptez mieux que ça !", textDelay)
 				continue
 			}
 
@@ -136,23 +136,23 @@ func Shopkeeper(c *Character) Character {
 			}
 			c.inventory = append(c.inventory[:sellChoice-1], c.inventory[sellChoice:]...)
 			c.gold += sellPrice
-			typeWriter(fmt.Sprintf("💸 Apu : 'J'ai acheté votre %s pour %d dollars. Solde : %d dollars.'", itemToSell, sellPrice, c.gold), textDelay)
+			typeWriter(fmt.Sprintf("💸 Apu : J'ai acheté votre %s pour %d dollars. Solde : %d dollars.", itemToSell, sellPrice, c.gold), textDelay)
 
 		case "3":
 			if len(c.inventory) == 0 {
-				typeWriter("⚠ Apu : 'Aucun objet à améliorer dans vos poches !'", textDelay)
+				typeWriter("⚠ Apu : Aucun objet à améliorer dans vos poches !", textDelay)
 				continue
 			}
-			typeWriter("\n--- 🔧 Atelier d'amélioration d'Apu ---", textDelay)
+			typeWriter("\n--- 🔧 Atelier damélioration d'Apu ---", textDelay)
 			for i, v := range c.inventory {
 				typeWriter(fmt.Sprintf("%d. %s", i+1, v), textDelay)
 			}
-			typeWriter("👉 Apu : 'Quel objet voulez-vous que j'améliore ?' ", textDelay)
+			typeWriter("👉 Apu : Quel objet voulez-vous que jaméliore ? ", textDelay)
 
 			var upgradeChoice int
 			fmt.Scan(&upgradeChoice)
 			if upgradeChoice < 1 || upgradeChoice > len(c.inventory) {
-				typeWriter("❌ Apu : 'Mauvais numéro, essayez encore !'", textDelay)
+				typeWriter("❌ Apu : Mauvais numéro, essayez encore !", textDelay)
 				continue
 			}
 
@@ -164,32 +164,31 @@ func Shopkeeper(c *Character) Character {
 			case "Bouclier fait maison":
 				upgradeCost = 25
 			default:
-				typeWriter("⚠ Apu : 'Cet objet ne peut pas être amélioré, désolé !'", textDelay)
+				typeWriter("⚠ Apu : Cet objet ne peut pas être amélioré, désolé !", textDelay)
 				continue
 			}
 
 			if c.gold >= upgradeCost {
 				c.gold -= upgradeCost
 				c.inventory[upgradeChoice-1] = itemToUpgrade + " +1"
-				typeWriter(fmt.Sprintf("✨ Apu : 'Votre %s est maintenant amélioré pour %d dollars !'", itemToUpgrade, upgradeCost), textDelay)
+				typeWriter(fmt.Sprintf("✨ Apu : Votre %s est maintenant amélioré pour %d dollars !", itemToUpgrade, upgradeCost), textDelay)
 			} else {
-				typeWriter("❌ Apu : 'Pas assez d'argent pour cette amélioration !'", textDelay)
+				typeWriter("❌ Apu : Pas assez dargent pour cette amélioration !", textDelay)
 			}
 
 		case "4":
 			CraftMenuInShop(c, textDelay)
 
 		case "0":
-			typeWriter("\n👋 Apu : 'Merci pour votre visite ! Revenez vite au Kwik-E-Mart !'", textDelay)
+			typeWriter("\n👋 Apu : Merci pour votre visite ! Revenez vite au Kwik-E-Mart !", textDelay)
 			ScenarioMenu(c, &ScenarioProgress{})
 			return *c
 
 		default:
-			typeWriter("❌ Apu : 'Je ne comprends pas votre choix, mon ami !'", textDelay)
+			typeWriter("❌ Apu : Je ne comprends pas votre choix, mon ami !", textDelay)
 		}
 	}
 }
-
 
 type CraftRecipe struct {
 	Name        string
@@ -243,13 +242,12 @@ var craftRecipes = []CraftRecipe{
 	},
 }
 
-
 func CraftMenuInShop(c *Character, textDelay time.Duration) {
 	for {
-		typeWriter("\n🔧 ATELIER DE BRICOLAGE D'APU", textDelay)
+		typeWriter("\n🔧 ATELIER DE BRICOLAGE DAPU", textDelay)
 		typeWriter("==============================", textDelay)
-		typeWriter("🏪 Apu : 'Bienvenue dans mon petit atelier ! J'ai appris quelques trucs...'", textDelay)
-		typeWriter("🏪 Apu : 'Avec les bons ingrédients, je peux créer des objets uniques !'", textDelay)
+		typeWriter("🏪 Apu : Bienvenue dans mon petit atelier ! J'ai appris quelques trucs...", textDelay)
+		typeWriter("🏪 Apu : Avec les bons ingrédients, je peux créer des objets uniques !", textDelay)
 		typeWriter("", textDelay)
 
 		typeWriter("1. 📋 Voir les recettes disponibles", textDelay)
@@ -272,7 +270,6 @@ func CraftMenuInShop(c *Character, textDelay time.Duration) {
 		}
 	}
 }
-
 
 func ShowCraftRecipesInShop(c *Character, textDelay time.Duration) {
 	typeWriter("📋 RECETTES DE CRAFT DISPONIBLES", textDelay)
@@ -301,12 +298,10 @@ func ShowCraftRecipesInShop(c *Character, textDelay time.Duration) {
 	fmt.Scanln()
 }
 
-
 func CraftItemInShop(c *Character, textDelay time.Duration) {
-	typeWriter("🔨 CRÉATION D'OBJET", textDelay)
+	typeWriter("🔨 CRÉATION DOBJET", textDelay)
 	typeWriter("===================", textDelay)
 	typeWriter("", textDelay)
-
 
 	availableRecipes := []CraftRecipe{}
 	for _, recipe := range craftRecipes {
@@ -327,8 +322,8 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 
 	if len(availableRecipes) == 0 {
 		typeWriter("❌ Aucune recette disponible avec vos ingrédients actuels.", textDelay)
-		typeWriter("🏪 Apu : 'Il vous faut plus d'ingrédients, mon ami !'", textDelay)
-		typeWriter("🏪 Apu : 'Battez-vous, parlez aux gens, explorez Springfield !'", textDelay)
+		typeWriter("🏪 Apu : Il vous faut plus dingrédients, mon ami !", textDelay)
+		typeWriter("🏪 Apu : Battez-vous, parlez aux gens, explorez Springfield !", textDelay)
 		return
 	}
 
@@ -350,11 +345,9 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 
 	selectedRecipe := availableRecipes[choice-1]
 
-
 	if !limitedInventory(c) {
 		return
 	}
-
 
 	typeWriter(fmt.Sprintf("🔨 Voulez-vous vraiment créer : %s ?", selectedRecipe.Name), textDelay)
 	typeWriter("1. Oui", textDelay)
@@ -368,7 +361,6 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 		return
 	}
 
-
 	for _, ingredient := range selectedRecipe.Ingredients {
 		for i, item := range c.inventory {
 			if item == ingredient {
@@ -378,12 +370,11 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 		}
 	}
 
-
 	c.inventory = append(c.inventory, selectedRecipe.Result)
 
 	typeWriter("✨ BRICOLAGE RÉUSSI !", textDelay)
-	typeWriter(fmt.Sprintf("🏪 Apu : 'Magnifique ! Vous avez créé : %s !'", selectedRecipe.Result), textDelay)
+	typeWriter(fmt.Sprintf("🏪 Apu : Magnifique ! Vous avez créé : %s !", selectedRecipe.Result), textDelay)
 	typeWriter(fmt.Sprintf("📝 %s", selectedRecipe.Description), textDelay)
-	typeWriter("🏪 Apu : 'Mes talents de bricoleur ne cessent de m'étonner !'", textDelay)
+	typeWriter("🏪 Apu : Mes talents de bricoleur ne cessent de métonner !'", textDelay)
 	typeWriter("", textDelay)
 }

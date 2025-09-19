@@ -115,7 +115,7 @@ func EquipFromInventory(c *Character) {
 	c.AddEquipement(selectedItem, equipValue)
 
 	typeWriter(fmt.Sprintf("✅ %s équipé avec succès !", selectedItem), textDelay)
-	typeWriter(fmt.Sprintf("⚡ Valeur d'équipement : %d", equipValue), textDelay)
+	typeWriter(fmt.Sprintf("⚡ Valeur déquipement : %d", equipValue), textDelay)
 }
 
 
@@ -168,7 +168,7 @@ func UnequipToInventory(c *Character) {
 	c.RemoveEquipement(selectedItem)
 
 	typeWriter(fmt.Sprintf("✅ %s déséquipé avec succès !", selectedItem), textDelay)
-	typeWriter("📦 L'objet reste dans votre inventaire.", textDelay)
+	typeWriter("📦 Lobjet reste dans votre inventaire.", textDelay)
 }
 
 

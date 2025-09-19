@@ -19,7 +19,6 @@ func attackMonster(c *Character, m *Monster) {
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-
 	if contains(c.inventory, "Donut empoisonné") {
 		damage += 30
 		typeWriter("☠️ Votre attaque est empoisonnée par le donut toxique !", textDelay)
@@ -38,7 +37,7 @@ func attackMonster(c *Character, m *Monster) {
 	}
 
 	if equipmentBonus > 0 {
-		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts ! (+%d équipement)", c.class, m.name, damage, equipmentBonus), textDelay)
+		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts ! (+%d'équipement)", c.class, m.name, damage, equipmentBonus), textDelay)
 	} else {
 		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts !", c.class, m.name, damage), textDelay)
 	}
@@ -57,7 +56,6 @@ func traningFight(c *Character, m *Monster) {
 	CombatInterface(c, m, 1, milhousePatternInstant)
 }
 
-
 func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Monster, int)) {
 	combatDelay := 0 * time.Millisecond
 
@@ -72,9 +70,7 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 			return
 		}
 
-
 		DisplayCombatScreen(c, m, turn)
-
 
 		action := GetPlayerAction()
 
@@ -117,13 +113,11 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 			continue
 		}
 
-
 		if m.PV > 0 {
 			time.Sleep(800 * time.Millisecond)
-			typeWriter("\n🔄 Tour de l'ennemi...", combatDelay)
+			typeWriter("\n🔄 Tour de lennemi...", combatDelay)
 			time.Sleep(300 * time.Millisecond)
 			enemyPatternInstant(m, turn, enemyPattern)
-
 
 			defense := GetTotalEquipmentBonus(c) / 4
 			damage := m.power - defense
@@ -149,7 +143,6 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 	}
 }
 
-
 func ClearScreen() {
 
 	for i := 0; i < 5; i++ {
@@ -157,20 +150,15 @@ func ClearScreen() {
 	}
 }
 
-
 func DisplayCombatScreen(c *Character, m *Monster, turn int) {
 	ClearScreen()
 
-
 	DisplayCombatHeader(c, m)
-
 
 	DisplayCombatDetails(c, m, turn)
 
-
 	DisplayActionMenu()
 }
-
 
 func DisplayCombatHeader(c *Character, m *Monster) {
 	combatDelay := 0 * time.Millisecond
@@ -180,7 +168,6 @@ func DisplayCombatHeader(c *Character, m *Monster) {
 	typeWriter("", combatDelay)
 }
 
-
 func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	combatDelay := 0 * time.Millisecond
 
@@ -188,10 +175,9 @@ func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	typeWriter(fmt.Sprintf("👤 %s", strings.ToUpper(c.class)), combatDelay)
 	typeWriter(fmt.Sprintf("   %s %d/%d PV", playerHealthBar, c.PV, c.PVmax), combatDelay)
 
-
 	equipBonus := GetTotalEquipmentBonus(c)
 	if equipBonus > 0 {
-		typeWriter(fmt.Sprintf("   💪 Power: %d (+%d équipement)", c.power, equipBonus), combatDelay)
+		typeWriter(fmt.Sprintf("   💪 Power: %d (+%d'équipement)", c.power, equipBonus), combatDelay)
 	} else {
 		typeWriter(fmt.Sprintf("   💪 Power: %d", c.power), combatDelay)
 	}
@@ -199,7 +185,6 @@ func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	typeWriter("", combatDelay)
 	typeWriter("                      🆚", combatDelay)
 	typeWriter("", combatDelay)
-
 
 	enemyHealthBar := CreateHealthBar(m.PV, m.PVmax, 20, "💀", "🖤")
 	typeWriter(fmt.Sprintf("👹 %s", strings.ToUpper(m.name)), combatDelay)
@@ -211,7 +196,6 @@ func DisplayCombatDetails(c *Character, m *Monster, turn int) {
 	typeWriter("", combatDelay)
 }
 
-
 func DisplayActionMenu() {
 	combatDelay := 0 * time.Millisecond
 	typeWriter("┌─────────────────────────────────────────────────┐", combatDelay)
@@ -219,12 +203,11 @@ func DisplayActionMenu() {
 	typeWriter("├─────────────────────────────────────────────────┤", combatDelay)
 	typeWriter("│ 1. 💥 Attaquer                                  │", combatDelay)
 	typeWriter("│ 2. 🎯 Utiliser une compétence                   │", combatDelay)
-	typeWriter("│ 3. 🎒 Consulter l'inventaire                    │", combatDelay)
+	typeWriter("│ 3. 🎒 Consulter linventaire                    │", combatDelay)
 	typeWriter("│ 4. 🏃 Fuir le combat                           │", combatDelay)
 	typeWriter("└─────────────────────────────────────────────────┘", combatDelay)
 	typeWriter("", combatDelay)
 }
-
 
 func CreateHealthBar(current, max, length int, fullChar, emptyChar string) string {
 	if max == 0 {
@@ -246,7 +229,6 @@ func CreateHealthBar(current, max, length int, fullChar, emptyChar string) strin
 	return strings.Repeat(fullChar, filledLength) + strings.Repeat(emptyChar, emptyLength)
 }
 
-
 func GetPlayerAction() int {
 	combatDelay := 0 * time.Millisecond
 	typeWriter("👉 Choisissez votre action (1-4): ", combatDelay)
@@ -256,7 +238,6 @@ func GetPlayerAction() int {
 
 	return choice
 }
-
 
 func DisplayInventoryInCombat(c *Character) {
 	combatDelay := 0 * time.Millisecond
@@ -298,7 +279,6 @@ func DisplayInventoryInCombat(c *Character) {
 	fmt.Scanln()
 }
 
-
 func DisplayVictory(c *Character, m *Monster) {
 	ClearScreen()
 
@@ -309,7 +289,6 @@ func DisplayVictory(c *Character, m *Monster) {
 	typeWriter(fmt.Sprintf("🏆 %s a vaincu %s !", strings.ToUpper(c.class), m.name), 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-
 	goldReward := 25 + (m.PVmax / 10)
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
@@ -318,7 +297,6 @@ func DisplayVictory(c *Character, m *Monster) {
 	typeWriter("Appuyez sur Entrée pour continuer...", 15*time.Millisecond)
 	fmt.Scanln()
 }
-
 
 func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyPattern func(*Monster, int), scenarioType string) {
 	for turn := 1; ; turn++ {
@@ -332,9 +310,7 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 			return
 		}
 
-
 		DisplayCombatScreen(c, m, turn)
-
 
 		action := GetPlayerAction()
 
@@ -379,13 +355,11 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 			continue
 		}
 
-
 		if m.PV > 0 {
 			time.Sleep(1 * time.Second)
-			typeWriter("\n🔄 Tour de l'ennemi...", 15*time.Millisecond)
+			typeWriter("\n🔄 Tour de lennemi...", 15*time.Millisecond)
 			time.Sleep(500 * time.Millisecond)
 			enemyPattern(m, turn)
-
 
 			defense := GetTotalEquipmentBonus(c) / 4
 			damage := m.power - defense
@@ -409,7 +383,6 @@ func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyP
 	}
 }
 
-
 func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress, scenarioType string) {
 	ClearScreen()
 
@@ -420,31 +393,27 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 	typeWriter(fmt.Sprintf("🏆 %s a vaincu %s !", strings.ToUpper(c.class), m.name), 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-
 	goldReward := 25 + (m.PVmax / 10)
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
 
-
 	switch scenarioType {
 	case "ned":
-		typeWriter("👨‍🦳 Ned : 'Oh... désolé pour cet éclat ! Diddly-dang, que m'est-il arrivé ?'", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : 'Pour me faire pardonner, laisse-moi t'aider...'", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : 'J'ai vu Homer marcher vers le bar de Moe, l'air louche...'", 15*time.Millisecond)
+		typeWriter("👨‍🦳 Ned : Oh... désolé pour cet éclat ! Diddly-dang, que m'est-il arrivé ?", 15*time.Millisecond)
+		typeWriter("👨‍🦳 Ned : Pour me faire pardonner, l'aisse-moi t'aider...", 15*time.Millisecond)
+		typeWriter("👨‍🦳 Ned : J'ai vu Homer marcher vers le bar de Moe, l'air louche...'", 15*time.Millisecond)
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("🔍 INDICE OBTENU : Homer était louche en allant chez Moe !", 15*time.Millisecond)
-
 
 		AddIngredient(c, "Matériau de base", "la maison de Ned")
 
 		progress.Stage = 2
 
 	case "barney":
-		typeWriter("🍺 Barney : '*rot* D'accord... d'accord... tu gagnes...'", 15*time.Millisecond)
-		typeWriter("🍺 Barney : 'Tiens... *rot* ...Homer a laissé tomber ça...'", 15*time.Millisecond)
+		typeWriter("🍺 Barney : *rot* Daccord... d'accord... tu gagnes...", 15*time.Millisecond)
+		typeWriter("🍺 Barney : Tiens... *rot* ...Homer a l'aissé tomber ça...", 15*time.Millisecond)
 		typeWriter("", 15*time.Millisecond)
-		typeWriter("📋 Barney vous tend un ticket froissé : 'CONCOURS DONUT GÉANT - Comic Book Store'", 15*time.Millisecond)
-
+		typeWriter("📋 Barney vous tend un ticket froissé : CONCOURS DONUT GÉANT - Comic Book Store", 15*time.Millisecond)
 
 		AddIngredient(c, "Carte Itchy & Scratchy", "le bar de Moe")
 
@@ -455,41 +424,37 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 		progress.Stage = 3
 
 	case "comic":
-		typeWriter("👨‍💻 Comic Book Guy : 'Impossible ! J'ai été vaincu par... un amateur !'", 15*time.Millisecond)
-		typeWriter("👨‍💻 Comic Book Guy : 'Bon... ton père est au parc d'attractions...'", 15*time.Millisecond)
-		typeWriter("👨‍💻 Comic Book Guy : 'Il participe au Grand Concours du Donut Cosmique !'", 15*time.Millisecond)
+		typeWriter("👨‍💻 Comic Book Guy : Impossible ! J'ai été vaincu par... un amateur !", 15*time.Millisecond)
+		typeWriter("👨‍💻 Comic Book Guy : Bon... ton père est au parc dattractions...", 15*time.Millisecond)
+		typeWriter("👨‍💻 Comic Book Guy : Il participe au Grand Concours du Donut Cosmique !", 15*time.Millisecond)
 		typeWriter("", 15*time.Millisecond)
-
 
 		AddIngredient(c, "Carte Itchy & Scratchy", "le magasin de BD")
 
-		typeWriter("🔍 INDICE OBTENU : Homer au concours de donuts du parc d'attractions !", 15*time.Millisecond)
+		typeWriter("🔍 INDICE OBTENU : Homer au concours de donuts du parc dattractions !", 15*time.Millisecond)
 		progress.HasClue3 = true
 		progress.ComicCompleted = true
 		progress.Stage = 4
 
 	case "bob":
-		typeWriter("🌴 Tahiti Bob : 'Impossible ! Vaincu par un gamin !'", 15*time.Millisecond)
-		typeWriter("🌴 Tahiti Bob : 'Bon... ton père est dans la Maison des Donuts Magiques...'", 15*time.Millisecond)
-
+		typeWriter("🌴 Tahiti Bob : Impossible ! Vaincu par un gamin !", 15*time.Millisecond)
+		typeWriter("🌴 Tahiti Bob : Bon... ton père est dans la Maison des Donuts Magiques...", 15*time.Millisecond)
 
 		AddIngredient(c, "Matériau de base", "le parc d'attractions")
 
 	case "gencives":
-		typeWriter("👻 Gencives Sanglantes : 'Impossible... vaincu par mon ancienne élève...'", 15*time.Millisecond)
-		typeWriter("🎺 Gencives Sanglantes : 'Tu as... évolué, Lisa... Le jazz vit en toi...'", 15*time.Millisecond)
-		typeWriter("👻 Gencives Sanglantes : 'Ton père... il est dans la Maison des Donuts... Joue pour lui...'", 15*time.Millisecond)
-		typeWriter("🎷 *La silhouette fantomatique disparaît dans une mélodie apaisante*", 15*time.Millisecond)
-
+		typeWriter("👻 Gencives Sanglantes : Impossible... vaincu par mon ancienne élève...", 15*time.Millisecond)
+		typeWriter("🎺 Gencives Sanglantes : Tu as... évolué, Lisa... Le jazz vit en toi...", 15*time.Millisecond)
+		typeWriter("👻 Gencives Sanglantes : Ton père... il est dans la Maison des Donuts... Joue pour lui...", 15*time.Millisecond)
+		typeWriter("🎷 *La s'ilhouette fantomatique disparaît dans une mélodie apaisante*", 15*time.Millisecond)
 
 		AddIngredient(c, "Note de Jazz Éternelle", "l'esprit de Gencives Sanglantes")
 
 	case "bebe":
-		typeWriter("😭 Bébé Furieux : 'WAAAAHHH... NO WIN... (Je ne gagne pas...)'", 15*time.Millisecond)
-		typeWriter("👶 Bébé Furieux : 'YOU STRONG BABY... (Tu es un bébé fort...)'", 15*time.Millisecond)
-		typeWriter("😊 Bébé Furieux : 'PAPA HOMER... DONUT HOUSE... (Papa Homer... maison donuts...)'", 15*time.Millisecond)
+		typeWriter("😭 Bébé Furieux : WAAAAHHH... NO WIN... (Je ne gagne pas...)", 15*time.Millisecond)
+		typeWriter("👶 Bébé Furieux : YOU STRONG BABY... (Tu es un bébé fort...)", 15*time.Millisecond)
+		typeWriter("😊 Bébé Furieux : PAPA HOMER... DONUT HOUSE... (Papa Homer... maison donuts...)", 15*time.Millisecond)
 		typeWriter("👶 *Le Bébé Furieux tend un biberon en signe de respect*", 15*time.Millisecond)
-
 
 		AddIngredient(c, "Biberon de Respect", "le Bébé Furieux")
 	}
@@ -498,19 +463,14 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 	typeWriter("Appuyez sur Entrée pour continuer...", 15*time.Millisecond)
 	fmt.Scanln()
 
-
 	ScenarioMenu(c, progress)
 }
-
-
-
 
 func attackMonsterInstant(c *Character, m *Monster) {
 	combatDelay := 0 * time.Millisecond
 	baseDamage := c.power
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
-
 
 	if contains(c.inventory, "Donut empoisonné") {
 		damage += 30
@@ -530,16 +490,14 @@ func attackMonsterInstant(c *Character, m *Monster) {
 	}
 
 	if equipmentBonus > 0 {
-		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts ! (+%d équipement)", c.class, m.name, damage, equipmentBonus), combatDelay)
+		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts ! (+%d'équipement)", c.class, m.name, damage, equipmentBonus), combatDelay)
 	} else {
 		typeWriter(fmt.Sprintf("💥 %s attaque %s et inflige %d points de dégâts !", c.class, m.name, damage), combatDelay)
 	}
 }
 
-
 func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	combatDelay := 0 * time.Millisecond
-
 
 	attackSkills := []string{}
 	attackDamages := map[string]int{}
@@ -568,11 +526,11 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	}
 
 	if len(attackSkills) == 0 {
-		typeWriter("❌ Aucune compétence d'attaque disponible.", combatDelay)
+		typeWriter("❌ Aucune compétence dattaque disponible.", combatDelay)
 		return false
 	}
 
-	typeWriter("⚔️ COMPÉTENCES D'ATTAQUE DISPONIBLES", combatDelay)
+	typeWriter("⚔️ COMPÉTENCES DATTAQUE DISPONIBLES", combatDelay)
 	typeWriter("====================================", combatDelay)
 	typeWriter("", combatDelay)
 
@@ -603,35 +561,33 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-
 	m.PV -= damage
 	if m.PV < 0 {
 		m.PV = 0
 	}
 
-	typeWriter(fmt.Sprintf("✨ %s utilise '%s' !", c.class, selectedSkill), combatDelay)
+	typeWriter(fmt.Sprintf("✨ %s utilise '%s !", c.class, selectedSkill), combatDelay)
 
 	switch selectedSkill {
 	case "Coup de fronde vicieux":
 		typeWriter("🎯 Bart vise soigneusement avec son lance-pierre !", combatDelay)
 	case "Blague empoisonnée":
-		typeWriter("😂 Bart raconte une blague si nulle qu'elle fait mal !", combatDelay)
+		typeWriter("😂 Bart raconte une blague si nulle quelle fait mal !", combatDelay)
 	case "Solo de jazz envoûtant":
 		typeWriter("🎷 Lisa joue un solo de saxophone hypnotisant !", combatDelay)
 	case "Leçon de morale dévastatrice":
 		typeWriter("📚 Lisa donne une leçon de morale accablante !", combatDelay)
 	case "Regard hypnotique":
-		typeWriter("👁️ Maggie fixe l'ennemi avec son regard mystérieux !", combatDelay)
+		typeWriter("👁️ Maggie fixe lennemi avec son regard mystérieux !", combatDelay)
 	case "Cri strident":
 		typeWriter("😱 Maggie pousse un cri de bébé assourdissant !", combatDelay)
 	}
 
 	if equipmentBonus > 0 {
-		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts ! (+%d équipement)", m.name, damage, equipmentBonus), combatDelay)
+		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts ! (+%d'équipement)", m.name, damage, equipmentBonus), combatDelay)
 	} else {
 		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts !", m.name, damage), combatDelay)
 	}
-
 
 	switch selectedSkill {
 	case "Solo de jazz envoûtant":
@@ -650,29 +606,27 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	return true
 }
 
-
 func enemyPatternInstant(m *Monster, turn int, pattern func(*Monster, int)) {
 
 	pattern(m, turn)
 }
 
-
 func milhousePatternInstant(m *Monster, turn int) {
 	combatDelay := 0 * time.Millisecond
 	if turn%3 == 0 {
 		damage := m.power * 2
-		typeWriter("🕶️ Milhouse utilise 'CRISE DE NERFS PARALYSANTE' !", combatDelay)
-		typeWriter("👦 Milhouse : 'Tout le monde me déteste !'", combatDelay)
+		typeWriter("🕶️ Milhouse utilise CRISE DE NERFS PARALYSANTE' !", combatDelay)
+		typeWriter("👦 Milhouse : Tout le monde me déteste !", combatDelay)
 		typeWriter(fmt.Sprintf("😭 Dégâts de désespoir : %d points !", damage), combatDelay)
 	} else if turn%2 == 0 {
 		damage := m.power + 5
-		typeWriter("📚 Milhouse utilise 'RÉCITATION ENNUYEUSE' !", combatDelay)
-		typeWriter("👦 Milhouse : 'Laissez-moi vous parler de mes allergies !'", combatDelay)
-		typeWriter(fmt.Sprintf("⚡ Dégâts d'ennui : %d points !", damage), combatDelay)
+		typeWriter("📚 Milhouse utilise 'RÉCITATION ENNUYEUSE !", combatDelay)
+		typeWriter("👦 Milhouse : Laissez-moi vous parler de mes allergies !", combatDelay)
+		typeWriter(fmt.Sprintf("⚡ Dégâts dennui : %d points !", damage), combatDelay)
 	} else {
 		damage := m.power
-		typeWriter("😨 Milhouse utilise 'PLAINTES DÉSESPÉRÉES' !", combatDelay)
-		typeWriter("👦 Milhouse : 'Oh non, pas encore !'", combatDelay)
+		typeWriter("😨 Milhouse utilise PLAINTES DÉSESPÉRÉES !", combatDelay)
+		typeWriter("👦 Milhouse : Oh non, pas encore !", combatDelay)
 		typeWriter(fmt.Sprintf("😓 Dégâts de désespoir : %d points !", damage), combatDelay)
 	}
 }

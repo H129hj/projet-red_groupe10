@@ -78,7 +78,7 @@ func DisplayStats(c Character) string {
 	equipmentBonus := GetTotalEquipmentBonus(&c)
 	texte := fmt.Sprintf("👤 Nom: %s\n🏆 Niveau: %d\n❤️ PV: %d/%d\n💪 Power: %d", c.class, c.level, c.PV, c.PVmax, c.power)
 	if equipmentBonus > 0 {
-		texte += fmt.Sprintf(" (+%d équipement)", equipmentBonus)
+		texte += fmt.Sprintf(" (+%d'équipement)", equipmentBonus)
 	}
 	texte += fmt.Sprintf("\n💰 Or: %d dollars", c.gold)
 	texte += fmt.Sprintf("\n🎒 Objets: %d/%d", len(c.inventory), 10+c.extendedInventory)
