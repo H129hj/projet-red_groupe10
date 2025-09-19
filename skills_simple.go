@@ -19,6 +19,7 @@ func SkillsMenuSimple(c *Character) {
 		typeWriter("", textDelay)
 
 		var choice string
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {
@@ -120,6 +121,7 @@ func UseHealingSkillFromCharacter(c *Character) {
 	typeWriter("👉 Quelle compétence voulez-vous utiliser ?", textDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {
@@ -205,6 +207,7 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	typeWriter("👉 Quelle compétence voulez-vous utiliser ?", textDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {

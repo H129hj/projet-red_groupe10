@@ -120,7 +120,7 @@ func CombatInterface(c *Character, m *Monster, turn int, enemyPattern func(*Mons
 
 		if m.PV > 0 {
 			time.Sleep(800 * time.Millisecond)
-			typeWriter("\n🔄 Tour de lennemi...", combatDelay)
+			typeWriter("\n🔄 Tour de l'ennemi...", combatDelay)
 			time.Sleep(300 * time.Millisecond)
 			enemyPatternInstant(m, turn, enemyPattern)
 
@@ -242,6 +242,7 @@ func GetPlayerAction() int {
 	typeWriter("👉 Choisissez votre action (1-4): ", combatDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	return choice
@@ -256,7 +257,7 @@ func DisplayInventoryInCombat(c *Character) {
 	hasUsableItems := false
 
 	for i, item := range c.inventory {
-		if item == "Donut magique" || item == "Donut empoisonné" {
+		if item == "donut magique" || item == "Donut empoisonné" {
 			typeWriter(fmt.Sprintf("%d. %s", i+1, item), combatDelay)
 			hasUsableItems = true
 		}
@@ -271,13 +272,21 @@ func DisplayInventoryInCombat(c *Character) {
 
 		var choice int
 		typeWriter("👉 Utiliser un objet (numéro) ou 0 pour retour: ", combatDelay)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		if choice > 0 && choice <= len(c.inventory) {
 			item := c.inventory[choice-1]
-			if item == "Donut magique" {
+			if item == "donut magique" {
+				oldPV := c.PV
 				TakePot(c)
-				typeWriter("✨ Vous utilisez un donut magique !", combatDelay)
+				healed := c.PV - oldPV
+				if healed > 0 {
+					typeWriter("✨ Vous utilisez un donut magique !", combatDelay)
+					typeWriter(fmt.Sprintf("❤️ Vous récupérez %d PV (%d/%d)", healed, c.PV, c.PVmax), combatDelay)
+				} else {
+					typeWriter("ℹ️ Vous êtes déjà au maximum de PV.", combatDelay)
+				}
 			}
 		}
 	}
@@ -298,6 +307,12 @@ func DisplayVictory(c *Character, m *Monster) {
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
 
+	if m.name != "Milhouse" {
+		c.level++
+		c.power += 10
+		c.PVmax += 15
+		typeWriter("⬆️ Niveau +1 ! (+10 puissance, +15 PV max)", 15*time.Millisecond)
+	}
 }
 
 func ScenarioCombat(c *Character, m *Monster, progress *ScenarioProgress, enemyPattern func(*Monster, int), scenarioType string) {
@@ -398,6 +413,13 @@ func DisplayScenarioVictory(c *Character, m *Monster, progress *ScenarioProgress
 	goldReward := 25 + (m.PVmax / 10)
 	c.gold += goldReward
 	typeWriter(fmt.Sprintf("💰 Vous gagnez %d dollars !", goldReward), 15*time.Millisecond)
+
+	if m.name != "Milhouse" {
+		c.level++
+		c.power += 10
+		c.PVmax += 15
+		typeWriter("⬆️ Niveau +1 ! (+10 puissance, +15 PV max)", 15*time.Millisecond)
+	}
 
 	switch scenarioType {
 	case "ned":
@@ -543,6 +565,7 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	typeWriter("👉 Quelle compétence voulez-vous utiliser ?", combatDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {

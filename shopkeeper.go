@@ -13,13 +13,12 @@ func Shopkeeper(c *Character) Character {
 	for {
 		fmt.Println()
 		MenuHeader("KWIK-E-MART D'APU", ShopTheme)
-		DialogueBox("🏪 Apu", "Bonjour mon ami ! Que puis-je faire pour vous ?", ShopTheme)
+		typeWriter("🏪 Apu : Bonjour mon ami ! Que puis-je faire pour vous ?", textDelay)
 		fmt.Println()
 
 		typeWriter("1. 🛍️ Acheter un objet", textDelay)
 		typeWriter("2. 💰 Vendre un objet", textDelay)
-		typeWriter("3. ⬆️ Améliorer un objet", textDelay)
-		typeWriter("4. 🔧 Atelier de bricolage d'Apu", textDelay)
+		typeWriter("3. 🔧 Atelier de bricolage d'Apu", textDelay)
 		typeWriter("0. 🚪 Quitter le magasin", textDelay)
 
 		fmt.Println()
@@ -27,6 +26,7 @@ func Shopkeeper(c *Character) Character {
 		ColoredTypeWriter("👉 Que voulez-vous faire ? ", textDelay, BrightCyan+Bold)
 
 		var choice string
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {
@@ -47,6 +47,7 @@ func Shopkeeper(c *Character) Character {
 			ColoredTypeWriter("👉 Quel objet souhaitez-vous acheter ? ", textDelay, BrightCyan+Bold)
 
 			var choice2 string
+			ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 			fmt.Scan(&choice2)
 
 			switch choice2 {
@@ -119,6 +120,7 @@ func Shopkeeper(c *Character) Character {
 			typeWriter("👉 Apu : Quel objet voulez-vous vendre ? ", textDelay)
 
 			var sellChoice int
+			ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 			fmt.Scan(&sellChoice)
 			if sellChoice < 1 || sellChoice > len(c.inventory) {
 				typeWriter("❌ Apu : Numéro invalide, comptez mieux que ça !", textDelay)
@@ -144,44 +146,6 @@ func Shopkeeper(c *Character) Character {
 			typeWriter(fmt.Sprintf("💸 Apu : J'ai acheté votre %s pour %d dollars. Solde : %d dollars.", itemToSell, sellPrice, c.gold), textDelay)
 
 		case "3":
-			if len(c.inventory) == 0 {
-				typeWriter("⚠ Apu : Aucun objet à améliorer dans vos poches !", textDelay)
-				continue
-			}
-			typeWriter("\n--- 🔧 Atelier damélioration d'Apu ---", textDelay)
-			for i, v := range c.inventory {
-				typeWriter(fmt.Sprintf("%d. %s", i+1, v), textDelay)
-			}
-			typeWriter("👉 Apu : Quel objet voulez-vous que jaméliore ? ", textDelay)
-
-			var upgradeChoice int
-			fmt.Scan(&upgradeChoice)
-			if upgradeChoice < 1 || upgradeChoice > len(c.inventory) {
-				typeWriter("❌ Apu : Mauvais numéro, essayez encore !", textDelay)
-				continue
-			}
-
-			itemToUpgrade := c.inventory[upgradeChoice-1]
-			var upgradeCost int
-			switch itemToUpgrade {
-			case "Batte de baseball":
-				upgradeCost = 30
-			case "Bouclier fait maison":
-				upgradeCost = 25
-			default:
-				typeWriter("⚠ Apu : Cet objet ne peut pas être amélioré, désolé !", textDelay)
-				continue
-			}
-
-			if c.gold >= upgradeCost {
-				c.gold -= upgradeCost
-				c.inventory[upgradeChoice-1] = itemToUpgrade + " +1"
-				typeWriter(fmt.Sprintf("✨ Apu : Votre %s est maintenant amélioré pour %d dollars !", itemToUpgrade, upgradeCost), textDelay)
-			} else {
-				typeWriter("❌ Apu : Pas assez dargent pour cette amélioration !", textDelay)
-			}
-
-		case "4":
 			CraftMenuInShop(c, textDelay)
 
 		case "0":
@@ -261,6 +225,7 @@ func CraftMenuInShop(c *Character, textDelay time.Duration) {
 		typeWriter("", textDelay)
 
 		var choice string
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {
@@ -334,6 +299,7 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 	typeWriter("👉 Quelle recette voulez-vous utiliser ?", textDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {
@@ -356,6 +322,7 @@ func CraftItemInShop(c *Character, textDelay time.Duration) {
 	typeWriter("2. Non", textDelay)
 
 	var confirm int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&confirm)
 
 	if confirm != 1 {

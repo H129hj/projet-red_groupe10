@@ -46,6 +46,7 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 	typeWriter("1. 😊 Oui, peux-tu m'aider s'il te plaît ?", 15*time.Millisecond)
 	typeWriter("2. 😤 J'aime pas ta tête, Barney !", 15*time.Millisecond)
 	typeWriter("3. 🤔 Tu as des informations utiles ?", 15*time.Millisecond)
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	switch choice {
@@ -66,7 +67,7 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 		typeWriter("", 15*time.Millisecond)
 		typeWriter("⚔️ Barney entre en mode IVROGNE FURIEUX !", 15*time.Millisecond)
 
-		barneyMonster := InitMonster("Barney Gumble (Ivrogne Furieux)", 90, 22)
+		barneyMonster := InitMonster("Barney Gumble (Ivrogne Furieux)", 300, 22)
 		ScenarioCombat(c, &barneyMonster, progress, barneyPattern, "barney")
 		return
 
@@ -91,51 +92,6 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 	typeWriter("", 15*time.Millisecond)
 
 	ScenarioMenu(c, progress)
-}
-
-func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProgress) {
-	var choice int
-	turn := t
-	if c.PV <= 0 {
-		Wasted(c)
-	} else if m.PV <= 0 {
-		typeWriter("🎉 Victoire ! Barney seffondre sur son tabouret...", 15*time.Millisecond)
-		typeWriter("🍺 Barney : *rot* Daccord... d'accord... tu gagnes...", 15*time.Millisecond)
-		typeWriter("🍺 Barney : Tiens... *rot* ...Homer a l'aissé tomber ça...", 15*time.Millisecond)
-		typeWriter("", 15*time.Millisecond)
-		typeWriter("📋 Barney vous tend un ticket froissé : CONCOURS DONUT GÉANT - Comic Book Store", 15*time.Millisecond)
-
-		AddIngredient(c, "Carte Itchy & Scratchy", "le bar de Moe")
-
-		typeWriter("", 15*time.Millisecond)
-		typeWriter("🔍 INDICE OBTENU : Ticket de concours menant au magasin de BD !", 15*time.Millisecond)
-		progress.HasClue2 = true
-		progress.MoeCompleted = true
-		progress.Stage = 3
-		ScenarioMenu(c, progress)
-	} else {
-		typeWriter("⚔️ À votre tour ! Choisissez une action :", 15*time.Millisecond)
-		typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
-		typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
-		typeWriter("3. 🏃 Fuir le combat", 15*time.Millisecond)
-		fmt.Scan(&choice)
-
-		switch choice {
-		case 1:
-			attackMonster(c, m)
-			barneyPattern(m, turn)
-			characterTurnBarney(c, m, turn+1, progress)
-		case 2:
-			typeWriter(AccessInventory(*c), 15*time.Millisecond)
-			characterTurnBarney(c, m, turn, progress)
-		case 3:
-			typeWriter("🏃💨 Vous fuyez le bar en évitant les chopes volantes !", 15*time.Millisecond)
-			ScenarioMenu(c, progress)
-		default:
-			typeWriter("❌ Choix invalide.", 15*time.Millisecond)
-			characterTurnBarney(c, m, turn, progress)
-		}
-	}
 }
 
 func barneyPattern(m *Monster, turn int) {

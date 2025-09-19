@@ -32,6 +32,7 @@ func EquipmentMenu(c *Character) {
 		typeWriter("", textDelay)
 
 		var choice string
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {
@@ -84,6 +85,7 @@ func EquipFromInventory(c *Character) {
 	typeWriter("👉 Quel objet voulez-vous équiper ?", textDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {
@@ -136,6 +138,7 @@ func UnequipToInventory(c *Character) {
 	typeWriter("👉 Quel objet voulez-vous déséquiper ?", textDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {

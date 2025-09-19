@@ -60,6 +60,7 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 
 		fmt.Println()
 		typeWriter("0. 🏠 Retourner à la maison", 15*time.Millisecond)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&stageChoice)
 
 		switch stageChoice {
@@ -76,6 +77,20 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			}
 		case 2:
 			typeWriter(AccessInventory(*c), 15*time.Millisecond)
+			// Offer to use a donut magique outside combat
+			var invChoice string
+			ColoredTypeWriter("➤ Utiliser un donut magique maintenant ? (o/n)", 15*time.Millisecond, BrightYellow)
+			fmt.Scan(&invChoice)
+			if invChoice == "o" || invChoice == "O" || invChoice == "y" || invChoice == "Y" {
+				oldPV := c.PV
+				TakePot(c)
+				healed := c.PV - oldPV
+				if healed > 0 {
+					ColoredTypeWriter(fmt.Sprintf("✨ Donut magique utilisé ! +%d PV (%d/%d)", healed, c.PV, c.PVmax), 15*time.Millisecond, BrightGreen)
+				} else {
+					ColoredTypeWriter("ℹ️ Aucun soin (PV déjà au maximum ou pas de donut).", 15*time.Millisecond, BrightYellow)
+				}
+			}
 			continue
 		case 3:
 			typeWriter(DisplayStats(*c), 15*time.Millisecond)
@@ -88,7 +103,7 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			continue
 		case 6:
 			if progressLocal.Stage == 1 {
-				traningFight(c, &Monster{name: "Milhouse", PVmax: 500, PV: 500, power: 2})
+				traningFight(c, &Monster{name: "Milhouse", PVmax: 150, PV: 150, power: 2})
 				continue
 			}
 		case 0:
@@ -132,9 +147,9 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	ColoredTypeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 15*time.Millisecond, BrightBlue+Bold)
 	fmt.Println()
 
-	DialogueBox("💬 Marge", "Oh mon dieu ! Homer n'est pas rentré de la taverne !", MargeTheme)
-	DialogueBox("💬 Marge", "Il devait juste prendre UNE bière chez Moe...", MargeTheme)
-	DialogueBox("💬 Marge", "Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", MargeTheme)
+	typeWriter("💬 Marge : Oh mon dieu ! Homer n'est pas rentré de la taverne !", 15*time.Millisecond)
+	typeWriter("💬 Marge : Il devait juste prendre UNE bière chez Moe...", 15*time.Millisecond)
+	typeWriter("💬 Marge : Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", 15*time.Millisecond)
 	fmt.Println()
 
 	BoxedText("🎯 PREMIER OBJECTIF : Parler aux voisins", SystemTheme)
