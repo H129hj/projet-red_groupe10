@@ -58,7 +58,7 @@ func NedFlanders(c *Character, progress *ScenarioProgress) {
 		typeWriter("⚔️ Ned se transforme en CHEVALIER BIBLIQUE !", 15*time.Millisecond)
 
 		nedMonster := InitMonster("Ned Flanders (Mode Biblique)", 80, 25)
-		characterTurnNed(c, &nedMonster, 1, progress)
+		ScenarioCombat(c, &nedMonster, progress, nedPattern, "ned")
 		return
 
 	default:
@@ -113,20 +113,21 @@ func characterTurnNed(c *Character, m *Monster, t int, progress *ScenarioProgres
 
 // Attaques spéciales de Ned
 func nedPattern(m *Monster, turn int) {
+	combatDelay := 0 * time.Millisecond
 	if turn%3 == 0 {
 		damage := m.power * 2
-		typeWriter("⛪ Ned utilise 'CITATION BIBLIQUE PARALYSANTE' !", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : 'Tu ne tueras point... mais je peux t'étourdir un peu !'", 15*time.Millisecond)
-		typeWriter(fmt.Sprintf("📖 Dégâts sacrés : %d points !", damage), 15*time.Millisecond)
+		typeWriter("⛪ Ned utilise 'CITATION BIBLIQUE PARALYSANTE' !", combatDelay)
+		typeWriter("👨‍🦳 Ned : 'Tu ne tueras point... mais je peux t'étourdir un peu !'", combatDelay)
+		typeWriter(fmt.Sprintf("📖 Dégâts sacrés : %d points !", damage), combatDelay)
 	} else if turn%2 == 0 {
 		damage := m.power + 10
-		typeWriter("🏏 Ned utilise 'BATTE BÉNITE' !", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : 'Cette batte a été bénie par le révérend Lovejoy !'", 15*time.Millisecond)
-		typeWriter(fmt.Sprintf("⚡ Dégâts divins : %d points !", damage), 15*time.Millisecond)
+		typeWriter("🏏 Ned utilise 'BATTE BÉNITE' !", combatDelay)
+		typeWriter("👨‍🦳 Ned : 'Cette batte a été bénie par le révérend Lovejoy !'", combatDelay)
+		typeWriter(fmt.Sprintf("⚡ Dégâts divins : %d points !", damage), combatDelay)
 	} else {
 		damage := m.power
-		typeWriter("✋ Ned utilise 'SERMON MORALISATEUR' !", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : 'Diddly-dang ! Tu devrais avoir honte !'", 15*time.Millisecond)
-		typeWriter(fmt.Sprintf("😇 Dégâts de culpabilité : %d points !", damage), 15*time.Millisecond)
+		typeWriter("✋ Ned utilise 'SERMON MORALISATEUR' !", combatDelay)
+		typeWriter("👨‍🦳 Ned : 'Diddly-dang ! Tu devrais avoir honte !'", combatDelay)
+		typeWriter(fmt.Sprintf("😇 Dégâts de culpabilité : %d points !", damage), combatDelay)
 	}
 }

@@ -103,7 +103,10 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 		Shopkeeper(c)
 	case 5:
 		if progress.Stage == 1 {
-			traningFight(c, &Monster{name: "Milhouse", PVmax: 1000000, PV: 1000000, power: 2})
+			typeWriter("👦 Milhouse : 'Hé ! Tu veux t'entraîner au combat ?'", 15*time.Millisecond)
+			typeWriter("👦 Milhouse : 'Allez, montre-moi ce que tu sais faire !'", 15*time.Millisecond)
+			milhouse := InitMonster("Milhouse Van Houten", 600, 12)
+			CombatInterface(c, &milhouse, 1, milhousePatternInstant)
 			ScenarioMenu(c, progress)
 		}
 	case 0:

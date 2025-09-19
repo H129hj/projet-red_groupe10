@@ -33,7 +33,7 @@ func TahitiBobFight(c *Character, progress *ScenarioProgress) {
 	typeWriter("🌴 Tahiti Bob : En garde !", 15*time.Millisecond)
 
 	bobMonster := InitMonster("Tahiti Bob (Vengeance)", 120, 35)
-	characterTurnTahitiBob(c, &bobMonster, 1, progress)
+	ScenarioCombat(c, &bobMonster, progress, tahitiBobPattern, "bob")
 }
 
 func characterTurnTahitiBob(c *Character, m *Monster, t int, progress *ScenarioProgress) {
