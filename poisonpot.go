@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-// Utiliser un donut empoisonné en combat
+
 func poisonPot(c *Character, m *Monster) {
 	if contains(c.inventory, "Donut empoisonné") {
 		m.PV -= 20
@@ -12,9 +12,9 @@ func poisonPot(c *Character, m *Monster) {
 	}
 }
 
-// Vérifier les effets de poison après chaque tour
+
 func CheckPoisonEffects(c *Character, m *Monster) {
-	// Si le joueur a utilisé un donut empoisonné, l'ennemi peut subir des dégâts de poison
+
 	if contains(c.inventory, "Donut empoisonné") {
 		poisonPot(c, m)
 	}

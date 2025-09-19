@@ -10,7 +10,7 @@ import (
 	"github.com/faiface/beep/speaker"
 )
 
-// MusiqueJouer lit et joue le fichier son.mp3 en boucle infinie
+
 func MusiqueJouer() {
 	f, err := os.Open("./son.mp3")
 	if err != nil {

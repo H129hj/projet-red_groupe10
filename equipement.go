@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Fonctions de base pour la gestion des équipements (structure existante)
+
 func (c *Character) AddEquipement(nom string, valeur int) {
 	if c.equipement == nil {
 		c.equipement = make(map[string]int)
@@ -17,7 +17,7 @@ func (c *Character) RemoveEquipement(nom string) {
 	delete(c.equipement, nom)
 }
 
-// Menu d'équipement harmonisé avec la structure existante
+
 func EquipmentMenu(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -56,7 +56,7 @@ func EquipmentMenu(c *Character) {
 	}
 }
 
-// Équiper un objet depuis l'inventaire
+
 func EquipFromInventory(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -69,7 +69,7 @@ func EquipFromInventory(c *Character) {
 	typeWriter("==============================", textDelay)
 	typeWriter("", textDelay)
 
-	// Afficher les objets équipables
+
 	equipableItems := []string{}
 	for _, item := range c.inventory {
 		if IsEquipable(item) {
@@ -104,21 +104,21 @@ func EquipFromInventory(c *Character) {
 
 	selectedItem := equipableItems[choice-1]
 
-	// Vérifier si déjà équipé
+
 	if _, equipped := c.equipement[selectedItem]; equipped {
 		typeWriter("❌ Cet objet est déjà équipé !", textDelay)
 		return
 	}
 
-	// Équiper l'objet avec une valeur par défaut
+
 	equipValue := GetEquipmentValue(selectedItem)
 	c.AddEquipement(selectedItem, equipValue)
 
 	typeWriter(fmt.Sprintf("✅ %s équipé avec succès !", selectedItem), textDelay)
-	typeWriter(fmt.Sprintf("⚡ Valeur d'équipement : %d", equipValue), textDelay)
+	typeWriter(fmt.Sprintf("⚡ Valeur déquipement : %d", equipValue), textDelay)
 }
 
-// Déséquiper un objet vers l'inventaire
+
 func UnequipToInventory(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -159,19 +159,19 @@ func UnequipToInventory(c *Character) {
 
 	selectedItem := equippedItems[choice-1]
 
-	// Vérifier si l'inventaire a de la place
+
 	if !limitedInventory(c) {
 		return
 	}
 
-	// Déséquiper l'objet
+
 	c.RemoveEquipement(selectedItem)
 
 	typeWriter(fmt.Sprintf("✅ %s déséquipé avec succès !", selectedItem), textDelay)
-	typeWriter("📦 L'objet reste dans votre inventaire.", textDelay)
+	typeWriter("📦 Lobjet reste dans votre inventaire.", textDelay)
 }
 
-// Afficher les équipements portés
+
 func ShowEquippedItems(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -196,14 +196,15 @@ func ShowEquippedItems(c *Character) {
 	fmt.Scanln()
 }
 
-// Vérifier si un objet est équipable
+
 func IsEquipable(itemName string) bool {
 	equipableItems := []string{
 		"Lance-pierre de Bart", "Saxophone de Lisa", "Biberon de Maggie",
 		"Batte de baseball", "Bouclier fait maison", "T-shirt rouge",
 		"Robe de première de classe", "Grenouillère bleue",
 		"Super Batte de Bart", "Saxophone Enchanté", "Bouclier de Springfield",
-		"Biberon Cosmique", "Serre-tête", "Collier de perles", "Short bleu",
+		"Biberon Cosmique", "Saxophone Spirituel", "Super Biberon",
+		"Serre-tête", "Collier de perles", "Short bleu",
 		"Chaussures de sport", "Nœud rose", "Tétine magique",
 	}
 
@@ -215,7 +216,7 @@ func IsEquipable(itemName string) bool {
 	return false
 }
 
-// Obtenir la valeur d'équipement d'un objet
+
 func GetEquipmentValue(itemName string) int {
 	equipmentValues := map[string]int{
 		"Lance-pierre de Bart":       25,
@@ -230,6 +231,8 @@ func GetEquipmentValue(itemName string) int {
 		"Saxophone Enchanté":         85,
 		"Bouclier de Springfield":    60,
 		"Biberon Cosmique":           120,
+		"Saxophone Spirituel":        95,
+		"Super Biberon":              140,
 		"Serre-tête":                 5,
 		"Collier de perles":          7,
 		"Short bleu":                 5,
@@ -241,10 +244,10 @@ func GetEquipmentValue(itemName string) int {
 	if value, exists := equipmentValues[itemName]; exists {
 		return value
 	}
-	return 10 // Valeur par défaut
+	return 10
 }
 
-// Calculer le bonus total d'équipement
+
 func GetTotalEquipmentBonus(c *Character) int {
 	total := 0
 	for _, value := range c.equipement {

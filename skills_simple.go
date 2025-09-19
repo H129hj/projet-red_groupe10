@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Menu des compétences utilisant la structure existante
+
 func SkillsMenuSimple(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -35,7 +35,7 @@ func SkillsMenuSimple(c *Character) {
 	}
 }
 
-// Afficher les compétences du personnage en utilisant la structure existante
+
 func ShowSkillsFromCharacter(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -49,22 +49,22 @@ func ShowSkillsFromCharacter(c *Character) {
 	for i, skill := range c.skills {
 		typeWriter(fmt.Sprintf("%d. ✅ %s", i+1, skill), textDelay)
 
-		// Description basée sur le nom de la compétence (utilise les skills existants de characters.go)
+
 		switch skill {
 		case "Coup de fronde vicieux":
 			typeWriter("   📝 Attaque précise avec le lance-pierre (+45 dégâts)", textDelay)
 		case "Blague empoisonnée":
-			typeWriter("   📝 Une blague si mauvaise qu'elle fait mal (+35 dégâts)", textDelay)
+			typeWriter("   📝 Une blague si mauvaise quelle fait mal (+35 dégâts)", textDelay)
 		case "Échappée en skateboard":
-			typeWriter("   📝 Récupère de l'énergie en faisant du skate (+25 PV)", textDelay)
+			typeWriter("   📝 Récupère de lénergie en faisant du skate (+25 PV)", textDelay)
 		case "Solo de jazz envoûtant":
 			typeWriter("   📝 Musique qui inspire et blesse (+50 dégâts, +15 PV)", textDelay)
 		case "Leçon de morale dévastatrice":
-			typeWriter("   📝 Sermon qui démoralise l'ennemi (+60 dégâts)", textDelay)
+			typeWriter("   📝 Sermon qui démoralise lennemi (+60 dégâts)", textDelay)
 		case "Méditation bouddhiste":
-			typeWriter("   📝 Restaure l'énergie spirituelle (+40 PV)", textDelay)
+			typeWriter("   📝 Restaure lénergie spirituelle (+40 PV)", textDelay)
 		case "Regard hypnotique":
-			typeWriter("   📝 Fixe l'ennemi avec intensité (+30 dégâts)", textDelay)
+			typeWriter("   📝 Fixe lennemi avec intensité (+30 dégâts)", textDelay)
 		case "Cri strident":
 			typeWriter("   📝 Cri de bébé assourdissant (+40 dégâts)", textDelay)
 		case "Attaque surprise du berceau":
@@ -79,7 +79,7 @@ func ShowSkillsFromCharacter(c *Character) {
 	fmt.Scanln()
 }
 
-// Utiliser une compétence de soin basée sur les skills du personnage
+
 func UseHealingSkillFromCharacter(c *Character) {
 	textDelay := 15 * time.Millisecond
 
@@ -88,7 +88,7 @@ func UseHealingSkillFromCharacter(c *Character) {
 		return
 	}
 
-	// Vérifier les compétences de soin disponibles dans les skills du personnage
+
 	healingSkills := []string{}
 	healingAmounts := map[string]int{}
 
@@ -142,7 +142,7 @@ func UseHealingSkillFromCharacter(c *Character) {
 	selectedSkill := healingSkills[choice-1]
 	healAmount := healingAmounts[selectedSkill]
 
-	// Appliquer les soins
+
 	oldPV := c.PV
 	c.PV += healAmount
 	if c.PV > c.PVmax {
@@ -151,7 +151,7 @@ func UseHealingSkillFromCharacter(c *Character) {
 
 	actualHeal := c.PV - oldPV
 
-	typeWriter(fmt.Sprintf("✨ Vous utilisez '%s' !", selectedSkill), textDelay)
+	typeWriter(fmt.Sprintf("✨ Vous utilisez %s' !", selectedSkill), textDelay)
 
 	switch selectedSkill {
 	case "Échappée en skateboard":
@@ -165,11 +165,11 @@ func UseHealingSkillFromCharacter(c *Character) {
 	typeWriter(fmt.Sprintf("❤️ Vous récupérez %d PV ! (%d/%d)", actualHeal, c.PV, c.PVmax), textDelay)
 }
 
-// Utiliser une compétence d'attaque en combat
+
 func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	textDelay := 15 * time.Millisecond
 
-	// Trouver les compétences d'attaque disponibles dans les skills du personnage
+
 	attackSkills := []string{}
 	attackDamages := map[string]int{}
 
@@ -197,11 +197,11 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	}
 
 	if len(attackSkills) == 0 {
-		typeWriter("❌ Aucune compétence d'attaque disponible.", textDelay)
+		typeWriter("❌ Aucune compétence dattaque disponible.", textDelay)
 		return false
 	}
 
-	typeWriter("⚔️ COMPÉTENCES D'ATTAQUE DISPONIBLES", textDelay)
+	typeWriter("⚔️ COMPÉTENCES DATTAQUE DISPONIBLES", textDelay)
 	typeWriter("====================================", textDelay)
 	typeWriter("", textDelay)
 
@@ -232,19 +232,19 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	equipmentBonus := GetTotalEquipmentBonus(c)
 	damage := baseDamage + equipmentBonus
 
-	// Appliquer les dégâts
+
 	m.PV -= damage
 	if m.PV < 0 {
 		m.PV = 0
 	}
 
-	typeWriter(fmt.Sprintf("✨ %s utilise '%s' !", c.class, selectedSkill), textDelay)
+	typeWriter(fmt.Sprintf("✨ %s utilise '%s !", c.class, selectedSkill), textDelay)
 
 	switch selectedSkill {
 	case "Coup de fronde vicieux":
 		typeWriter("🎯 Bart vise soigneusement avec son lance-pierre !", textDelay)
 	case "Blague empoisonnée":
-		typeWriter("😂 Bart raconte une blague si nulle qu'elle fait mal !", textDelay)
+		typeWriter("😂 Bart raconte une blague si nulle quelle fait mal !", textDelay)
 	case "Solo de jazz envoûtant":
 		typeWriter("🎷 Lisa joue un solo de saxophone hypnotisant !", textDelay)
 	case "Leçon de morale dévastatrice":
@@ -256,15 +256,15 @@ func UseCombatSkillFromCharacter(c *Character, m *Monster) bool {
 	}
 
 	if equipmentBonus > 0 {
-		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts ! (+%d équipement)", m.name, damage, equipmentBonus), textDelay)
+		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts ! (+%d'équipement)", m.name, damage, equipmentBonus), textDelay)
 	} else {
 		typeWriter(fmt.Sprintf("💥 %s subit %d points de dégâts !", m.name, damage), textDelay)
 	}
 
-	// Effets spéciaux selon la compétence
+
 	switch selectedSkill {
 	case "Solo de jazz envoûtant":
-		// Lisa récupère aussi des PV
+
 		oldPV := c.PV
 		c.PV += 15
 		if c.PV > c.PVmax {

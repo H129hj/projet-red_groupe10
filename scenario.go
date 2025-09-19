@@ -35,7 +35,7 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 
 	for {
 		var stageChoice int
-		typeWriter("🗺️ Où voulez-vous aller ?", 15*time.Millisecond)
+		typeWriter("🗺️  Où voulez-vous aller ?", 15*time.Millisecond)
 
 		switch progressLocal.Stage {
 		case 1:
@@ -43,8 +43,8 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
 			typeWriter("3. 📊 Voir vos statistiques", 15*time.Millisecond)
 			typeWriter("4. 🏪 Aller chez Apu au Kwik-E-Mart", 15*time.Millisecond)
-			typeWriter("5. ⚔️ Gérer les équipements", 15*time.Millisecond)
-			typeWriter("6. 🥊\u200b Casse la gueule à Milhouse pour passer le temps (entrainement)", 15*time.Millisecond)
+			typeWriter("5. ⚔️  Gérer les équipements", 15*time.Millisecond)
+			typeWriter("6. 🥊 Casse la gueule à Milhouse pour passer le temps (entrainement)", 15*time.Millisecond)
 		case 2:
 			typeWriter("1. 🍻 Allez au bar de Moe", 15*time.Millisecond)
 			typeWriter("2. 🎒 Regarder dans votre sac à dos", 15*time.Millisecond)
@@ -140,9 +140,9 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	typeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-	typeWriter("💬 Marge : 'Oh mon dieu ! Homer n'est pas rentré de la taverne !'", 15*time.Millisecond)
-	typeWriter("💬 Marge : 'Il devait juste prendre UNE bière chez Moe...'", 15*time.Millisecond)
-	typeWriter("💬 Marge : 'Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?'", 15*time.Millisecond)
+	typeWriter("💬 Marge : Oh mon dieu ! Homer n'est pas rentré de la taverne !", 15*time.Millisecond)
+	typeWriter("💬 Marge : Il devait juste prendre UNE bière chez Moe...", 15*time.Millisecond)
+	typeWriter("💬 Marge : Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
 	typeWriter("", 15*time.Millisecond)
