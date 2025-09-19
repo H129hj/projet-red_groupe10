@@ -46,6 +46,7 @@ func MoeBar(c *Character, progress *ScenarioProgress) {
 	typeWriter("1. 😊 Oui, peux-tu m'aider s'il te plaît ?", 15*time.Millisecond)
 	typeWriter("2. 😤 J'aime pas ta tête, Barney !", 15*time.Millisecond)
 	typeWriter("3. 🤔 Tu as des informations utiles ?", 15*time.Millisecond)
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	switch choice {
@@ -118,6 +119,7 @@ func characterTurnBarney(c *Character, m *Monster, t int, progress *ScenarioProg
 		typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
 		typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
 		typeWriter("3. 🏃 Fuir le combat", 15*time.Millisecond)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {

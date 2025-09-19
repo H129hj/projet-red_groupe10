@@ -1,6 +1,9 @@
 package projetred
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func CharacterCreationPersonalized() Character {
 	go MusiqueJouer()
@@ -10,6 +13,7 @@ func CharacterCreationPersonalized() Character {
 	fmt.Print("🏠 Entrez le nom de votre enfant Simpson: ")
 	fmt.Scan(&name)
 	fmt.Print("🎭 Choisissez le style (bart, lisa, maggie): ")
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&class)
 	if class != "bart" && class != "lisa" && class != "maggie" {
 		fmt.Println("❌ Choix invalide ! Vous devez choisir entre Bart, Lisa ou Maggie.")

@@ -242,6 +242,7 @@ func GetPlayerAction() int {
 	typeWriter("👉 Choisissez votre action (1-4): ", combatDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	return choice
@@ -271,6 +272,7 @@ func DisplayInventoryInCombat(c *Character) {
 
 		var choice int
 		typeWriter("👉 Utiliser un objet (numéro) ou 0 pour retour: ", combatDelay)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		if choice > 0 && choice <= len(c.inventory) {
@@ -543,6 +545,7 @@ func UseCombatSkillFromCharacterInstant(c *Character, m *Monster) bool {
 	typeWriter("👉 Quelle compétence voulez-vous utiliser ?", combatDelay)
 
 	var choice int
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	if choice == 0 {

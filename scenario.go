@@ -60,6 +60,7 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 
 		fmt.Println()
 		typeWriter("0. 🏠 Retourner à la maison", 15*time.Millisecond)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&stageChoice)
 
 		switch stageChoice {
@@ -132,9 +133,9 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	ColoredTypeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 15*time.Millisecond, BrightBlue+Bold)
 	fmt.Println()
 
-	DialogueBox("💬 Marge", "Oh mon dieu ! Homer n'est pas rentré de la taverne !", MargeTheme)
-	DialogueBox("💬 Marge", "Il devait juste prendre UNE bière chez Moe...", MargeTheme)
-	DialogueBox("💬 Marge", "Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", MargeTheme)
+	typeWriter("💬 Marge : Oh mon dieu ! Homer n'est pas rentré de la taverne !", 15*time.Millisecond)
+	typeWriter("💬 Marge : Il devait juste prendre UNE bière chez Moe...", 15*time.Millisecond)
+	typeWriter("💬 Marge : Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", 15*time.Millisecond)
 	fmt.Println()
 
 	BoxedText("🎯 PREMIER OBJECTIF : Parler aux voisins", SystemTheme)

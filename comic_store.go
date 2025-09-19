@@ -38,6 +38,7 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 	typeWriter("1. 😊 'Pouvez-vous m'aider poliment, s'il vous plaît ?'", 15*time.Millisecond)
 	typeWriter("2. 😤 'Dépêche-toi, j'ai pas toute la journée !'", 15*time.Millisecond)
 	typeWriter("3. 🤓 'J'ai besoin de vos connaissances encyclopédiques.'", 15*time.Millisecond)
+	ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 	fmt.Scan(&choice)
 
 	switch choice {
@@ -61,6 +62,7 @@ func ComicBookStore(c *Character, progress *ScenarioProgress) {
 		typeWriter("💭 Le Comic Book Guy semble énervé...", 15*time.Millisecond)
 		typeWriter("1. ⚔️ 'Alors on se bat ?'", 15*time.Millisecond)
 		typeWriter("2. 😅 'Désolé, je me suis mal exprimé...'", 15*time.Millisecond)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&fightChoice)
 
 		if fightChoice == 1 {
@@ -128,6 +130,7 @@ func characterTurnComicGuy(c *Character, m *Monster, t int, progress *ScenarioPr
 		typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
 		typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
 		typeWriter("3. 🏃 Fuir le combat", 15*time.Millisecond)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {

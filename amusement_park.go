@@ -15,7 +15,6 @@ func AmusementPark(c *Character, progress *ScenarioProgress) {
 	typeWriter("🎪 Des lumières clignotantes et une musique de fête résonnent partout.", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-
 	switch c.class {
 	case "bart":
 		BartVsTahitiBob(c, progress)
@@ -103,7 +102,6 @@ func characterTurnTahitiBob(c *Character, m *Monster, t int, progress *ScenarioP
 		typeWriter("🌴 Tahiti Bob : Impossible ! Vaincu par un gamin !", 15*time.Millisecond)
 		typeWriter("🌴 Tahiti Bob : Bon... ton père est dans la Maison des Donuts Magiques...", 15*time.Millisecond)
 
-
 		AddIngredient(c, "Matériau de base", "le parc d'attractions")
 
 		typeWriter("", 15*time.Millisecond)
@@ -112,6 +110,7 @@ func characterTurnTahitiBob(c *Character, m *Monster, t int, progress *ScenarioP
 		typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
 		typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
 		typeWriter("3. 🏃 Fuir le combat", 15*time.Millisecond)
+		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
 		fmt.Scan(&choice)
 
 		switch choice {
