@@ -2,6 +2,7 @@ package projetred
 
 import (
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -87,12 +88,12 @@ func ScenarioMenu(c *Character, progress *ScenarioProgress) {
 			continue
 		case 6:
 			if progressLocal.Stage == 1 {
-				traningFight(c, &Monster{name: "Milhouse", PVmax: 1000000, PV: 1000000, power: 2})
+				traningFight(c, &Monster{name: "Milhouse", PVmax: 500, PV: 500, power: 2})
 				continue
 			}
 		case 0:
 			typeWriter("🏠 Vous retournez à la maison...", 15*time.Millisecond)
-			return
+			os.Exit(0)
 		default:
 			typeWriter("❌ Choix invalide.", 15*time.Millisecond)
 			continue
