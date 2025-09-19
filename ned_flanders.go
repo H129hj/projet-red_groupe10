@@ -64,45 +64,6 @@ func NedFlanders(c *Character, progress *ScenarioProgress) {
 	ScenarioMenu(c, progress)
 }
 
-func characterTurnNed(c *Character, m *Monster, t int, progress *ScenarioProgress) {
-	var choice int
-	turn := t
-	if c.PV <= 0 {
-		Wasted(c)
-	} else if m.PV <= 0 {
-		typeWriter("🎉 Victoire ! Ned redevient normal...", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : Oh... désolé pour cet éclat ! Diddly-dang, que m'est-il arrivé ?", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : Pour me faire pardonner, l'aisse-moi t'aider...", 15*time.Millisecond)
-		typeWriter("👨‍🦳 Ned : J'ai vu Homer marcher vers le bar de Moe, l'air louche...", 15*time.Millisecond)
-		typeWriter("", 15*time.Millisecond)
-		typeWriter("🔍 INDICE OBTENU : Homer était louche en allant chez Moe !", 15*time.Millisecond)
-
-		AddIngredient(c, "Matériau de base", "la maison de Ned")
-
-		progress.Stage = 2
-		ScenarioMenu(c, progress)
-	} else {
-		typeWriter("⚔️ À votre tour ! Choisissez une action :", 15*time.Millisecond)
-		typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
-		typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
-		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
-		fmt.Scan(&choice)
-
-		switch choice {
-		case 1:
-			attackMonster(c, m)
-			nedPattern(m, turn)
-			characterTurnNed(c, m, turn+1, progress)
-		case 2:
-			typeWriter(AccessInventory(*c), 15*time.Millisecond)
-			characterTurnNed(c, m, turn, progress)
-		default:
-			typeWriter("❌ Choix invalide.", 15*time.Millisecond)
-			characterTurnNed(c, m, turn, progress)
-		}
-	}
-}
-
 func nedPattern(m *Monster, turn int) {
 	combatDelay := 0 * time.Millisecond
 	if turn%3 == 0 {

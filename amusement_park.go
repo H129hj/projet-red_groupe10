@@ -88,48 +88,7 @@ func MaggieVsBebeFurieux(c *Character, progress *ScenarioProgress) {
 }
 
 func TahitiBobFight(c *Character, progress *ScenarioProgress) {
-
 	BartVsTahitiBob(c, progress)
-}
-
-func characterTurnTahitiBob(c *Character, m *Monster, t int, progress *ScenarioProgress) {
-	var choice int
-	turn := t
-	if c.PV <= 0 {
-		Wasted(c)
-	} else if m.PV <= 0 {
-		typeWriter("🎉 Victoire ! Tahiti Bob seffondre dramatiquement...", 15*time.Millisecond)
-		typeWriter("🌴 Tahiti Bob : Impossible ! Vaincu par un gamin !", 15*time.Millisecond)
-		typeWriter("🌴 Tahiti Bob : Bon... ton père est dans la Maison des Donuts Magiques...", 15*time.Millisecond)
-
-		AddIngredient(c, "Matériau de base", "le parc d'attractions")
-
-		typeWriter("", 15*time.Millisecond)
-	} else {
-		typeWriter("⚔️ À votre tour ! Choisissez une action :", 15*time.Millisecond)
-		typeWriter("1. 💥 Attaquer", 15*time.Millisecond)
-		typeWriter("2. 🎒 Fouiller dans votre sac", 15*time.Millisecond)
-		typeWriter("3. 🏃 Fuir le combat", 15*time.Millisecond)
-		ColoredTypeWriter("➤ Votre choix : ", 15*time.Millisecond, BrightCyan+Bold)
-		fmt.Scan(&choice)
-
-		switch choice {
-		case 1:
-			attackMonster(c, m)
-			tahitiBobPattern(m, turn)
-			characterTurnTahitiBob(c, m, turn+1, progress)
-		case 2:
-			typeWriter(AccessInventory(*c), 15*time.Millisecond)
-			characterTurnTahitiBob(c, m, turn, progress)
-		case 3:
-			typeWriter("🏃💨 Impossible de fuir ! Tahiti Bob bloque la sortie !", 15*time.Millisecond)
-			typeWriter("🌴 Tahiti Bob : Tu ne méchapperas pas cette fois !", 15*time.Millisecond)
-			characterTurnTahitiBob(c, m, turn, progress)
-		default:
-			typeWriter("❌ Choix invalide.", 15*time.Millisecond)
-			characterTurnTahitiBob(c, m, turn, progress)
-		}
-	}
 }
 
 func tahitiBobPattern(m *Monster, turn int) {
