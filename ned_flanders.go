@@ -12,17 +12,14 @@ func NedFlanders(c *Character, progress *ScenarioProgress) {
 	typeWriter("==================================================", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-	typeWriter("👨‍🦳 Vous apercevez Ned Flanders qui arrose ses fleurs parfaitement alignées...", 15*time.Millisecond)
-	typeWriter("", 15*time.Millisecond)
-
 	typeWriter("👨‍🦳 Ned : 'Oh ! Bonjour petit voisin ! belle journée, n'est-ce pas ?'", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
 	var choice int
 	typeWriter("💭 Comment voulez-vous aborder Ned ?", 15*time.Millisecond)
-	typeWriter("1. 'Ned, as-tu vu Homer aujourd'hui ?'", 15*time.Millisecond)
-	typeWriter("2. 'Tu sais s'il est allé au bar de Moe ?'", 15*time.Millisecond)
-	typeWriter("3. 'T'es un voisin ringard, Ned !'", 15*time.Millisecond)
+	typeWriter("1. Ned, as-tu vu Homer aujourd'hui ?", 15*time.Millisecond)
+	typeWriter("2. Tu sais s'il est allé au bar de Moe ?", 15*time.Millisecond)
+	typeWriter("3. T'es un voisin ringard, Ned !", 15*time.Millisecond)
 	fmt.Scan(&choice)
 
 	switch choice {

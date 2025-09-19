@@ -26,7 +26,6 @@ func typeWriter(str string, delay time.Duration) {
 }
 
 func ScenarioMenu(c *Character, progress *ScenarioProgress) {
-
 	var progressLocal ScenarioProgress
 	if progress != nil {
 		progressLocal = *progress
