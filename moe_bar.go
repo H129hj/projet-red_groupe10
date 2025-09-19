@@ -6,7 +6,8 @@ import (
 )
 
 func MoeBar(c *Character, progress *ScenarioProgress) {
-	typeWriter("🍺 BAR DE MOE", 15*time.Millisecond)
+	typeWriter("==================================================", 15*time.Millisecond)
+	typeWriter("             🍺 BAR DE MOE", 15*time.Millisecond)
 	typeWriter("==================================================", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 

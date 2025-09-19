@@ -342,12 +342,6 @@ func LevelUpEffect(newLevel int) {
 	fmt.Println()
 }
 
-func VictoryEffect() {
-	fmt.Println()
-	FlashingText("🏆 VICTOIRE! 🏆", BrightYellow+Bold, BrightGreen+Bold, 8, 150*time.Millisecond)
-	fmt.Println()
-}
-
 func DefeatEffect() {
 	fmt.Println()
 	FlashingText("💀 DÉFAITE... 💀", BrightRed+Bold, Red, 5, 300*time.Millisecond)

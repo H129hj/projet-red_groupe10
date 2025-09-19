@@ -6,7 +6,8 @@ import (
 )
 
 func ComicBookStore(c *Character, progress *ScenarioProgress) {
-	typeWriter("📚 MAGASIN DE BD", 15*time.Millisecond)
+	typeWriter("==================================================", 15*time.Millisecond)
+	typeWriter("             📚 MAGASIN DE BD", 15*time.Millisecond)
 	typeWriter("==================================================", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
