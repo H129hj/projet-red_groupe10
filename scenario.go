@@ -140,9 +140,9 @@ func StartHomerScenario(c *Character) ScenarioProgress {
 	typeWriter("👩‍🦱 Marge apparaît, l'air inquiet...", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
-	typeWriter("💬 Marge : 'Oh mon dieu ! Homer n'est pas rentré de la taverne !'", 15*time.Millisecond)
-	typeWriter("💬 Marge : 'Il devait juste prendre UNE bière chez Moe...'", 15*time.Millisecond)
-	typeWriter("💬 Marge : 'Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?'", 15*time.Millisecond)
+	typeWriter("💬 Marge : Oh mon dieu ! Homer n'est pas rentré de la taverne !", 15*time.Millisecond)
+	typeWriter("💬 Marge : Il devait juste prendre UNE bière chez Moe...", 15*time.Millisecond)
+	typeWriter("💬 Marge : Peux-tu aller demander dans Springfield si quelqu'un sait où il est ?", 15*time.Millisecond)
 	typeWriter("", 15*time.Millisecond)
 
 	typeWriter("", 15*time.Millisecond)
