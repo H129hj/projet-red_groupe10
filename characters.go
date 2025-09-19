@@ -43,10 +43,10 @@ func InitCharacter() Character {
 		c = Character{
 			class:             class,
 			level:             1,
-			PVmax:             90,
-			PV:                90,
-			power:             45,
-			inventory:         []string{"Saxophone de Lisa", "donut magique"},
+			PVmax:             130,
+			PV:                130,
+			power:             80,
+			inventory:         []string{"Saxophone de Lisa", "donut magique", "donut magique", "donut magique"},
 			gold:              100,
 			skills:            []string{"Solo de jazz envoûtant", "Leçon de morale dévastatrice", "Méditation bouddhiste"},
 			equipement:        map[string]int{"Robe de première de classe": 10, "Serre-tête": 5, "Collier de perles": 7},
@@ -56,10 +56,10 @@ func InitCharacter() Character {
 		c = Character{
 			class:             class,
 			level:             1,
-			PVmax:             80,
-			PV:                80,
-			power:             50,
-			inventory:         []string{"Lance-pierre de Bart", "donut magique"},
+			PVmax:             120,
+			PV:                120,
+			power:             70,
+			inventory:         []string{"Lance-pierre de Bart", "donut magique", "donut magique", "donut magique"},
 			gold:              100,
 			skills:            []string{"Coup de fronde vicieux", "Blague empoisonnée", "Échappée en skateboard"},
 			equipement:        map[string]int{"T-shirt rouge": 10, "Short bleu": 5, "Chaussures de sport": 7},
@@ -69,10 +69,10 @@ func InitCharacter() Character {
 		c = Character{
 			class:             class,
 			level:             1,
-			PVmax:             100,
-			PV:                100,
-			power:             40,
-			inventory:         []string{"Biberon de Maggie", "donut magique"},
+			PVmax:             110,
+			PV:                110,
+			power:             60,
+			inventory:         []string{"Biberon de Maggie", "donut magique", "donut magique", "donut magique"},
 			gold:              100,
 			skills:            []string{"Regard hypnotique", "Cri strident", "Attaque surprise du berceau"},
 			equipement:        map[string]int{"Grenouillère bleue": 10, "Nœud rose": 5, "Tétine magique": 7},
@@ -155,7 +155,7 @@ func AccessInventory(c Character) string {
 func TakePot(c *Character) []string {
 	for i := range c.inventory {
 		if c.inventory[i] == "donut magique" && c.PV < c.PVmax {
-			c.PV += 20
+			c.PV += 50
 			c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
 			if c.PV > c.PVmax {
 				c.PV = c.PVmax
